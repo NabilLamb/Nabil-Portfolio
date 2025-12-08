@@ -1,0 +1,617 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import {
+  Briefcase,
+  Calendar,
+  MapPin,  Code2,
+  Zap,
+  Cpu,
+  Rocket,
+  Terminal,
+  Sparkles,
+  Clock,
+  TrendingUp, ArrowRight, Code, Mail
+} from "lucide-react";
+
+interface Experience {
+  role: string;
+  company: string;
+  location: string;
+  date: string;
+  description: string;
+  technologies: string[];
+}
+
+interface ExperiencesProps {
+  data: Experience[];
+}
+
+const Experiences = ({ data }: ExperiencesProps) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  // Intersection Observer for scroll animation
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  // Binary background animation
+  useEffect(() => {
+    if (!canvasRef.current) return;
+
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    // Set canvas size
+    const setCanvasSize = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
+
+    setCanvasSize();
+    window.addEventListener("resize", setCanvasSize);
+
+    // Matrix animation settings
+    const fontSize = 10;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops: number[] = Array(columns).fill(-fontSize);
+    let animationFrameId: number;
+
+    const draw = () => {
+      // Semi-transparent overlay for trail effect
+      ctx.fillStyle = "rgba(8, 8, 16, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.font = `bold ${fontSize}px 'Monaco', 'Consolas', monospace`;
+
+      // Draw binary characters
+      for (let i = 0; i < drops.length; i++) {
+        // Random character with varying opacity
+        const char = Math.random() > 0.5 ? "1" : "0";
+        const opacity = Math.random() * 0.2 + 0.05;
+
+        // Purple/cyan tint for binary code
+        ctx.fillStyle = `rgba(120, 119, 198, ${opacity})`;
+
+        // Draw character
+        ctx.fillText(char, i * fontSize, drops[i]);
+
+        // Move drop down
+        drops[i] += fontSize * 0.8;
+
+        // Reset drop if it's past bottom and random chance
+        if (drops[i] > canvas.height && Math.random() > 0.97) {
+          drops[i] = -fontSize;
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(draw);
+    };
+
+    // Start animation
+    animationFrameId = requestAnimationFrame(draw);
+
+    return () => {
+      window.removeEventListener("resize", setCanvasSize);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  // Calculate experience duration
+  const getDuration = (dateString: string) => {
+    const match = dateString.match(/(\w{3}) (\d{4}) – (\w{3})? ?(\d{4})?/);
+    if (!match) return "";
+
+    const [, startMonth, startYear, endMonth, endYear] = match;
+    const end = endYear || "Present";
+    return `${startMonth} ${startYear} - ${
+      endMonth ? `${endMonth} ` : ""
+    }${end}`;
+  };
+
+  // Get icon based on role
+  const getRoleIcon = (role: string) => {
+    if (role.toLowerCase().includes("full-stack")) return <Code2 size={20} />;
+    if (
+      role.toLowerCase().includes("technical") ||
+      role.toLowerCase().includes("it")
+    )
+      return <Cpu size={20} />;
+    if (role.toLowerCase().includes("freelance")) return <Rocket size={20} />;
+    if (role.toLowerCase().includes("intern")) return <Terminal size={20} />;
+    return <Briefcase size={20} />;
+  };
+
+  return (
+    <section
+      id="experiences"
+      className="relative py-24 md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      ref={ref}
+    >
+      {/* Binary Animation Background */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 -z-20"
+        style={{
+          background: "linear-gradient(135deg, #0a0a14 0%, #0f0f1a 100%)",
+        }}
+      />
+
+      {/* Animated gradient orbs */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-purple-500/5 via-cyan-500/5 to-blue-500/5 rounded-full blur-3xl"></div>
+      </div>
+
+      {/* Grid pattern overlay */}
+      <div className="absolute inset-0 -z-10 opacity-5">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `linear-gradient(to right, rgba(120, 119, 198, 0.1) 1px, transparent 1px),
+                             linear-gradient(to bottom, rgba(120, 119, 198, 0.1) 1px, transparent 1px)`,
+            backgroundSize: "40px 40px",
+          }}
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative">
+        {/* Section Header */}
+        <div
+          className={`transition-all duration-1000 mb-16 text-center ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-cyan-500/10 border border-purple-500/20 mb-6">
+            <TrendingUp className="w-4 h-4 text-purple-400" />
+            <span className="text-sm font-mono text-cyan-300">
+              Career Journey
+            </span>
+          </div>
+
+          <h2 className="text-4xl md:text-6xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-purple-400 via-violet-400 to-cyan-400 bg-clip-text text-transparent">
+              Professional Experience
+            </span>
+          </h2>
+
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            A timeline of my professional growth and achievements in the tech
+            industry
+          </p>
+        </div>
+
+        {/* Desktop Timeline Layout */}
+        <div className="hidden lg:block relative">
+          {/* Timeline line */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-500/20 via-cyan-500/20 to-transparent -translate-x-1/2"></div>
+
+          {/* Timeline markers */}
+          <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2">
+            {data.map((_, idx) => (
+              <div
+                key={idx}
+                className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 border-2 border-background"
+                style={{
+                  top: `${(idx / (data.length - 1)) * 100}%`,
+                  transform: "translate(-50%, -50%)",
+                }}
+              >
+                <div
+                  className={`absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 animate-ping ${
+                    activeIndex === idx ? "opacity-20" : "opacity-10"
+                  }`}
+                ></div>
+              </div>
+            ))}
+          </div>
+
+          {/* Experience Cards */}
+          <div className="space-y-24">
+            {data.map((exp, idx) => (
+              <div
+                key={idx}
+                className={`relative transition-all duration-1000 delay-${
+                  idx * 200
+                } ${isVisible ? "opacity-100" : "opacity-0"}`}
+                style={{
+                  marginLeft: idx % 2 === 0 ? "0" : "auto",
+                  width: "45%",
+                }}
+                onMouseEnter={() => setActiveIndex(idx)}
+              >
+                {/* Card container */}
+                <div
+                  className={`relative p-6 rounded-2xl border backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] group ${
+                    idx % 2 === 0 ? "mr-auto ml-0" : "ml-auto mr-0"
+                  } ${
+                    activeIndex === idx
+                      ? "border-cyan-500/50 bg-gradient-to-r from-purple-500/10 via-background/50 to-cyan-500/10 shadow-xl shadow-cyan-500/10"
+                      : "border-white/10 bg-white/5 hover:border-purple-500/30"
+                  }`}
+                >
+                  {/* Corner accents */}
+                  <div
+                    className={`absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 rounded-tr-lg transition-all duration-300 ${
+                      activeIndex === idx
+                        ? "border-cyan-500"
+                        : "border-purple-500/30 group-hover:border-purple-500"
+                    }`}
+                  ></div>
+                  <div
+                    className={`absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 rounded-bl-lg transition-all duration-300 ${
+                      activeIndex === idx
+                        ? "border-purple-500"
+                        : "border-cyan-500/30 group-hover:border-cyan-500"
+                    }`}
+                  ></div>
+
+                  {/* Header */}
+                  <div className="flex items-start gap-4 mb-6">
+                    <div
+                      className={`p-3 rounded-xl transition-all duration-300 ${
+                        activeIndex === idx
+                          ? "bg-gradient-to-r from-purple-500/20 to-cyan-500/20"
+                          : "bg-white/5 group-hover:bg-white/10"
+                      }`}
+                    >
+                      <div
+                        className={
+                          activeIndex === idx
+                            ? "text-cyan-400"
+                            : "text-purple-400"
+                        }
+                      >
+                        {getRoleIcon(exp.role)}
+                      </div>
+                    </div>
+
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <h3 className="text-2xl font-bold text-white">
+                          {exp.role}
+                        </h3>
+                        <span
+                          className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 ${
+                            activeIndex === idx
+                              ? "bg-gradient-to-r from-purple-500/20 to-cyan-500/20 text-cyan-300"
+                              : "bg-white/5 text-muted-foreground group-hover:text-white"
+                          }`}
+                        >
+                          <Calendar size={12} />
+                          {getDuration(exp.date)}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-4">
+                        <span className="flex items-center gap-1 text-cyan-300 font-medium">
+                          <Briefcase size={14} />
+                          {exp.company}
+                        </span>
+                        <span className="flex items-center gap-1 text-muted-foreground">
+                          <MapPin size={14} />
+                          {exp.location}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-muted-foreground mb-6 leading-relaxed group-hover:text-white/80 transition-colors duration-300">
+                    {exp.description}
+                  </p>
+
+                  {/* Technologies */}
+                  <div className="flex flex-wrap gap-2">
+                    {exp.technologies.map((tech, techIdx) => (
+                      <span
+                        key={techIdx}
+                        className={`px-3 py-1.5 text-xs font-medium rounded-lg backdrop-blur-sm border transition-all duration-300 group-hover/tech:scale-105 ${
+                          activeIndex === idx
+                            ? "bg-gradient-to-r from-purple-500/20 to-cyan-500/20 text-cyan-300 border-cyan-500/30"
+                            : "bg-white/5 text-muted-foreground border-white/10 group-hover:border-purple-500/30 group-hover:text-purple-300"
+                        }`}
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Achievement Badge */}
+                  {idx === 0 && (
+                    <div className="absolute -top-3 -right-3">
+                      <div className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/30 backdrop-blur-sm">
+                        <Zap size={12} className="text-yellow-500" />
+                        <span className="text-xs font-medium text-yellow-300">
+                          Current Role
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Timeline connector */}
+                <div
+                  className={`absolute top-1/2 -translate-y-1/2 w-12 h-1 transition-all duration-300 ${
+                    activeIndex === idx
+                      ? "bg-gradient-to-r from-purple-500 to-cyan-500"
+                      : "bg-white/20"
+                  } ${
+                    idx % 2 === 0
+                      ? "right-0 translate-x-full"
+                      : "left-0 -translate-x-full"
+                  }`}
+                >
+                  <div
+                    className={`absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full transition-all duration-300 ${
+                      activeIndex === idx ? "bg-cyan-400" : "bg-white/40"
+                    } ${idx % 2 === 0 ? "right-0" : "left-0"}`}
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile Layout */}
+        <div className="lg:hidden space-y-8">
+          {/* Timeline for mobile */}
+          <div className="relative pl-8">
+            {/* Timeline line */}
+            <div className="absolute left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-500/20 via-cyan-500/20 to-transparent"></div>
+
+            {data.map((exp, idx) => (
+              <div
+                key={idx}
+                className={`relative mb-12 last:mb-0 transition-all duration-1000 delay-${
+                  idx * 200
+                } ${
+                  isVisible
+                    ? "opacity-100 translate-x-0"
+                    : "opacity-0 -translate-x-10"
+                }`}
+                onMouseEnter={() => setActiveIndex(idx)}
+              >
+                {/* Timeline marker */}
+                <div
+                  className={`absolute left-4 -translate-x-1/2 w-4 h-4 rounded-full border-2 border-background z-10 transition-all duration-300 ${
+                    activeIndex === idx
+                      ? "bg-gradient-to-r from-purple-500 to-cyan-500"
+                      : "bg-white/20"
+                  }`}
+                >
+                  <div
+                    className={`absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 animate-ping ${
+                      activeIndex === idx ? "opacity-20" : "opacity-10"
+                    }`}
+                  ></div>
+                </div>
+
+                {/* Card */}
+                <div
+                  className={`ml-8 p-6 rounded-2xl border backdrop-blur-sm transition-all duration-300 ${
+                    activeIndex === idx
+                      ? "border-cyan-500/50 bg-gradient-to-b from-purple-500/10 to-cyan-500/10 shadow-xl shadow-cyan-500/10"
+                      : "border-white/10 bg-white/5 hover:border-purple-500/30"
+                  }`}
+                >
+                  {/* Header */}
+                  <div className="flex items-start gap-4 mb-6">
+                    <div
+                      className={`p-3 rounded-xl transition-all duration-300 ${
+                        activeIndex === idx
+                          ? "bg-gradient-to-r from-purple-500/20 to-cyan-500/20"
+                          : "bg-white/5"
+                      }`}
+                    >
+                      <div
+                        className={
+                          activeIndex === idx
+                            ? "text-cyan-400"
+                            : "text-purple-400"
+                        }
+                      >
+                        {getRoleIcon(exp.role)}
+                      </div>
+                    </div>
+
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-white mb-2">
+                        {exp.role}
+                      </h3>
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2">
+                          <Briefcase size={14} className="text-cyan-300" />
+                          <span className="text-cyan-300 font-medium">
+                            {exp.company}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <MapPin size={14} className="text-muted-foreground" />
+                          <span className="text-muted-foreground">
+                            {exp.location}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Calendar
+                            size={14}
+                            className="text-muted-foreground"
+                          />
+                          <span className="text-muted-foreground">
+                            {getDuration(exp.date)}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                    {exp.description}
+                  </p>
+
+                  {/* Technologies */}
+                  <div className="flex flex-wrap gap-2">
+                    {exp.technologies.map((tech, techIdx) => (
+                      <span
+                        key={techIdx}
+                        className={`px-3 py-1.5 text-xs font-medium rounded-lg backdrop-blur-sm border ${
+                          activeIndex === idx
+                            ? "bg-gradient-to-r from-purple-500/20 to-cyan-500/20 text-cyan-300 border-cyan-500/30"
+                            : "bg-white/5 text-muted-foreground border-white/10"
+                        }`}
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Stats Summary */}
+        <div
+          className={`mt-16 transition-all duration-1000 delay-800 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              {
+                label: "Years Experience",
+                value: "2+",
+                icon: <Clock size={20} />,
+                color: "text-purple-400",
+              },
+              {
+                label: "Projects",
+                value: "20+",
+                icon: <Code2 size={20} />,
+                color: "text-cyan-400",
+              },
+              {
+                label: "Technologies",
+                value: "5+",
+                icon: <Cpu size={20} />,
+                color: "text-blue-400",
+              },
+              {
+                label: "Satisfaction",
+                value: "100%",
+                icon: <Sparkles size={20} />,
+                color: "text-green-400",
+              },
+            ].map((stat, idx) => (
+              <div
+                key={idx}
+                className="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-500/30 transition-all duration-300 hover:scale-105 group"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div
+                    className={`p-2 rounded-lg bg-gradient-to-r from-purple-500/10 to-cyan-500/10 ${stat.color}`}
+                  >
+                    {stat.icon}
+                  </div>
+                  <span className={`text-3xl font-bold ${stat.color}`}>
+                    {stat.value}
+                  </span>
+                </div>
+                <p className="text-sm text-muted-foreground group-hover:text-white transition-colors">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Call to Action */}
+        <div
+          className={`mt-12 transition-all duration-1000 delay-1000 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
+          <div className="p-8 md:p-12 rounded-3xl bg-gradient-to-br from-gray-900/80 to-black/80 border border-purple-500/30 backdrop-blur-lg shadow-2xl shadow-purple-900/50">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+              {/* Left Side: Main Text Block */}
+              <div className="max-w-xl lg:max-w-3xl text-center lg:text-left">
+                <div className="inline-flex items-center gap-2 mb-4">
+                  <Briefcase size={20} className="text-cyan-400" />
+                  <span className="text-sm font-semibold uppercase tracking-widest text-cyan-400">
+                    Ready to collaborate?
+                  </span>
+                </div>
+
+                <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
+                  <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                    Let's Build Something Exceptional Together
+                  </span>
+                </h2>
+
+                <p className="text-lg text-muted-foreground/90">
+                  I'm currently available for full-stack development projects
+                  and new opportunities. View my work or reach out directly.
+                </p>
+              </div>
+
+              {/* Right Side: Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto justify-center lg:justify-end">
+                {/* Primary Action Button: Contact */}
+                <a
+                  href="#contact"
+                  className="group relative inline-flex items-center justify-center px-8 py-3 w-full sm:w-auto 
+                       bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold rounded-xl 
+                       shadow-lg shadow-purple-500/40 
+                       overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-purple-400/60"
+                >
+                  <span className="relative z-10 flex items-center gap-2">
+                    <Mail size={20} />
+                    Hire Me / Contact
+                  </span>
+                  {/* Hover Effect: Shimmer */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform duration-700"></div>
+                </a>
+
+                {/* Secondary Action Button: Projects */}
+                <a
+                  href="#projects"
+                  className="group inline-flex items-center justify-center px-6 py-3 w-full sm:w-auto 
+                       bg-white/5 border border-cyan-500/50 text-cyan-400 font-semibold rounded-xl 
+                       transition-all duration-300 hover:bg-cyan-500/10 hover:text-white"
+                >
+                  <span className="flex items-center gap-2">
+                    <Code size={18} />
+                    View Projects
+                    <ArrowRight
+                      size={18}
+                      className="transition-transform group-hover:translate-x-1"
+                    />
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Experiences;
