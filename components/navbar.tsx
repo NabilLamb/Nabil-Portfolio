@@ -3,7 +3,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { Menu, X, ChevronDown, Search, Moon, Sun, User, LogIn } from "lucide-react"
+import { Menu, X, Search, Moon, Sun, User, LogIn } from "lucide-react"
 import Image from "next/image"
 
 const Navbar = () => {
@@ -297,16 +297,6 @@ const Navbar = () => {
           }}
         />
       </nav>
-
-      {/* Back to Top Button */}
-      {scrolled && (
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-8 right-8 z-40 p-3 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-xl shadow-purple-500/30 hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 hover:scale-110"
-        >
-          <ChevronDown className="w-5 h-5 rotate-180" />
-        </button>
-      )}
     </>
   )
 }

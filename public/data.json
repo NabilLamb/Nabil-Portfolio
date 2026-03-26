@@ -15,39 +15,66 @@
     "avatar": "./about.jpg"
   },
   "experiences": [
-  {
-    "role": "Technical Problem-Solving & Operations",
-    "company": "MAMDA/MCMA Assurance",
-    "location": "Oujda, Morocco",
-    "date": "Sep 2025 – Present",
-    "description": "Managed and maintained internal IT systems and network infrastructure to ensure stability and availability. Provided first and second-level technical support, resolving critical hardware, software, and network issues rapidly to minimize operational downtime. Streamlined support processes through documentation, reducing average resolution time.",
-    "technologies": ["IT Systems", "Network Infrastructure", "Troubleshooting", "System Maintenance"]
-  },
-  {
-    "role": "Freelance Full-Stack Web Developer",
-    "company": "Self-employed",
-    "location": "Remote",
-    "date": "Dec 2024 – Present",
-    "description": "Designed, developed, and launched 8+ custom, performance-focused websites using Next.js and React. Implemented responsive, high-fidelity UIs with **Tailwind CSS**. Applied rigorous technical standards to deliver maintainable, scalable, and high-quality codebases while providing technical consulting to clients.",
-    "technologies": ["Next.js", "React", "Tailwind CSS", "HTML/CSS", "Performance Optimization", "Client Management"]
-  },
-  {
-    "role": "End-of-studies Full-Stack Web Developer Intern",
-    "company": "FCPO",
-    "location": "Oujda, Morocco",
-    "date": "Mar 2024 – Sep 2024",
-    "description": "Built a comprehensive e-commerce management dashboard using **React.js**. Streamlined the UI with Tailwind CSS & Bootstrap, cutting page load times by 40%. Secured crucial API communications via **Axios with JWT authentication** and designed data visualizations using **ECharts**.",
-    "technologies": ["React.js", "Tailwind CSS", "Bootstrap", "ECharts", "Axios", "JWT", "Agile"]
-  },
-  {
-    "role": "Full-Stack Web Developer Intern",
-    "company": "Oriental Regional Council (CRO)",
-    "location": "Oujda, Morocco",
-    "date": "Jun 2022 – Sep 2022",
-    "description": "Developed a critical web application to automate the management of association and cooperative files using a **React.js** frontend and **Node.js** backend. Digitized the entire file process, significantly improving administrative efficiency and implementing advanced features like data filtering and authorization.",
-    "technologies": ["React.js", "Node.js", "Bootstrap", "API Integration", "Authorization", "Full-Stack Development"]
-  }
-],
+    {
+      "role": "Technical Problem-Solving & Operations",
+      "company": "MAMDA/MCMA Assurance",
+      "location": "Oujda, Morocco",
+      "date": "Sep 2025 – Present",
+      "description": "Managed and maintained internal IT systems and network infrastructure to ensure stability and availability. Provided first and second-level technical support, resolving critical hardware, software, and network issues rapidly to minimize operational downtime. Streamlined support processes through documentation, reducing average resolution time.",
+      "technologies": [
+        "IT Systems",
+        "Network Infrastructure",
+        "Troubleshooting",
+        "System Maintenance"
+      ]
+    },
+    {
+      "role": "Freelance Full-Stack Web Developer",
+      "company": "Self-employed",
+      "location": "Remote",
+      "date": "Dec 2024 – Present",
+      "description": "Designed, developed, and launched 8+ custom, performance-focused websites using Next.js and React. Implemented responsive, high-fidelity UIs with **Tailwind CSS**. Applied rigorous technical standards to deliver maintainable, scalable, and high-quality codebases while providing technical consulting to clients.",
+      "technologies": [
+        "Next.js",
+        "React",
+        "Tailwind CSS",
+        "HTML/CSS",
+        "Performance Optimization",
+        "Client Management"
+      ]
+    },
+    {
+      "role": "End-of-studies Full-Stack Web Developer Intern",
+      "company": "FCPO",
+      "location": "Oujda, Morocco",
+      "date": "Mar 2024 – Sep 2024",
+      "description": "Built a comprehensive e-commerce management dashboard using **React.js**. Streamlined the UI with Tailwind CSS & Bootstrap, cutting page load times by 40%. Secured crucial API communications via **Axios with JWT authentication** and designed data visualizations using **ECharts**.",
+      "technologies": [
+        "React.js",
+        "Tailwind CSS",
+        "Bootstrap",
+        "ECharts",
+        "Axios",
+        "JWT",
+        "Agile"
+      ]
+    },
+    {
+      "role": "Full-Stack Web Developer Intern",
+      "company": "Oriental Regional Council (CRO)",
+      "location": "Oujda, Morocco",
+      "date": "Jun 2022 – Sep 2022",
+      "description": "Developed a critical web application to automate the management of association and cooperative files using a **React.js** frontend and **Node.js** backend. Digitized the entire file process, significantly improving administrative efficiency and implementing advanced features like data filtering and authorization.",
+      "technologies": [
+        "React.js",
+        "Node.js",
+        "Bootstrap",
+        "API Integration",
+        "Authorization",
+        "Full-Stack Development"
+      ]
+    }
+  ],
   "technologies": [
     "HTML",
     "CSS",
@@ -62,16 +89,20 @@
     "PostgreSQL",
     "Firebase",
     "Git",
-    "GitHub",
-    "Docker",
-    "Vercel"
+    "GitHub"
   ],
   "projects": [
     {
       "title": "Full-featured eCommerce Platform",
       "image": "/placeholder.svg?height=400&width=600",
       "description": "Complete online shop with authentication, product catalog, shopping cart, payment integration, and admin panel for inventory management.",
-      "technologies": ["React", "Next.js", "Node.js", "MongoDB", "Stripe"],
+      "technologies": [
+        "React",
+        "Next.js",
+        "Node.js",
+        "MongoDB",
+        "Stripe"
+      ],
       "github": "https://github.com",
       "demo": "https://example.com"
     },
@@ -79,7 +110,12 @@
       "title": "Sales Analytics Dashboard",
       "image": "/placeholder.svg?height=400&width=600",
       "description": "Real-time analytics dashboard for eCommerce sales tracking, business KPIs visualization, and performance metrics.",
-      "technologies": ["React", "Tailwind CSS", "Recharts", "Node.js"],
+      "technologies": [
+        "React",
+        "Tailwind CSS",
+        "Recharts",
+        "Node.js"
+      ],
       "github": "https://github.com",
       "demo": "https://example.com"
     },
@@ -87,7 +123,12 @@
       "title": "Full-Stack Blog Platform",
       "image": "/placeholder.svg?height=400&width=600",
       "description": "Blog platform with post creation, comments, user authentication, search functionality, and admin moderation features.",
-      "technologies": ["Next.js", "MongoDB", "Authentication", "API Routes"],
+      "technologies": [
+        "Next.js",
+        "MongoDB",
+        "Authentication",
+        "API Routes"
+      ],
       "github": "https://github.com",
       "demo": "https://example.com"
     }
@@ -110,13 +151,13 @@
     }
   ],
   "contact": {
-    "email": "nabil@example.com",
-    "phone": "+212 6 00 00 00 00",
-    "location": "Casablanca, Morocco"
+    "email": "lambattannabil2000@gmail.com",
+    "phone": "+212 639281869",
+    "location": "Oujda, Maroc"
   },
   "social": {
-    "github": "https://github.com",
-    "linkedin": "https://linkedin.com",
-    "twitter": "https://twitter.com"
+    "github": "https://github.com/NabilLamb",
+    "linkedin": "https://linkedin.com/in/nabil-lambattan",
+    "email": "lambattannabil2000@gmail.com"
   }
 }

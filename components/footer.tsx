@@ -3,14 +3,13 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { 
-  Github, 
-  Linkedin, 
-  Twitter, 
-  Mail, 
-  Heart, 
-  Code2, 
-  ExternalLink, 
+import {
+  Github,
+  Linkedin,
+  Mail,
+  Heart,
+  Code2,
+  ExternalLink,
   Coffee,
   Sparkles,
   Rocket,
@@ -41,8 +40,7 @@ const Footer = ({ data }: FooterProps) => {
   const socialLinks = [
     { icon: Github, href: data.github, label: "GitHub", color: "text-gray-300", bg: "bg-gray-900/80", desc: "View my code" },
     { icon: Linkedin, href: data.linkedin, label: "LinkedIn", color: "text-blue-400", bg: "bg-blue-900/80", desc: "Professional network" },
-    { icon: Twitter, href: data.twitter, label: "Twitter", color: "text-sky-400", bg: "bg-sky-900/80", desc: "Tech thoughts" },
-    { icon: Mail, href: `mailto:${data.email || "hello@nabil.dev"}`, label: "Email", color: "text-red-400", bg: "bg-red-900/80", desc: "Contact me" },
+    { icon: Mail, href: `mailto:${data.email}`, label: "Email", color: "text-red-400", bg: "bg-red-900/80", desc: "Contact me" },
   ]
 
   const quickLinks = [
@@ -98,7 +96,7 @@ const Footer = ({ data }: FooterProps) => {
       canvas.width = canvas.offsetWidth
       canvas.height = canvas.offsetHeight
     }
-    
+
     setCanvasSize()
     window.addEventListener('resize', setCanvasSize)
 
@@ -120,21 +118,21 @@ const Footer = ({ data }: FooterProps) => {
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       ctx.font = `bold ${fontSize}px 'Monaco', 'Consolas', monospace`
-      
+
       // Draw binary characters
       for (let i = 0; i < drops.length; i++) {
         const drop = drops[i]
-        
+
         // Purple/cyan tint for binary code
         ctx.fillStyle = `rgba(120, 119, 198, ${drop.opacity})`
-        
+
         // Draw character
         const char = binary[Math.floor(Math.random() * binary.length)]
         ctx.fillText(char, i * fontSize, drop.y)
-        
+
         // Move drop down
         drop.y += drop.speed
-        
+
         // Reset drop if it's past bottom
         if (drop.y > canvas.height + 100) {
           drop.y = Math.random() * -100
@@ -142,7 +140,7 @@ const Footer = ({ data }: FooterProps) => {
           drop.opacity = Math.random() * 0.1 + 0.03
         }
       }
-      
+
       animationFrameId = requestAnimationFrame(draw)
     }
 
@@ -179,7 +177,7 @@ const Footer = ({ data }: FooterProps) => {
         </button>
       )}
 
-      <footer 
+      <footer
         ref={footerRef}
         className="relative border-t border-purple-500/20 bg-gradient-to-t from-gray-900 via-gray-900/95 to-gray-900 overflow-hidden"
       >
@@ -200,7 +198,7 @@ const Footer = ({ data }: FooterProps) => {
 
         {/* Circuit pattern overlay */}
         <div className="absolute inset-0 -z-10 opacity-3">
-          <div 
+          <div
             className="absolute inset-0"
             style={{
               backgroundImage: `radial-gradient(circle at 1px 1px, rgba(120, 119, 198, 0.1) 1px, transparent 1px)`,
@@ -234,15 +232,19 @@ const Footer = ({ data }: FooterProps) => {
                   <p className="text-muted-foreground mb-6">
                     Building exceptional digital experiences with modern technologies and creative solutions.
                   </p>
-                  
+
                   {/* Call to Action */}
-                  <button className="group relative w-full px-4 py-3 rounded-lg bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300">
-                    <span className="relative flex items-center justify-center gap-2 text-purple-300 hover:text-white">
-                      <FileText size={16} />
-                      Download Resume
-                    </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </button>
+                  <a
+                    href="/nabil_cv.pdf"
+                    download="Nabil_Lambattan_CV.pdf"
+                    className="group relative w-full px-4 py-3 rounded-lg bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 flex items-center justify-center gap-2 text-purple-300 hover:text-white"
+                  >
+                    <FileText size={16} />
+                    <span>Download Resume</span>
+
+                    {/* Hover overlay effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg -z-10"></div>
+                  </a>
                 </div>
               </div>
 
@@ -289,7 +291,7 @@ const Footer = ({ data }: FooterProps) => {
                     </span>
                   ))}
                 </div>
-                
+
                 {/* Currently Learning */}
                 <div className="mt-8 p-4 rounded-lg bg-gradient-to-r from-cyan-500/5 to-blue-500/5 border border-cyan-500/20">
                   <div className="flex items-center gap-2 mb-2">
@@ -329,9 +331,8 @@ const Footer = ({ data }: FooterProps) => {
                           <p className="text-sm font-medium text-white">{social.label}</p>
                           <p className="text-xs text-muted-foreground">{social.desc}</p>
                         </div>
-                        <ExternalLink className={`w-4 h-4 transition-all duration-300 ${
-                          hoveredLink === social.label ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2'
-                        } text-purple-400`} />
+                        <ExternalLink className={`w-4 h-4 transition-all duration-300 ${hoveredLink === social.label ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2'
+                          } text-purple-400`} />
                       </div>
                     </a>
                   ))}
@@ -339,43 +340,9 @@ const Footer = ({ data }: FooterProps) => {
               </div>
             </div>
 
-            {/* Newsletter Section */}
-            <div className={`mb-12 transition-all duration-1000 delay-300 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}>
-              <div className="p-6 rounded-2xl bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-cyan-500/10 border border-purple-500/20">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center">
-                      <Rocket className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-bold text-white mb-1">Join My Newsletter</h4>
-                      <p className="text-sm text-muted-foreground">
-                        Get updates on new projects and tech insights
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex-1 max-w-md">
-                    <div className="flex gap-2">
-                      <input
-                        type="email"
-                        placeholder="Enter your email"
-                        className="flex-1 px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-muted-foreground focus:outline-none focus:border-purple-500/50"
-                      />
-                      <button className="px-6 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300">
-                        Subscribe
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             {/* Bottom Bar */}
-            <div className={`pt-8 border-t border-white/10 transition-all duration-1000 delay-500 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}>
+            <div className={`pt-8 border-t border-white/10 transition-all duration-1000 delay-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}>
               <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                 {/* Copyright */}
                 <div className="flex items-center gap-2">
@@ -408,19 +375,6 @@ const Footer = ({ data }: FooterProps) => {
                   <Coffee className="w-4 h-4" />
                   <span>Made with passion & countless cups of coffee</span>
                 </div>
-              </div>
-
-              {/* Legal Links */}
-              <div className="mt-6 flex flex-wrap justify-center gap-6">
-                {["Privacy Policy", "Terms of Service", "Cookie Policy", "Disclaimer"].map((item) => (
-                  <a
-                    key={item}
-                    href="#"
-                    className="text-xs text-muted-foreground hover:text-purple-300 transition-colors"
-                  >
-                    {item}
-                  </a>
-                ))}
               </div>
             </div>
           </div>

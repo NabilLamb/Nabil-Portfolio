@@ -4,18 +4,17 @@
 
 import type React from "react"
 import { useEffect, useRef, useState } from "react"
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Send, 
-  MessageSquare, 
-  CheckCircle, 
-  Clock, 
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  MessageSquare,
+  CheckCircle,
+  Clock,
   Globe,
   Linkedin,
   Github,
-  Twitter,
   Sparkles,
   Paperclip,
   User,
@@ -47,10 +46,9 @@ const Contact = ({ data }: ContactProps) => {
 
   // Social media links
   const socialLinks = [
-    { icon: <Github size={20} />, label: "GitHub", url: "https://github.com", color: "text-gray-300", bg: "bg-gray-900/80" },
-    { icon: <Linkedin size={20} />, label: "LinkedIn", url: "https://linkedin.com", color: "text-blue-400", bg: "bg-blue-900/80" },
-    { icon: <Twitter size={20} />, label: "Twitter", url: "https://twitter.com", color: "text-sky-400", bg: "bg-sky-900/80" },
-    { icon: <Mail size={20} />, label: "Email", url: `mailto:${data.email}`, color: "text-red-400", bg: "bg-red-900/80" },
+    { icon: <Github size={20} />, label: "GitHub", url: "https://github.com/NabilLamb", color: "text-gray-300", bg: "bg-gray-900/80" },
+    { icon: <Linkedin size={20} />, label: "LinkedIn", url: "https://linkedin.com/in/nabil-lambattan", color: "text-blue-400", bg: "bg-blue-900/80" },
+    { icon: <Mail size={20} />, label: "Email", url: "mailto:lambattannabil2000@gmail.com", color: "text-red-400", bg: "bg-red-900/80" },
   ]
 
   // Intersection Observer for scroll animation
@@ -82,7 +80,7 @@ const Contact = ({ data }: ContactProps) => {
       canvas.width = canvas.offsetWidth
       canvas.height = canvas.offsetHeight
     }
-    
+
     setCanvasSize()
     window.addEventListener('resize', setCanvasSize)
 
@@ -104,21 +102,21 @@ const Contact = ({ data }: ContactProps) => {
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       ctx.font = `bold ${fontSize}px 'Monaco', 'Consolas', monospace`
-      
+
       // Draw binary characters
       for (let i = 0; i < drops.length; i++) {
         const drop = drops[i]
-        
+
         // Green/cyan tint for binary code
         ctx.fillStyle = `rgba(0, 255, 200, ${drop.opacity})`
-        
+
         // Draw character
         const char = binary[Math.floor(Math.random() * binary.length)]
         ctx.fillText(char, i * fontSize, drop.y)
-        
+
         // Move drop down
         drop.y += drop.speed
-        
+
         // Reset drop if it's past bottom
         if (drop.y > canvas.height + 100) {
           drop.y = Math.random() * -100
@@ -126,7 +124,7 @@ const Contact = ({ data }: ContactProps) => {
           drop.opacity = Math.random() * 0.15 + 0.05
         }
       }
-      
+
       animationFrameId = requestAnimationFrame(draw)
     }
 
@@ -150,12 +148,12 @@ const Contact = ({ data }: ContactProps) => {
 
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500))
-    
+
     console.log("Form submitted:", formData)
     setIsSubmitting(false)
     setIsSubmitted(true)
     setFormData({ name: "", email: "", message: "", subject: "" })
-    
+
     // Reset success message after 5 seconds
     setTimeout(() => setIsSubmitted(false), 5000)
   }
@@ -182,14 +180,14 @@ const Contact = ({ data }: ContactProps) => {
       {/* Animated gradient orbs */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-1/4 -left-40 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 -right-40 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-pulse" 
-             style={{animationDelay: '1s'}}></div>
+        <div className="absolute bottom-1/4 -right-40 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-pulse"
+          style={{ animationDelay: '1s' }}></div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-r from-emerald-500/3 via-cyan-500/3 to-blue-500/3 rounded-full blur-3xl"></div>
       </div>
 
       {/* Grid pattern overlay */}
       <div className="absolute inset-0 -z-10 opacity-5">
-        <div 
+        <div
           className="absolute inset-0"
           style={{
             backgroundImage: `linear-gradient(to right, rgba(0, 255, 200, 0.1) 1px, transparent 1px),
@@ -208,13 +206,13 @@ const Contact = ({ data }: ContactProps) => {
             <MessageSquare className="w-4 h-4 text-emerald-400" />
             <span className="text-sm font-mono text-emerald-300">Let's Connect</span>
           </div>
-          
+
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
             <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
               Get In Touch
             </span>
           </h2>
-          
+
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Have a project in mind? Let's discuss how we can bring your ideas to life
           </p>
@@ -228,34 +226,34 @@ const Contact = ({ data }: ContactProps) => {
             <div className="space-y-6">
               {/* Contact Cards */}
               {[
-                { 
-                  icon: Mail, 
-                  label: "Email", 
-                  value: data.email, 
+                {
+                  icon: Mail,
+                  label: "Email",
+                  value: data.email,
                   link: `mailto:${data.email}`,
                   color: "text-red-400",
                   bg: "bg-red-500/10"
                 },
-                { 
-                  icon: Phone, 
-                  label: "Phone", 
-                  value: data.phone, 
+                {
+                  icon: Phone,
+                  label: "Phone",
+                  value: data.phone,
                   link: `tel:${data.phone}`,
                   color: "text-green-400",
                   bg: "bg-green-500/10"
                 },
-                { 
-                  icon: MapPin, 
-                  label: "Location", 
-                  value: data.location, 
+                {
+                  icon: MapPin,
+                  label: "Location",
+                  value: data.location,
                   link: "#",
                   color: "text-blue-400",
                   bg: "bg-blue-500/10"
                 },
-                { 
-                  icon: Clock, 
-                  label: "Response Time", 
-                  value: "Within 24 hours", 
+                {
+                  icon: Clock,
+                  label: "Response Time",
+                  value: "Within 24 hours",
                   link: "#",
                   color: "text-purple-400",
                   bg: "bg-purple-500/10"
@@ -356,7 +354,7 @@ const Contact = ({ data }: ContactProps) => {
               >
                 {/* Form Glow Effect */}
                 <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-blue-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
+
                 {/* Form Content */}
                 <div className="relative p-6 md:p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
                   <div className="flex items-center gap-3 mb-8">
@@ -381,11 +379,10 @@ const Contact = ({ data }: ContactProps) => {
                           onBlur={handleFieldBlur}
                           required
                           placeholder="John Doe"
-                          className={`w-full px-4 py-3 rounded-lg bg-white/5 border ${
-                            activeField === "name" 
-                              ? "border-emerald-500/50" 
+                          className={`w-full px-4 py-3 rounded-lg bg-white/5 border ${activeField === "name"
+                              ? "border-emerald-500/50"
                               : "border-white/10"
-                          } text-white placeholder-muted-foreground focus:outline-none transition-all duration-300`}
+                            } text-white placeholder-muted-foreground focus:outline-none transition-all duration-300`}
                         />
                         {formData.name && (
                           <CheckCircle className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-emerald-400" />
@@ -409,11 +406,10 @@ const Contact = ({ data }: ContactProps) => {
                           onBlur={handleFieldBlur}
                           required
                           placeholder="john@example.com"
-                          className={`w-full px-4 py-3 rounded-lg bg-white/5 border ${
-                            activeField === "email" 
-                              ? "border-emerald-500/50" 
+                          className={`w-full px-4 py-3 rounded-lg bg-white/5 border ${activeField === "email"
+                              ? "border-emerald-500/50"
                               : "border-white/10"
-                          } text-white placeholder-muted-foreground focus:outline-none transition-all duration-300`}
+                            } text-white placeholder-muted-foreground focus:outline-none transition-all duration-300`}
                         />
                         {formData.email && (
                           <CheckCircle className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-emerald-400" />
@@ -437,11 +433,10 @@ const Contact = ({ data }: ContactProps) => {
                       onBlur={handleFieldBlur}
                       required
                       placeholder="Project Inquiry"
-                      className={`w-full px-4 py-3 rounded-lg bg-white/5 border ${
-                        activeField === "subject" 
-                          ? "border-emerald-500/50" 
+                      className={`w-full px-4 py-3 rounded-lg bg-white/5 border ${activeField === "subject"
+                          ? "border-emerald-500/50"
                           : "border-white/10"
-                      } text-white placeholder-muted-foreground focus:outline-none transition-all duration-300`}
+                        } text-white placeholder-muted-foreground focus:outline-none transition-all duration-300`}
                     />
                   </div>
 
@@ -461,11 +456,10 @@ const Contact = ({ data }: ContactProps) => {
                         required
                         rows={6}
                         placeholder="Tell me about your project, timeline, and budget..."
-                        className={`w-full px-4 py-3 rounded-lg bg-white/5 border ${
-                          activeField === "message" 
-                            ? "border-emerald-500/50" 
+                        className={`w-full px-4 py-3 rounded-lg bg-white/5 border ${activeField === "message"
+                            ? "border-emerald-500/50"
                             : "border-white/10"
-                        } text-white placeholder-muted-foreground focus:outline-none resize-none transition-all duration-300`}
+                          } text-white placeholder-muted-foreground focus:outline-none resize-none transition-all duration-300`}
                       />
                       <div className="absolute bottom-3 right-3 text-xs text-muted-foreground">
                         {formData.message.length}/2000
