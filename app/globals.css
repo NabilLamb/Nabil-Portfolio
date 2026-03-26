@@ -27,6 +27,12 @@
   --neon-purple: oklch(0.55 0.25 280);
   --neon-blue: oklch(0.5 0.25 260);
   --neon-cyan: oklch(0.5 0.22 200);
+  --section-bg: #f8f8fc;
+  --section-bg-alt: #f0f0f8;
+  --glass-bg: rgba(0, 0, 0, 0.03);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-bg-hover: rgba(0, 0, 0, 0.06);
+  --canvas-opacity: 0;
 }
 
 .dark {
@@ -50,6 +56,12 @@
   --neon-purple: oklch(0.7 0.25 280);
   --neon-blue: oklch(0.65 0.25 260);
   --neon-cyan: oklch(0.68 0.22 200);
+  --section-bg: #0a0a14;
+  --section-bg-alt: #11111f;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-bg-hover: rgba(255, 255, 255, 0.1);
+  --canvas-opacity: 1;
 }
 
 @theme inline {

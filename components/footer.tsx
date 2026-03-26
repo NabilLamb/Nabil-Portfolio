@@ -10,6 +10,7 @@ import {
   ExternalLink,
   Coffee,
   Sparkles,
+  Rocket,
   Zap,
   ChevronUp,
   FileText,
@@ -20,14 +21,16 @@ import { useBinaryCanvas } from "@/hooks/useBinaryCanvas"
 
 interface FooterProps {
   data: {
-    github: string
-    linkedin: string
-    email: string
+    brandName: string
+    brandRole: string
+    description: string
+    quickLinks: Array<{ label: string; href: string; icon: string }>
+    techStack: string[]
+    learningText: string
+    builtWithTechs: string[]
+    copyrightName: string
   }
 }
-
-// The footer tech stack is intentionally a short curated list — kept here as UI config
-const FOOTER_TECH_STACK = ["React", "Next.js", "TypeScript", "Tailwind CSS", "MongoDB"]
 
 const Footer = ({ data }: FooterProps) => {
   const currentYear = new Date().getFullYear()
@@ -36,22 +39,6 @@ const Footer = ({ data }: FooterProps) => {
   const [showBackToTop, setShowBackToTop] = useState(false)
   const footerRef = useRef<HTMLElement>(null)
   const canvasRef = useBinaryCanvas({ color: "120, 119, 198", fontSize: 10, speed: 0.5, opacity: 0.08 })
-
-  const socialLinks = [
-    { icon: Github,   href: data.github,              label: "GitHub",   color: "text-gray-300", bg: "bg-gray-900/80",  desc: "View my code"        },
-    { icon: Linkedin, href: data.linkedin,             label: "LinkedIn", color: "text-blue-400", bg: "bg-blue-900/80",  desc: "Professional network"},
-    { icon: Mail,     href: `mailto:${data.email}`,   label: "Email",    color: "text-red-400",  bg: "bg-red-900/80",   desc: "Contact me"          },
-  ]
-
-  const quickLinks = [
-    { label: "Home",         href: "#hero",         icon: "🏠" },
-    { label: "About",        href: "#about",        icon: "👨‍💻" },
-    { label: "Experience",   href: "#experiences",  icon: "💼" },
-    { label: "Projects",     href: "#projects",     icon: "🚀" },
-    { label: "Skills",       href: "#technologies", icon: "⚡" },
-    { label: "Testimonials", href: "#feedbacks",    icon: "⭐" },
-    { label: "Contact",      href: "#contact",      icon: "📧" },
-  ]
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -68,20 +55,31 @@ const Footer = ({ data }: FooterProps) => {
   }, [])
 
   useEffect(() => {
-    const handleScroll = () => setShowBackToTop(window.scrollY > 500)
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 500)
+    }
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" })
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
 
   const scrollToSection = (href: string) => {
     const element = document.getElementById(href.replace("#", ""))
     if (element) element.scrollIntoView({ behavior: "smooth" })
   }
 
+  const iconMap: Record<string, any> = {
+    github: <Github size={18} />,
+    linkedin: <Linkedin size={18} />,
+    mail: <Mail size={18} />,
+  }
+
   return (
     <>
+      {/* Back to Top Button */}
       {showBackToTop && (
         <button
           onClick={scrollToTop}
@@ -95,12 +93,13 @@ const Footer = ({ data }: FooterProps) => {
 
       <footer
         ref={footerRef}
-        className="relative border-t border-purple-500/20 overflow-hidden"
+        className="relative border-t border-purple-500/20 bg-background overflow-hidden"
       >
+        {/* Binary Animation Background */}
         <canvas
           ref={canvasRef}
           className="absolute inset-0 -z-10"
-          style={{ background: "linear-gradient(180deg, #0a0a14 0%, #11111f 100%)" }}
+          style={{ background: "linear-gradient(180deg, var(--section-bg) 0%, var(--section-bg-alt) 100%)", opacity: "var(--canvas-opacity)" }}
         />
 
         <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -115,46 +114,45 @@ const Footer = ({ data }: FooterProps) => {
             }`}
           >
             <div className="grid lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
-              {/* Brand */}
+              {/* Brand Column */}
               <div className="lg:col-span-1">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 p-0.5">
-                    <div className="w-full h-full rounded-full bg-gray-900 flex items-center justify-center">
-                      <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-                        N
-                      </span>
+                <div className="mb-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 p-0.5">
+                      <div className="w-full h-full rounded-full bg-background flex items-center justify-center">
+                        <div className="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                          {data.brandName.charAt(0)}
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                        {data.brandName}
+                      </h3>
+                      <p className="text-sm text-muted-foreground font-mono">{data.brandRole}</p>
                     </div>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                      Nabil
-                    </h3>
-                    <p className="text-sm text-muted-foreground font-mono">Frontend Developer</p>
-                  </div>
+                  <p className="text-muted-foreground mb-6">{data.description}</p>
+
+                  <a
+                    href="/nabil_cv.pdf"
+                    download="Nabil_Lambattan_CV.pdf"
+                    className="group relative w-full px-4 py-3 rounded-lg bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 flex items-center justify-center gap-2 text-purple-300 hover:text-foreground"
+                  >
+                    <FileText size={16} />
+                    Download Resume
+                  </a>
                 </div>
-
-                <p className="text-muted-foreground mb-6 text-sm">
-                  Building modern web experiences with React and Next.js.
-                </p>
-
-                <a
-                  href="/nabil_cv.pdf"
-                  download="Nabil_Lambattan_CV.pdf"
-                  className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 hover:border-purple-500/40 text-purple-300 hover:text-white transition-all duration-300"
-                >
-                  <FileText size={16} />
-                  Download Resume
-                </a>
               </div>
 
-              {/* Navigation */}
+              {/* Quick Links Column */}
               <div className="lg:col-span-1">
-                <h4 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                <h4 className="text-lg font-bold text-foreground mb-6 flex items-center gap-2">
                   <Zap className="w-4 h-4 text-purple-400" />
                   Navigation
                 </h4>
-                <div className="grid grid-cols-2 gap-3">
-                  {quickLinks.map((link) => (
+                <div className="grid grid-cols-2 gap-4">
+                  {data.quickLinks.map((link) => (
                     <button
                       key={link.label}
                       onClick={() => scrollToSection(link.href)}
@@ -163,7 +161,7 @@ const Footer = ({ data }: FooterProps) => {
                       className="group flex items-center gap-2 p-2 rounded-lg hover:bg-white/5 transition-all duration-300"
                     >
                       <span className="text-sm">{link.icon}</span>
-                      <span className="text-sm text-muted-foreground group-hover:text-white transition-colors">
+                      <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
                         {link.label}
                       </span>
                       {hoveredLink === link.label && (
@@ -174,16 +172,16 @@ const Footer = ({ data }: FooterProps) => {
                 </div>
               </div>
 
-              {/* Tech Stack */}
+              {/* Tech Stack Column */}
               <div className="lg:col-span-1">
-                <h4 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                <h4 className="text-lg font-bold text-foreground mb-6 flex items-center gap-2">
                   <Terminal className="w-4 h-4 text-cyan-400" />
                   Tech Stack
                 </h4>
                 <div className="flex flex-wrap gap-2">
-                  {FOOTER_TECH_STACK.map((tech) => (
+                  {data.techStack.map((tech, idx) => (
                     <span
-                      key={tech}
+                      key={idx}
                       className="px-3 py-1.5 text-xs rounded-full bg-white/5 border border-white/10 text-muted-foreground hover:text-cyan-300 hover:border-cyan-500/30 transition-all duration-300"
                     >
                       {tech}
@@ -194,43 +192,45 @@ const Footer = ({ data }: FooterProps) => {
                 <div className="mt-8 p-4 rounded-lg bg-gradient-to-r from-cyan-500/5 to-blue-500/5 border border-cyan-500/20">
                   <div className="flex items-center gap-2 mb-2">
                     <Sparkles className="w-4 h-4 text-cyan-400" />
-                    <span className="text-sm font-medium text-white">Open to Work</span>
+                    <span className="text-sm font-medium text-foreground">Currently Learning</span>
                   </div>
-                  <p className="text-xs text-muted-foreground">
-                    Available for frontend & full-stack opportunities
-                  </p>
+                  <p className="text-xs text-muted-foreground">{data.learningText}</p>
                 </div>
               </div>
 
-              {/* Connect */}
+              {/* Connect Column */}
               <div className="lg:col-span-1">
-                <h4 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                <h4 className="text-lg font-bold text-foreground mb-6 flex items-center gap-2">
                   <Globe className="w-4 h-4 text-blue-400" />
                   Let's Connect
                 </h4>
                 <div className="space-y-4">
-                  {socialLinks.map((social, idx) => (
+                  {[
+                    { label: "GitHub", url: "https://github.com/NabilLamb", color: "text-gray-300", bg: "bg-gray-900/80", icon: "github", desc: "View my code" },
+                    { label: "LinkedIn", url: "https://linkedin.com/in/nabil-lambattan", color: "text-blue-400", bg: "bg-blue-900/80", icon: "linkedin", desc: "Professional network" },
+                    { label: "Email", url: "mailto:lambattannabil2000@gmail.com", color: "text-red-400", bg: "bg-red-900/80", icon: "mail", desc: "Contact me" },
+                  ].map((social, idx) => (
                     <a
                       key={idx}
-                      href={social.href}
-                      target={social.href.startsWith("mailto") ? undefined : "_blank"}
-                      rel={social.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+                      href={social.url}
+                      target={social.url.startsWith("mailto") ? undefined : "_blank"}
+                      rel={social.url.startsWith("mailto") ? undefined : "noopener noreferrer"}
                       onMouseEnter={() => setHoveredLink(social.label)}
                       onMouseLeave={() => setHoveredLink(null)}
-                      className="group block p-3 rounded-lg bg-white/5 border border-white/10 hover:border-purple-500/30 transition-all duration-300 hover:scale-105"
+                      className="group block p-3 rounded-lg hover:border-purple-500/30 transition-all duration-300 hover:scale-105" style={{ background: 'var(--glass-bg)', borderWidth: '1px', borderStyle: 'solid', borderColor: 'var(--glass-border)' }}
                     >
                       <div className="flex items-center gap-3">
                         <div className={`p-2 rounded-lg ${social.bg}`}>
-                          <social.icon size={18} className={social.color} />
+                          <div className={social.color}>{iconMap[social.icon] || <Globe size={18} />}</div>
                         </div>
                         <div className="flex-1">
-                          <p className="text-sm font-medium text-white">{social.label}</p>
+                          <p className="text-sm font-medium text-foreground">{social.label}</p>
                           <p className="text-xs text-muted-foreground">{social.desc}</p>
                         </div>
                         <ExternalLink
-                          className={`w-4 h-4 text-purple-400 transition-all duration-300 ${
+                          className={`w-4 h-4 transition-all duration-300 ${
                             hoveredLink === social.label ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2"
-                          }`}
+                          } text-purple-400`}
                         />
                       </div>
                     </a>
@@ -240,28 +240,34 @@ const Footer = ({ data }: FooterProps) => {
             </div>
 
             {/* Bottom Bar */}
-            <div className="pt-8 border-t border-white/10">
+            <div
+              className={`pt-8 border-t border-white/10 transition-all duration-1000 delay-500 ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
+            >
               <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                 <div className="flex items-center gap-2">
                   <Heart className="w-4 h-4 text-red-500 fill-red-500 animate-pulse" />
                   <p className="text-sm text-muted-foreground">
-                    © {currentYear} Nabil Lambattan. All rights reserved.
+                    © {currentYear} {data.copyrightName}. All rights reserved.
                   </p>
                 </div>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-4">
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Code2 className="w-4 h-4" />
                     <span>Built with</span>
                   </div>
-                  {["React", "Next.js", "TypeScript", "Tailwind"].map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 text-xs rounded-full bg-white/5 border border-white/10 text-muted-foreground"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                  <div className="flex items-center gap-2">
+                    {data.builtWithTechs.map((tech) => (
+                      <div
+                        key={tech}
+                        className="px-3 py-1 text-xs rounded-full bg-white/5 border border-white/10 text-muted-foreground"
+                      >
+                        {tech}
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">

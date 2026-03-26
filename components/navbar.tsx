@@ -8,14 +8,24 @@ import Image from "next/image"
 import { useTheme } from "next-themes"
 import { useBinaryCanvas } from "@/hooks/useBinaryCanvas"
 
-const Navbar = () => {
+interface NavbarData {
+  brandName?: string;
+  brandRole?: string;
+  links?: Array<{
+    id: string;
+    label: string;
+    icon: string;
+  }>;
+}
+
+const Navbar = ({ data }: { data?: NavbarData }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState("Home")
   const { theme, setTheme } = useTheme()
   const canvasRef = useBinaryCanvas({ color: "120, 119, 198", fontSize: 8, speed: 0.6, opacity: 0.1 })
 
-  const links = [
+  const links = data?.links || [
     { id: "hero", label: "Home", icon: "🏠" },
     { id: "about", label: "About", icon: "👨‍💻" },
     { id: "experiences", label: "Experience", icon: "💼" },
@@ -77,7 +87,7 @@ const Navbar = () => {
       <nav
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-gray-900/90 backdrop-blur-xl border-b border-purple-500/20 shadow-xl shadow-purple-500/5"
+            ? "bg-background/90 backdrop-blur-xl border-b border-purple-500/20 shadow-xl shadow-purple-500/5"
             : "bg-transparent backdrop-blur-sm border-b border-purple-500/10"
         }`}
       >
@@ -87,9 +97,9 @@ const Navbar = () => {
             <div className="flex items-center gap-3">
               <div className="relative">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 p-0.5">
-                  <div className="w-full h-full rounded-full bg-gray-900 flex items-center justify-center">
+                  <div className="w-full h-full rounded-full bg-white/20 dark:bg-white/10 backdrop-blur-sm flex items-center justify-center">
                     <Image
-                      src="/apple-icon.png"
+                      src="/apple-icon-180x180.png"
                       alt="Nabil Logo"
                       width={24}
                       height={24}
@@ -97,13 +107,13 @@ const Navbar = () => {
                     />
                   </div>
                 </div>
-                <div className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-green-500 animate-pulse border-2 border-gray-900"></div>
+                <div className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-green-500 animate-pulse border-2 border-background"></div>
               </div>
               <div className="hidden md:flex flex-col">
                 <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-                  Nabil
+                  {data?.brandName || "Nabil"}
                 </span>
-                <span className="text-xs text-muted-foreground font-mono">Frontend Developer</span>
+                <span className="text-xs text-muted-foreground font-mono">{data?.brandRole || "Frontend Developer"}</span>
               </div>
             </div>
 
@@ -117,8 +127,8 @@ const Navbar = () => {
                   aria-current={activeSection === link.label ? "page" : undefined}
                   className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 group ${
                     activeSection === link.label
-                      ? "text-white bg-purple-500/20"
-                      : "text-muted-foreground hover:text-white hover:bg-white/5"
+                      ? "text-foreground bg-purple-500/20"
+                      : "text-muted-foreground hover:text-foreground hover:bg-white/5"
                   }`}
                 >
                   <div className="flex items-center gap-2">
@@ -141,7 +151,7 @@ const Navbar = () => {
               <button
                 onClick={toggleDarkMode}
                 aria-label="Toggle dark mode"
-                className="p-2 rounded-lg bg-white/5 border border-white/10 text-muted-foreground hover:text-white hover:border-purple-500/30 transition-all duration-300"
+                className="p-2 rounded-lg border text-muted-foreground hover:text-foreground hover:border-purple-500/30 transition-all duration-300" style={{ background: 'var(--glass-bg)', borderColor: 'var(--glass-border)' }}
               >
                 {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
               </button>
@@ -150,7 +160,7 @@ const Navbar = () => {
               <a
                 href="/nabil_cv.pdf"
                 download="Nabil_Lambattan_CV.pdf"
-                className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30 text-purple-300 hover:text-white hover:border-purple-500/60 transition-all duration-300"
+                className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30 text-purple-300 hover:text-foreground hover:border-purple-500/60 transition-all duration-300"
               >
                 <User size={16} />
                 <span className="text-sm font-medium">Download CV</span>
@@ -161,7 +171,7 @@ const Navbar = () => {
                 onClick={() => setIsOpen(!isOpen)}
                 aria-label="Toggle mobile menu"
                 aria-expanded={isOpen}
-                className="md:hidden p-2 rounded-lg bg-white/5 border border-white/10 text-purple-400 hover:text-white hover:border-purple-500/30 transition-all duration-300"
+                className="md:hidden p-2 rounded-lg border text-purple-400 hover:text-foreground hover:border-purple-500/30 transition-all duration-300" style={{ background: 'var(--glass-bg)', borderColor: 'var(--glass-border)' }}
               >
                 {isOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
@@ -183,7 +193,7 @@ const Navbar = () => {
                     }`}
                   >
                     <span className="text-lg">{link.icon}</span>
-                    <span className="font-medium text-white">{link.label}</span>
+                    <span className="font-medium text-foreground">{link.label}</span>
                     {activeSection === link.label && (
                       <div className="ml-auto w-2 h-2 rounded-full bg-purple-500 animate-pulse"></div>
                     )}

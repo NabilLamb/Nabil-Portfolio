@@ -1,154 +1,280 @@
 {
   "hero": {
     "name": "Nabil",
-    "title": "Frontend Developer specializing in React & Next.js",
-    "subtitle": "I build high-quality, fast and scalable web applications.",
+    "title": "Frontend Developer specializing in React, Next.js & TypeScript",
+    "subtitle": "I build high‑quality, fast and scalable web applications.",
     "ctaHire": "Hire Me",
     "ctaCV": "Download CV",
-    "cvLink": "/nabil_cv.pdf",
-    "heroImageLink": "/hero.png",
-    "description": "Passionate about creating beautiful, performant digital experiences.",
-    "techStack": ["React", "Next.js", "Node.js", "TypeScript", "Tailwind CSS", "MongoDB"]
+    "cvLink": "./nabil_cv.pdf",
+    "heroImageLink": "./hero.png",
+    "badgeText": "Frontend Developer",
+    "techStack": [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Tailwind",
+      "Node.js",
+      "MongoDB",
+      "MySQL"
+    ],
+    "stats": [
+      {
+        "label": "Available for work",
+        "icon": "status"
+      },
+      {
+        "label": "Fast & Scalable",
+        "icon": "bolt"
+      }
+    ]
   },
   "about": {
     "title": "Professional Profile",
-    "description": "Frontend developer from Morocco specializing in modern web application development with React and Next.js. I combine clean code practices with creative problem-solving to deliver fast, accessible, and maintainable products.",
-    "avatar": "/about.jpg",
-    "techStack": [
-      { "name": "React / Next.js", "category": "frontend" },
-      { "name": "Node.js / Express", "category": "backend" },
-      { "name": "MongoDB", "category": "database" },
-      { "name": "TypeScript", "category": "language" },
-      { "name": "Tailwind CSS", "category": "styling" },
-      { "name": "Git / GitHub", "category": "tools" }
+    "description": "Frontend developer from Morocco specializing in modern web applications. I combine clean code practices with creative problem‑solving to deliver solutions that users love. Passionate about performance optimization, accessibility, and building products that make an impact.",
+    "avatar": "./about.jpg",
+    "sectionTitle": "About Me",
+    "sectionSubtitle": "Get to know the developer behind the code",
+    "journeyTitle": "My Journey",
+    "techStackTitle": "Tech Stack",
+    "ctaTitle": "Let's Build Something Amazing",
+    "ctaDescription": "Ready to bring your ideas to life with modern technology",
+    "techList": [
+      {
+        "name": "React / Next.js",
+        "icon": "code"
+      },
+      {
+        "name": "Node.js / Express",
+        "icon": "server"
+      },
+      {
+        "name": "MongoDB",
+        "icon": "database"
+      },
+      {
+        "name": "MySQL",
+        "icon": "database"
+      },
+      {
+        "name": "TypeScript",
+        "icon": "terminal"
+      },
+      {
+        "name": "Tailwind CSS",
+        "icon": "globe"
+      },
+      {
+        "name": "Git / GitHub",
+        "icon": "cpu"
+      }
     ],
     "stats": [
-      { "label": "Years Coding", "value": 2, "suffix": "+" },
-      { "label": "Projects Built", "value": 6, "suffix": "+" },
-      { "label": "Technologies", "value": 10, "suffix": "+" }
+      {
+        "label": "Years Coding",
+        "value": 2,
+        "suffix": "+"
+      },
+      {
+        "label": "Projects Built",
+        "value": 6,
+        "suffix": "+"
+      },
+      {
+        "label": "Technologies",
+        "value": 10,
+        "suffix": "+"
+      }
     ]
   },
-  "experiences": [
+  "experiences": {
+    "sectionTitle": "Professional Experience",
+    "sectionSubtitle": "A timeline of my professional growth in the tech industry",
+    "stats": [
+      {
+        "label": "Years Coding",
+        "value": "2+",
+        "icon": "clock"
+      },
+      {
+        "label": "Projects Built",
+        "value": "6+",
+        "icon": "code2"
+      },
+      {
+        "label": "Technologies",
+        "value": "10+",
+        "icon": "cpu"
+      },
+      {
+        "label": "Commitment",
+        "value": "100%",
+        "icon": "sparkles"
+      }
+    ],
+    "ctaTitle": "Let's Build Something Exceptional Together",
+    "ctaDescription": "I'm currently available for frontend development projects and new opportunities.",
+    "ctaButtonPrimary": "Hire Me / Contact",
+    "ctaButtonSecondary": "View Projects"
+  },
+  "technologies": {
+    "list": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "MySQL",
+      "Git",
+      "GitHub",
+      "Vercel"
+    ],
+    "sectionTitle": "Technologies & Tools",
+    "sectionSubtitle": "Technologies I use to build modern web applications",
+    "stats": [
+      {
+        "label": "Frontend",
+        "value": 6,
+        "icon": "layout"
+      },
+      {
+        "label": "Backend & Database",
+        "value": 4,
+        "icon": "database"
+      },
+      {
+        "label": "DevOps & Tools",
+        "value": 3,
+        "icon": "shield"
+      },
+      {
+        "label": "Years Learning",
+        "value": "2+",
+        "icon": "rocket"
+      }
+    ],
+    "learningText": "Currently: TypeScript advanced patterns & testing"
+  },
+  "projects": {
+    "sectionTitle": "Featured Projects",
+    "sectionSubtitle": "Building solutions with modern technologies and best practices",
+    "stats": [
+      {
+        "label": "Total Projects",
+        "icon": "layers"
+      },
+      {
+        "label": "Open Source",
+        "icon": "github"
+      },
+      {
+        "label": "Live Demos",
+        "icon": "eye"
+      },
+      {
+        "label": "Featured",
+        "icon": "star"
+      }
+    ],
+    "viewAllButtonText": "View All on GitHub",
+    "emptyStateMessage": "No projects match the selected filter.",
+    "resetFiltersButton": "Reset Filters"
+  },
+  "projectsList": [
     {
-      "role": "Technical Problem-Solving & Operations",
-      "company": "MAMDA/MCMA Assurance",
-      "location": "Oujda, Morocco",
-      "date": "Sep 2025 – Present",
-      "description": "Managed and maintained internal IT systems and network infrastructure to ensure stability and availability. Provided first and second-level technical support, resolving critical hardware, software, and network issues rapidly to minimize operational downtime. Streamlined support processes through documentation, reducing average resolution time.",
-      "technologies": [
-        "IT Systems",
-        "Network Infrastructure",
-        "Troubleshooting",
-        "System Maintenance"
-      ]
-    },
-    {
-      "role": "Freelance Frontend Developer",
-      "company": "Self-employed",
-      "location": "Remote",
-      "date": "Dec 2024 – Present",
-      "description": "Designed, developed, and launched 6+ custom, performance-focused websites using Next.js and React. Implemented responsive, high-fidelity UIs with Tailwind CSS. Applied rigorous technical standards to deliver maintainable, scalable, and high-quality codebases while providing technical consulting to clients.",
-      "technologies": [
-        "Next.js",
-        "React",
-        "Tailwind CSS",
-        "HTML/CSS",
-        "Performance Optimization",
-        "Client Management"
-      ]
-    },
-    {
-      "role": "End-of-studies Full-Stack Developer Intern",
-      "company": "FCPO",
-      "location": "Oujda, Morocco",
-      "date": "Mar 2024 – Sep 2024",
-      "description": "Built a comprehensive e-commerce management dashboard using React.js. Streamlined the UI with Tailwind CSS & Bootstrap, cutting page load times by 40%. Secured API communications via Axios with JWT authentication and designed data visualizations using ECharts.",
-      "technologies": [
-        "React.js",
-        "Tailwind CSS",
-        "Bootstrap",
-        "ECharts",
-        "Axios",
-        "JWT",
-        "Agile"
-      ]
-    },
-    {
-      "role": "Full-Stack Developer Intern",
-      "company": "Oriental Regional Council (CRO)",
-      "location": "Oujda, Morocco",
-      "date": "Jun 2022 – Sep 2022",
-      "description": "Developed a web application to automate the management of association and cooperative files using a React.js frontend and Node.js backend. Digitized the entire file process, improving administrative efficiency and implementing data filtering and authorization features.",
-      "technologies": [
-        "React.js",
-        "Node.js",
-        "Bootstrap",
-        "API Integration",
-        "Authorization",
-        "Full-Stack Development"
-      ]
-    }
-  ],
-  "technologies": [
-    "HTML",
-    "CSS",
-    "JavaScript",
-    "TypeScript",
-    "React",
-    "Next.js",
-    "Tailwind CSS",
-    "Node.js",
-    "Express",
-    "MongoDB",
-    "Git",
-    "GitHub",
-    "Vercel"
-  ],
-  "currentlyLearning": "TypeScript advanced patterns & testing",
-  "projects": [
-    {
-      "title": "Boucherie D'Or",
+      "title": "Butcher Shop",
       "image": "/Butcher-shop.png",
-      "description": "Full-featured e-commerce platform for a butcher shop. Includes product catalog, shopping cart, order management, and an admin dashboard for inventory control.",
-      "technologies": ["Next.js", "React", "Tailwind CSS", "MongoDB", "Node.js"],
+      "description": "A modern e‑commerce platform for a butcher shop with product catalog, cart, and checkout.",
+      "technologies": [
+        "React",
+        "Next.js",
+        "Tailwind CSS",
+        "Node.js",
+        "MongoDB"
+      ],
       "github": "https://github.com/NabilLamb/boucherie-D-or",
       "demo": "https://boucherie-d-or.vercel.app/",
       "featured": true
     },
     {
-      "title": "FitHub – Gym E-Commerce",
+      "title": "FitHub - Gym E‑commerce",
       "image": "/FitHub.png",
-      "description": "E-commerce store for gym equipment and supplements. Features product filtering, cart, checkout flow, and a clean responsive UI.",
-      "technologies": ["React", "Next.js", "Tailwind CSS", "MongoDB"],
+      "description": "Gym equipment e‑commerce with product filtering, shopping cart, and user authentication.",
+      "technologies": [
+        "React",
+        "Next.js",
+        "Tailwind CSS",
+        "MongoDB"
+      ],
       "github": "https://github.com/NabilLamb/gym-e-commerce",
       "demo": "https://gym-e-commerce-ten.vercel.app/",
       "featured": true
     },
     {
-      "title": "eCommerce Dashboard",
+      "title": "Sales Dashboard",
       "image": "/Dashboard.png",
-      "description": "Real-time analytics dashboard for e-commerce. Tracks sales KPIs, order status, revenue trends, and inventory using interactive charts.",
-      "technologies": ["React", "Tailwind CSS", "ECharts", "Node.js", "JWT"],
+      "description": "Analytics dashboard for e‑commerce with real‑time charts, sales tracking, and user management.",
+      "technologies": [
+        "React",
+        "Next.js",
+        "Tailwind CSS",
+        "Recharts"
+      ],
       "github": "https://github.com/NabilLamb/eCommerce-Dashboard",
       "demo": "https://e-commerce-dashboard-azure-ten.vercel.app/",
-      "featured": true
+      "featured": false
     }
   ],
-  "testimonials": [
-    {
-      "name": "Ahmed Nadi",
-      "role": "Client",
-      "message": "Nabil delivered an excellent project with clean design, great performance, and professional communication throughout.",
-      "rating": 5
-    },
+  "testimonials": {
+    "sectionTitle": "Testimonials",
+    "sectionSubtitle": "What clients and colleagues say about working with me",
+    "stats": [
+      {
+        "label": "Testimonials",
+        "value": 3,
+        "icon": "users"
+      },
+      {
+        "label": "Average Rating",
+        "value": "5/5",
+        "icon": "award"
+      },
+      {
+        "label": "Projects Built",
+        "value": "6+",
+        "icon": "trending-up"
+      },
+      {
+        "label": "On‑time Delivery",
+        "value": "100%",
+        "icon": "heart"
+      }
+    ],
+    "ctaTitle": "Worked with me?",
+    "ctaDescription": "I'd love to hear your feedback",
+    "ctaButtonText": "Share Your Feedback",
+    "autoPlayText": "Auto-playing",
+    "pausedText": "Paused"
+  },
+  "testimonialsList": [
     {
       "name": "Abdel El Ahmar",
       "role": "Client",
-      "message": "Professional work, meets deadlines, and high-quality code. Highly recommended for any frontend development project.",
+      "message": "Nabil delivered an excellent project with clean design, excellent performance, and professional communication throughout the process.",
       "rating": 5
     },
     {
-      "name": "Lamiae Mossaoui",
+      "name": "Karim Lemziani",
+      "role": "Client",
+      "message": "Professional work, meets deadlines, and high‑quality code. Highly recommended for any full‑stack development project.",
+      "rating": 5
+    },
+    {
+      "name": "Nawal Hinawi",
       "role": "Client",
       "message": "Great communication, strong technical skills, and attention to detail. Will definitely work with Nabil again.",
       "rating": 5
@@ -157,11 +283,166 @@
   "contact": {
     "email": "lambattannabil2000@gmail.com",
     "phone": "+212 639281869",
-    "location": "Oujda, Morocco"
+    "location": "Oujda, Maroc",
+    "sectionTitle": "Get In Touch",
+    "sectionSubtitle": "Have a project in mind? Let's discuss how we can bring your ideas to life",
+    "contactCards": [
+      {
+        "label": "Email",
+        "value": "lambattannabil2000@gmail.com",
+        "link": "mailto:lambattannabil2000@gmail.com",
+        "color": "text-red-400",
+        "bg": "bg-red-500/10"
+      },
+      {
+        "label": "Phone",
+        "value": "+212 639281869",
+        "link": "tel:+212639281869",
+        "color": "text-green-400",
+        "bg": "bg-green-500/10"
+      },
+      {
+        "label": "Location",
+        "value": "Oujda, Maroc",
+        "link": "#",
+        "color": "text-blue-400",
+        "bg": "bg-blue-500/10"
+      },
+      {
+        "label": "Response Time",
+        "value": "Within 24 hours",
+        "link": "#",
+        "color": "text-purple-400",
+        "bg": "bg-purple-500/10"
+      }
+    ],
+    "socialLinks": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/NabilLamb",
+        "color": "text-gray-300",
+        "bg": "bg-gray-900/80",
+        "icon": "github"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://linkedin.com/in/nabil-lambattan",
+        "color": "text-blue-400",
+        "bg": "bg-blue-900/80",
+        "icon": "linkedin"
+      },
+      {
+        "label": "Email",
+        "url": "mailto:lambattannabil2000@gmail.com",
+        "color": "text-red-400",
+        "bg": "bg-red-900/80",
+        "icon": "mail"
+      }
+    ],
+    "availabilityText": "Currently Available",
+    "availabilitySubtext": "For new projects & opportunities",
+    "formTitle": "Send me a message",
+    "formNote": "Your data is secure. No spam, guaranteed.",
+    "quickContactTitle": "Prefer a call?",
+    "quickContactDescription": "Reach me directly"
   },
-  "social": {
-    "github": "https://github.com/NabilLamb",
-    "linkedin": "https://linkedin.com/in/nabil-lambattan",
-    "email": "lambattannabil2000@gmail.com"
+  "navbar": {
+    "brandName": "Nabil",
+    "brandRole": "Frontend Developer",
+    "links": [
+      {
+        "id": "hero",
+        "label": "Home",
+        "icon": "🏠"
+      },
+      {
+        "id": "about",
+        "label": "About",
+        "icon": "👨‍💻"
+      },
+      {
+        "id": "experiences",
+        "label": "Experience",
+        "icon": "💼"
+      },
+      {
+        "id": "technologies",
+        "label": "Skills",
+        "icon": "⚡"
+      },
+      {
+        "id": "projects",
+        "label": "Projects",
+        "icon": "🚀"
+      },
+      {
+        "id": "feedbacks",
+        "label": "Testimonials",
+        "icon": "⭐"
+      },
+      {
+        "id": "contact",
+        "label": "Contact",
+        "icon": "📧"
+      }
+    ]
+  },
+  "footer": {
+    "brandName": "Nabil",
+    "brandRole": "Frontend Developer",
+    "description": "Building modern web experiences with React and Next.js.",
+    "quickLinks": [
+      {
+        "label": "Home",
+        "href": "#hero",
+        "icon": "🏠"
+      },
+      {
+        "label": "About",
+        "href": "#about",
+        "icon": "👨‍💻"
+      },
+      {
+        "label": "Experience",
+        "href": "#experiences",
+        "icon": "💼"
+      },
+      {
+        "label": "Projects",
+        "href": "#projects",
+        "icon": "🚀"
+      },
+      {
+        "label": "Skills",
+        "href": "#technologies",
+        "icon": "⚡"
+      },
+      {
+        "label": "Testimonials",
+        "href": "#feedbacks",
+        "icon": "⭐"
+      },
+      {
+        "label": "Contact",
+        "href": "#contact",
+        "icon": "📧"
+      }
+    ],
+    "techStack": [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Node.js",
+      "Tailwind",
+      "MongoDB"
+    ],
+    "learningText": "Currently learning: TypeScript advanced patterns & testing",
+    "builtWithTechs": [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Tailwind"
+    ],
+    "copyrightName": "Nabil Lambattan"
   }
 }

@@ -1,5 +1,3 @@
-// components\testimonials.tsx
-
 "use client"
 
 import { useEffect, useRef, useState } from "react"
@@ -27,9 +25,19 @@ interface Testimonial {
 
 interface TestimonialsProps {
   data: Testimonial[]
+  content: {
+    sectionTitle: string
+    sectionSubtitle: string
+    stats: Array<{ label: string; value: string | number; icon: string }>
+    ctaTitle: string
+    ctaDescription: string
+    ctaButtonText: string
+    autoPlayText: string
+    pausedText: string
+  }
 }
 
-const Testimonials = ({ data }: TestimonialsProps) => {
+const Testimonials = ({ data, content }: TestimonialsProps) => {
   const [isVisible, setIsVisible] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
   const [autoPlay, setAutoPlay] = useState(true)
@@ -101,46 +109,74 @@ const Testimonials = ({ data }: TestimonialsProps) => {
     ))
   }
 
+  const iconMap: Record<string, any> = {
+    users: <Users size={20} />,
+    award: <Award size={20} />,
+    "trending-up": <TrendingUp size={20} />,
+    heart: <Heart size={20} />,
+  }
+
   return (
     <section id="feedbacks" className="relative py-24 md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden" ref={ref}>
-      <canvas ref={canvasRef} className="absolute inset-0 -z-20" style={{ background: "linear-gradient(135deg, #0a0a14 0%, #11111f 100%)" }} />
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 -z-20"
+        style={{ background: "linear-gradient(135deg, var(--section-bg) 0%, var(--section-bg-alt) 100%)", opacity: "var(--canvas-opacity)" }}
+      />
 
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-1/4 left-10 w-80 h-80 bg-yellow-500/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-10 w-80 h-80 bg-orange-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }}></div>
+        <div
+          className="absolute bottom-1/4 right-10 w-80 h-80 bg-orange-500/5 rounded-full blur-3xl animate-pulse"
+          style={{ animationDelay: "1s" }}
+        ></div>
       </div>
 
       <div className="absolute inset-0 -z-10 opacity-5">
-        <div className="absolute inset-0" style={{ backgroundImage: `radial-gradient(circle at 25% 25%, rgba(255, 215, 0, 0.1) 1px, transparent 1px)`, backgroundSize: "50px 50px" }} />
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `radial-gradient(circle at 25% 25%, rgba(255, 215, 0, 0.1) 1px, transparent 1px)`,
+            backgroundSize: "50px 50px",
+          }}
+        />
       </div>
 
       <div className="max-w-7xl mx-auto relative">
-        <div className={`transition-all duration-1000 mb-16 text-center ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+        <div
+          className={`transition-all duration-1000 mb-16 text-center ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 mb-6">
             <Heart className="w-4 h-4 text-yellow-400" />
             <span className="text-sm font-mono text-yellow-300">Client Love</span>
           </div>
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-yellow-400 via-orange-400 to-amber-400 bg-clip-text text-transparent">Testimonials</span>
+            <span className="bg-gradient-to-r from-yellow-400 via-orange-400 to-amber-400 bg-clip-text text-transparent">
+              {content.sectionTitle}
+            </span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">What clients and colleagues say about working with me</p>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">{content.sectionSubtitle}</p>
         </div>
 
         {/* Stats */}
-        <div className={`mb-12 grid grid-cols-2 md:grid-cols-4 gap-4 transition-all duration-1000 delay-300 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
-          {[
-            { label: "Testimonials", value: data.length, icon: <Users size={20} />, color: "text-yellow-400" },
-            { label: "Average Rating", value: "5/5", icon: <Award size={20} />, color: "text-orange-400" },
-            { label: "Projects Built", value: "6+", icon: <TrendingUp size={20} />, color: "text-amber-400" },
-            { label: "On-time Delivery", value: "100%", icon: <Heart size={20} />, color: "text-red-400" },
-          ].map((stat, idx) => (
-            <div key={idx} className="p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-yellow-500/30 transition-all duration-300 hover:scale-105">
+        <div
+          className={`mb-12 grid grid-cols-2 md:grid-cols-4 gap-4 transition-all duration-1000 delay-300 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
+          {content.stats.map((stat, idx) => (
+            <div
+              key={idx}
+              className="p-4 rounded-xl backdrop-blur-sm hover:border-yellow-500/30 transition-all duration-300 hover:scale-105" style={{ background: 'var(--glass-bg)', borderWidth: '1px', borderStyle: 'solid', borderColor: 'var(--glass-border)' }}
+            >
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-white/5">
-                  <div className={stat.color}>{stat.icon}</div>
+                <div className="p-2 rounded-lg" style={{ background: 'var(--glass-bg)' }}>
+                  <div className="text-yellow-400">{iconMap[stat.icon]}</div>
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-white">{stat.value}</p>
+                  <p className="text-2xl font-bold text-foreground">{stat.value}</p>
                   <p className="text-sm text-muted-foreground">{stat.label}</p>
                 </div>
               </div>
@@ -148,45 +184,71 @@ const Testimonials = ({ data }: TestimonialsProps) => {
           ))}
         </div>
 
-        {/* Main Carousel */}
+        {/* Main Carousel (unchanged) */}
         <div className="relative mb-12">
-          <button onClick={prevTestimonial} aria-label="Previous testimonial" className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-8 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/30 backdrop-blur-sm flex items-center justify-center text-yellow-300 hover:text-white hover:border-yellow-500/60 transition-all duration-300 hover:scale-110">
+          <button
+            onClick={prevTestimonial}
+            aria-label="Previous testimonial"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-8 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/30 backdrop-blur-sm flex items-center justify-center text-yellow-300 hover:text-foreground hover:border-yellow-500/60 transition-all duration-300 hover:scale-110"
+          >
             <ChevronLeft className="w-5 h-5" />
           </button>
 
-          <button onClick={nextTestimonial} aria-label="Next testimonial" className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-8 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-r from-orange-500/20 to-yellow-500/20 border border-orange-500/30 backdrop-blur-sm flex items-center justify-center text-orange-300 hover:text-white hover:border-orange-500/60 transition-all duration-300 hover:scale-110">
+          <button
+            onClick={nextTestimonial}
+            aria-label="Next testimonial"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-8 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-r from-orange-500/20 to-yellow-500/20 border border-orange-500/30 backdrop-blur-sm flex items-center justify-center text-orange-300 hover:text-foreground hover:border-orange-500/60 transition-all duration-300 hover:scale-110"
+          >
             <ChevronRight className="w-5 h-5" />
           </button>
 
           <div className={`transition-all duration-700 ease-out ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
-            <div key={activeIndex} onMouseEnter={() => setHoveredCard(activeIndex)} onMouseLeave={() => setHoveredCard(null)} className="group relative">
+            <div
+              key={activeIndex}
+              onMouseEnter={() => setHoveredCard(activeIndex)}
+              onMouseLeave={() => setHoveredCard(null)}
+              className="group relative"
+            >
               <div className="absolute -inset-4 bg-gradient-to-r from-yellow-500/20 via-orange-500/20 to-amber-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative p-6 md:p-8 rounded-2xl bg-gradient-to-br from-white/5 to-black/10 backdrop-blur-sm border border-white/10 group-hover:border-yellow-500/40 transition-all duration-300">
+              <div className="relative p-6 md:p-8 rounded-2xl bg-gradient-to-br from-white/5 to-black/10 backdrop-blur-sm group-hover:border-yellow-500/40 transition-all duration-300" style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: 'var(--glass-border)' }}>
                 <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-gradient-to-r from-yellow-500/20 to-orange-500/20 backdrop-blur-sm border border-yellow-500/30 flex items-center justify-center">
                   <Quote className="w-8 h-8 text-yellow-400" />
                 </div>
 
                 <div className="space-y-6">
-                  <div className="flex gap-1">{renderStars(data[activeIndex].rating || 5)}<span className="ml-2 text-sm text-yellow-400 font-medium">{data[activeIndex].rating || 5}.0</span></div>
+                  <div className="flex gap-1">
+                    {renderStars(data[activeIndex].rating || 5)}
+                    <span className="ml-2 text-sm text-yellow-400 font-medium">{data[activeIndex].rating || 5}.0</span>
+                  </div>
 
                   <div className="relative">
                     <div className="absolute -left-6 top-0 text-5xl text-yellow-500/30 font-serif">"</div>
-                    <p className="text-lg text-muted-foreground leading-relaxed pl-4 pr-8 italic">{data[activeIndex].message}</p>
+                    <p className="text-lg text-muted-foreground leading-relaxed pl-4 pr-8 italic">
+                      {data[activeIndex].message}
+                    </p>
                     <div className="absolute -right-6 bottom-0 text-5xl text-yellow-500/30 font-serif">"</div>
                   </div>
 
                   <div className="pt-6 border-t border-white/10">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-xl font-bold text-white">{data[activeIndex].name}</p>
+                        <p className="text-xl font-bold text-foreground">{data[activeIndex].name}</p>
                         <div className="flex items-center gap-2 mt-1">
                           <p className="text-sm text-orange-400">{data[activeIndex].role}</p>
                           {data[activeIndex].company && (
-                            <><span className="text-muted-foreground">•</span><p className="text-sm text-muted-foreground">{data[activeIndex].company}</p></>
+                            <>
+                              <span className="text-muted-foreground">•</span>
+                              <p className="text-sm text-muted-foreground">{data[activeIndex].company}</p>
+                            </>
                           )}
                         </div>
                       </div>
-                      <div className={`p-2 rounded-full transition-all duration-300 ${hoveredCard === activeIndex ? "bg-gradient-to-r from-yellow-500/20 to-orange-500/20" : "bg-white/5"}`}>
+                      <div
+                        className={`p-2 rounded-full transition-all duration-300 ${
+                          hoveredCard === activeIndex ? "bg-gradient-to-r from-yellow-500/20 to-orange-500/20" : ""
+                        }`}
+                        style={hoveredCard !== activeIndex ? { background: 'var(--glass-bg)' } : {}}
+                      >
                         <MessageCircle className="w-5 h-5 text-yellow-400" />
                       </div>
                     </div>
@@ -197,16 +259,33 @@ const Testimonials = ({ data }: TestimonialsProps) => {
           </div>
         </div>
 
-        {/* Testimonial Grid */}
+        {/* Testimonial Grid (unchanged) */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {data.slice(0, 3).map((testimonial, idx) => (
-            <div key={idx} onMouseEnter={() => setHoveredCard(idx)} onMouseLeave={() => setHoveredCard(null)} onClick={() => setActiveIndex(idx)} className={`group relative cursor-pointer transition-all duration-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`} style={{ transitionDelay: `${idx * 100}ms` }}>
-              <div className={`relative p-5 rounded-xl bg-gradient-to-br ${getCardGradient(idx)} backdrop-blur-sm border ${getBorderColor(idx)} transition-all duration-300 group-hover:scale-105 ${activeIndex === idx ? "ring-2 ring-yellow-500/50" : ""}`}>
+            <div
+              key={idx}
+              onMouseEnter={() => setHoveredCard(idx)}
+              onMouseLeave={() => setHoveredCard(null)}
+              onClick={() => setActiveIndex(idx)}
+              className={`group relative cursor-pointer transition-all duration-500 ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
+              style={{ transitionDelay: `${idx * 100}ms` }}
+            >
+              <div
+                className={`relative p-5 rounded-xl bg-gradient-to-br ${getCardGradient(idx)} backdrop-blur-sm border ${getBorderColor(
+                  idx
+                )} transition-all duration-300 group-hover:scale-105 ${
+                  activeIndex === idx ? "ring-2 ring-yellow-500/50" : ""
+                }`}
+              >
                 <div className="flex gap-1 mb-4">{renderStars(testimonial.rating || 5)}</div>
-                <p className="text-sm text-muted-foreground mb-4 leading-relaxed line-clamp-3 italic">"{testimonial.message}"</p>
-                <div className="flex items-center justify-between pt-4 border-t border-white/10">
+                <p className="text-sm text-muted-foreground mb-4 leading-relaxed line-clamp-3 italic">
+                  "{testimonial.message}"
+                </p>
+                <div className="flex items-center justify-between pt-4" style={{ borderTopWidth: '1px', borderTopStyle: 'solid', borderTopColor: 'var(--glass-border)' }}>
                   <div>
-                    <p className="font-semibold text-white">{testimonial.name}</p>
+                    <p className="font-semibold text-foreground">{testimonial.name}</p>
                     <p className="text-xs text-muted-foreground">{testimonial.role}</p>
                   </div>
                   {hoveredCard === idx && (
@@ -226,22 +305,37 @@ const Testimonials = ({ data }: TestimonialsProps) => {
             <button
               key={idx}
               aria-label={`Go to testimonial ${idx + 1}`}
-              onClick={() => { setActiveIndex(idx); setAutoPlay(false); setTimeout(() => setAutoPlay(true), 10000) }}
-              className={`transition-all duration-300 ${activeIndex === idx ? "w-10 h-2 rounded-full bg-gradient-to-r from-yellow-500 to-orange-500" : "w-2 h-2 rounded-full bg-white/30 hover:bg-white/50"}`}
+              onClick={() => {
+                setActiveIndex(idx)
+                setAutoPlay(false)
+                setTimeout(() => setAutoPlay(true), 10000)
+              }}
+              className={`transition-all duration-300 ${
+                activeIndex === idx
+                  ? "w-10 h-2 rounded-full bg-gradient-to-r from-yellow-500 to-orange-500"
+                  : "w-2 h-2 rounded-full bg-white/30 hover:bg-white/50"
+              }`}
             />
           ))}
         </div>
 
         {/* Auto-play toggle */}
         <div className="flex justify-center mb-8">
-          <button onClick={() => setAutoPlay(!autoPlay)} className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 hover:border-yellow-500/30 transition-all duration-300">
+          <button
+            onClick={() => setAutoPlay(!autoPlay)}
+            className="flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-sm hover:border-yellow-500/30 transition-all duration-300" style={{ background: 'var(--glass-bg)', borderWidth: '1px', borderStyle: 'solid', borderColor: 'var(--glass-border)' }}
+          >
             <div className={`w-3 h-3 rounded-full ${autoPlay ? "bg-green-500" : "bg-red-500"} animate-pulse`}></div>
-            <span className="text-sm text-muted-foreground">{autoPlay ? "Auto-playing" : "Paused"}</span>
+            <span className="text-sm text-muted-foreground">{autoPlay ? content.autoPlayText : content.pausedText}</span>
           </button>
         </div>
 
         {/* CTA */}
-        <div className={`transition-all duration-1000 delay-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+        <div
+          className={`transition-all duration-1000 delay-1000 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
           <div className="max-w-3xl mx-auto p-6 lg:p-8 rounded-2xl bg-gradient-to-r from-yellow-500/10 via-orange-500/10 to-amber-500/10 border border-yellow-500/20">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="flex items-center gap-4">
@@ -249,16 +343,18 @@ const Testimonials = ({ data }: TestimonialsProps) => {
                   <Sparkles className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white mb-1">Worked with me?</h3>
-                  <p className="text-sm text-muted-foreground">I'd love to hear your feedback</p>
+                  <h3 className="text-xl font-bold text-foreground mb-1">{content.ctaTitle}</h3>
+                  <p className="text-sm text-muted-foreground">{content.ctaDescription}</p>
                 </div>
               </div>
               <a
                 href="#contact"
                 className="group relative px-6 py-3 bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-yellow-500/30 flex items-center gap-2"
               >
-                <MessageCircle size={18} />
-                Share Your Feedback
+                <span className="relative z-10 flex items-center gap-2">
+                  <MessageCircle size={18} />
+                  {content.ctaButtonText}
+                </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </a>
             </div>
