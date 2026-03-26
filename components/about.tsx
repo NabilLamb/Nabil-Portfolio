@@ -5,6 +5,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Code2, Cpu, Zap, Sparkles, Globe, Server, Database, Terminal } from "lucide-react"
 import Image from "next/image"
+import { useBinaryCanvas } from "@/hooks/useBinaryCanvas"
 
 interface AboutProps {
   data: {
@@ -16,113 +17,34 @@ interface AboutProps {
 
 const About = ({ data }: AboutProps) => {
   const [isVisible, setIsVisible] = useState(false)
-  const [counters, setCounters] = useState({
-    experience: 0,
-    projects: 0,
-    technologies: 0
-  })
-
+  const [counters, setCounters] = useState({ experience: 0, projects: 0, technologies: 0 })
   const ref = useRef<HTMLDivElement>(null)
-  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const canvasRef = useBinaryCanvas({ color: "0, 255, 200", fontSize: 12, speed: 1, opacity: 0.12 })
 
-  // Intersection Observer for scroll animation
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true)
-
-          // Animate counters when visible
           setTimeout(() => {
-            setCounters({
-              experience: 2,
-              projects: 6,
-              technologies: 10
-            })
+            setCounters({ experience: 2, projects: 6, technologies: 10 })
           }, 500)
-
           observer.unobserve(entry.target)
         }
       },
       { threshold: 0.2 }
     )
-
     if (ref.current) observer.observe(ref.current)
     return () => observer.disconnect()
   }, [])
 
-  // Binary background animation
-  useEffect(() => {
-    if (!canvasRef.current) return
-
-    const canvas = canvasRef.current
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    // Set canvas size
-    const setCanvasSize = () => {
-      canvas.width = canvas.offsetWidth
-      canvas.height = canvas.offsetHeight
-    }
-
-    setCanvasSize()
-    window.addEventListener('resize', setCanvasSize)
-
-    // Matrix animation settings
-    const binary = "01"
-    const fontSize = 12
-    const columns = Math.floor(canvas.width / fontSize)
-    const drops: number[] = Array(columns).fill(-fontSize)
-    let animationFrameId: number
-
-    const draw = () => {
-      // Semi-transparent overlay for trail effect
-      ctx.fillStyle = 'rgba(8, 8, 16, 0.05)'
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-      ctx.font = `${fontSize}px 'Monaco', 'Consolas', monospace`
-
-      // Draw binary characters
-      for (let i = 0; i < drops.length; i++) {
-        // Random character with varying opacity
-        const char = binary[Math.floor(Math.random() * binary.length)]
-        const opacity = Math.random() * 0.3 + 0.1
-
-        // Greenish tint for binary code
-        ctx.fillStyle = `rgba(0, 255, 200, ${opacity})`
-
-        // Draw character
-        ctx.fillText(char, i * fontSize, drops[i])
-
-        // Move drop down
-        drops[i] += fontSize
-
-        // Reset drop if it's past bottom and random chance
-        if (drops[i] > canvas.height && Math.random() > 0.95) {
-          drops[i] = -fontSize
-        }
-      }
-
-      animationFrameId = requestAnimationFrame(draw)
-    }
-
-    // Start animation
-    animationFrameId = requestAnimationFrame(draw)
-
-    return () => {
-      window.removeEventListener('resize', setCanvasSize)
-      cancelAnimationFrame(animationFrameId)
-    }
-  }, [])
-
-  // Tech stack items
   const techStack = [
-    { icon: <Code2 size={20} />, name: "React/Next.js", color: "text-cyan-400" },
-    { icon: <Server size={20} />, name: "Node.js/Express", color: "text-green-400" },
-    { icon: <Database size={20} />, name: "MongoDB/PostgreSQL", color: "text-blue-400" },
+    { icon: <Code2 size={20} />, name: "React / Next.js", color: "text-cyan-400" },
+    { icon: <Server size={20} />, name: "Node.js / Express", color: "text-green-400" },
+    { icon: <Database size={20} />, name: "MongoDB", color: "text-blue-400" },
     { icon: <Terminal size={20} />, name: "TypeScript", color: "text-purple-400" },
-    { icon: <Globe size={20} />, name: "AWS/Cloud", color: "text-orange-400" },
-    { icon: <Cpu size={20} />, name: "CI/CD", color: "text-pink-400" }
+    { icon: <Globe size={20} />, name: "Tailwind CSS", color: "text-cyan-300" },
+    { icon: <Cpu size={20} />, name: "Git / GitHub", color: "text-orange-400" },
   ]
 
   return (
@@ -135,9 +57,7 @@ const About = ({ data }: AboutProps) => {
       <canvas
         ref={canvasRef}
         className="absolute inset-0 -z-20"
-        style={{
-          background: 'linear-gradient(135deg, #0a0a14 0%, #11111f 100%)'
-        }}
+        style={{ background: "linear-gradient(135deg, #0a0a14 0%, #11111f 100%)" }}
       />
 
       {/* Animated gradient orbs */}
@@ -154,7 +74,7 @@ const About = ({ data }: AboutProps) => {
           style={{
             backgroundImage: `linear-gradient(to right, rgba(0, 255, 255, 0.1) 1px, transparent 1px),
                              linear-gradient(to bottom, rgba(0, 255, 255, 0.1) 1px, transparent 1px)`,
-            backgroundSize: '50px 50px'
+            backgroundSize: "50px 50px",
           }}
         />
       </div>
@@ -162,7 +82,9 @@ const About = ({ data }: AboutProps) => {
       <div className="max-w-7xl mx-auto relative">
         {/* Section Header */}
         <div
-          className={`transition-all duration-1000 mb-16 text-center ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+          className={`transition-all duration-1000 mb-16 text-center ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-cyan-500/20 mb-6">
             <Sparkles className="w-4 h-4 text-cyan-400" />
@@ -183,17 +105,16 @@ const About = ({ data }: AboutProps) => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Left Column - Avatar & Stats */}
           <div
-            className={`transition-all duration-1000 delay-200 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"}`}
+            className={`transition-all duration-1000 delay-200 ${
+              isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
+            }`}
           >
             <div className="relative group">
-              {/* Glowing border effect */}
               <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-              {/* Avatar container */}
               <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-br from-gray-900 to-black">
                 <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 via-transparent to-purple-500/10"></div>
 
-                {/* Avatar image */}
                 <div className="relative aspect-square">
                   <Image
                     src={data.avatar || "/hero.png"}
@@ -204,19 +125,14 @@ const About = ({ data }: AboutProps) => {
                     priority
                     quality={90}
                   />
-
-                  {/* Gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                 </div>
 
-                {/* Floating code badge */}
                 <div className="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-sm rounded-lg p-4 border border-cyan-500/30">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                      <code className="text-xs font-mono text-cyan-300">
-                        nabil@portfolio:~$
-                      </code>
+                      <code className="text-xs font-mono text-cyan-300">nabil@portfolio:~$</code>
                     </div>
                     <Zap className="w-4 h-4 text-yellow-500" />
                   </div>
@@ -224,11 +140,11 @@ const About = ({ data }: AboutProps) => {
               </div>
 
               {/* Stats Grid */}
-              <div className="grid grid-cols-2 gap-4 mt-8">
+              <div className="grid grid-cols-3 gap-4 mt-8">
                 {[
                   { label: "Years Coding", value: counters.experience, suffix: "+", color: "text-cyan-400" },
-{ label: "Projects Built", value: counters.projects, suffix: "+", color: "text-purple-400" },
-{ label: "Technologies", value: counters.technologies, suffix: "+", color: "text-orange-400" }
+                  { label: "Projects Built", value: counters.projects, suffix: "+", color: "text-purple-400" },
+                  { label: "Technologies", value: counters.technologies, suffix: "+", color: "text-orange-400" },
                 ].map((stat, idx) => (
                   <div
                     key={idx}
@@ -247,9 +163,11 @@ const About = ({ data }: AboutProps) => {
             </div>
           </div>
 
-          {/* Right Column - Description & Skills */}
+          {/* Right Column - Description & Tech Stack */}
           <div
-            className={`transition-all duration-1000 delay-400 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"}`}
+            className={`transition-all duration-1000 delay-400 ${
+              isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
+            }`}
           >
             {/* Description */}
             <div className="mb-10">
@@ -258,10 +176,9 @@ const About = ({ data }: AboutProps) => {
                 <h3 className="text-2xl font-bold text-white">My Journey</h3>
               </div>
 
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+              <p className="text-lg text-muted-foreground leading-relaxed">
                 {data.description}
               </p>
-              
             </div>
 
             {/* Tech Stack */}
@@ -295,7 +212,7 @@ const About = ({ data }: AboutProps) => {
                 <div>
                   <h4 className="text-lg font-bold text-white mb-1">Let's Build Something Amazing</h4>
                   <p className="text-sm text-muted-foreground">
-                    Ready to bring your ideas to life with cutting-edge technology
+                    Ready to bring your ideas to life with modern technology
                   </p>
                 </div>
               </div>

@@ -1,102 +1,32 @@
 // components\hero.tsx
 
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
-import { ArrowDown, Download, Mail } from "lucide-react";
-import Image from "next/image";
+import { useEffect, useState } from "react"
+import { ArrowDown, Download, Mail } from "lucide-react"
+import Image from "next/image"
+import { useBinaryCanvas } from "@/hooks/useBinaryCanvas"
 
 interface HeroProps {
   data: {
-    name: string;
-    title: string;
-    subtitle: string;
-    ctaHire: string;
-    ctaCV: string;
-    heroImageLink: string;
-    cvLink: string;
-    description: string;
-  };
+    name: string
+    title: string
+    subtitle: string
+    ctaHire: string
+    ctaCV: string
+    heroImageLink: string
+    cvLink: string
+    description: string
+  }
 }
 
 const Hero = ({ data }: HeroProps) => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false)
+  const canvasRef = useBinaryCanvas({ color: "0, 255, 255", fontSize: 14, speed: 1.5, opacity: 0.2 })
 
   useEffect(() => {
-    setIsVisible(true);
-  }, []);
-
-  // Binary background animation
-  useEffect(() => {
-    const canvas = document.getElementById("binaryCanvas") as HTMLCanvasElement;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    // Set canvas size
-    const resizeCanvas = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    };
-
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
-
-    // Binary characters
-    const binary =
-      "010110100110111101110101011100100010000001100011011011110110010001100101";
-    const columns = Math.floor(canvas.width / 20);
-    const drops: number[] = Array(columns).fill(1);
-
-    // Animation settings
-    const fontSize = 14;
-    const speed = 20; // Lower is faster
-    let frameCount = 0;
-
-    const draw = () => {
-      // Semi-transparent black to create trail effect
-      ctx.fillStyle = "rgba(10, 10, 20, 0.05)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.fillStyle = "rgba(0, 255, 255, 0.1)"; // Neon cyan with low opacity
-      ctx.font = `bold ${fontSize}px monospace`;
-
-      for (let i = 0; i < drops.length; i++) {
-        if (frameCount % speed === 0) {
-          // Random binary character
-          const text = Math.random() > 0.5 ? "1" : "0";
-
-          ctx.fillStyle = "rgba(0, 255, 255, 0.3)"; // Brighter for first character
-          ctx.fillText(text, i * 20, drops[i] * 20);
-
-          ctx.fillStyle = "rgba(0, 255, 200, 0.1)"; // Dimmer for trail
-          ctx.fillText(
-            Math.random() > 0.5 ? "1" : "0",
-            i * 20,
-            (drops[i] - 1) * 20
-          );
-
-          drops[i]++;
-
-          // Reset drop if it reaches bottom
-          if (drops[i] * 20 > canvas.height && Math.random() > 0.975) {
-            drops[i] = 0;
-          }
-        }
-      }
-
-      frameCount++;
-      requestAnimationFrame(draw);
-    };
-
-    const animationId = requestAnimationFrame(draw);
-
-    return () => {
-      window.removeEventListener("resize", resizeCanvas);
-      cancelAnimationFrame(animationId);
-    };
-  }, []);
+    setIsVisible(true)
+  }, [])
 
   return (
     <section
@@ -105,11 +35,10 @@ const Hero = ({ data }: HeroProps) => {
     >
       {/* Binary Animation Background */}
       <canvas
-        id="binaryCanvas"
+        ref={canvasRef}
         className="absolute inset-0 -z-10"
         style={{
-          background:
-            "radial-gradient(ellipse at center, #0a0a14 0%, #05050f 100%)",
+          background: "radial-gradient(ellipse at center, #0a0a14 0%, #05050f 100%)",
         }}
       />
 
@@ -128,17 +57,13 @@ const Hero = ({ data }: HeroProps) => {
           {/* Left Content */}
           <div
             className={`transition-all duration-700 ${
-              isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-8"
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-neon-purple/10 border border-neon-purple/30 mb-6">
               <div className="w-2 h-2 rounded-full bg-neon-cyan animate-pulse"></div>
-              <span className="text-sm font-mono text-neon-cyan">
-                Frontend Developer
-              </span>
+              <span className="text-sm font-mono text-neon-cyan">Frontend Developer</span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 text-pretty leading-tight">
@@ -160,21 +85,16 @@ const Hero = ({ data }: HeroProps) => {
             <div className="flex flex-wrap gap-6 mb-8">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
-                <span className="font-mono text-sm text-neon-blue">
-                  Available for work
-                </span>
+                <span className="font-mono text-sm text-neon-blue">Available for work</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-neon-purple"></div>
-                <span className="font-mono text-sm text-neon-purple">
-                  Fast & Scalable
-                </span>
+                <span className="font-mono text-sm text-neon-purple">Fast & Scalable</span>
               </div>
             </div>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              {/* Hire Me */}
               <a
                 href="#contact"
                 className="group inline-flex items-center gap-3 px-8 py-3.5 rounded-xl font-semibold
@@ -189,12 +109,11 @@ const Hero = ({ data }: HeroProps) => {
                 <span className="tracking-wide">{data.ctaHire}</span>
               </a>
 
-              {/* Download CV */}
               <a
                 href="/nabil_cv.pdf"
-                download="Nabil_CV.pdf"
+                download="Nabil_Lambattan_CV.pdf"
                 className="group inline-flex items-center gap-3 px-8 py-3.5 rounded-xl font-semibold
-               border-2 border-neon-blue/60 text-neon-blue 
+               border-2 border-neon-blue/60 text-neon-blue
                transition-all duration-300
                hover:bg-neon-blue/10 hover:border-neon-blue hover:scale-[1.04]
                hover:shadow-lg hover:shadow-neon-blue/30"
@@ -211,14 +130,7 @@ const Hero = ({ data }: HeroProps) => {
             <div className="mb-12">
               <p className="text-sm text-muted-foreground mb-3">Tech Stack:</p>
               <div className="flex flex-wrap gap-2">
-                {[
-                  "React",
-                  "Next.js",
-                  "Node.js",
-                  "TypeScript",
-                  "Tailwind",
-                  "MongoDB",
-                ].map((tech) => (
+                {["React", "Next.js", "Node.js", "TypeScript", "Tailwind", "MongoDB"].map((tech) => (
                   <span
                     key={tech}
                     className="px-3 py-1.5 text-xs font-mono rounded-full bg-white/5 border border-white/10 hover:border-neon-cyan/30 hover:text-neon-cyan transition-colors duration-300"
@@ -231,30 +143,23 @@ const Hero = ({ data }: HeroProps) => {
 
             {/* Scroll Indicator */}
             <a
-  href="#projects"
-  className="inline-flex items-center gap-2 text-sm text-muted-foreground 
-             transition-all duration-300 group"
->
-  <span className="group-hover:text-neon-cyan group-hover:translate-x-1 
-                   transition-all duration-300">
-    Explore my work
-  </span>
-
-  <ArrowDown
-    size={18}
-    className="text-neon-cyan transition-transform duration-300 
-               group-hover:translate-y-1 group-hover:opacity-100 opacity-80"
-  />
-</a>
-
+              href="#about"
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-all duration-300 group"
+            >
+              <span className="group-hover:text-neon-cyan group-hover:translate-x-1 transition-all duration-300">
+                Explore my work
+              </span>
+              <ArrowDown
+                size={18}
+                className="text-neon-cyan transition-transform duration-300 group-hover:translate-y-1 group-hover:opacity-100 opacity-80"
+              />
+            </a>
           </div>
 
           {/* Right Visual - Profile Image */}
           <div
             className={`transition-all duration-700 delay-300 ${
-              isVisible
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 translate-x-8"
+              isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
             }`}
           >
             <div className="relative w-full max-w-2xl mx-auto aspect-square">
@@ -293,9 +198,7 @@ const Hero = ({ data }: HeroProps) => {
                 <div className="absolute -bottom-4 -right-4 bg-background/80 backdrop-blur-sm border border-neon-blue/30 rounded-lg p-3 shadow-xl">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                    <code className="text-xs font-mono text-neon-blue">
-                      npm run dev
-                    </code>
+                    <code className="text-xs font-mono text-neon-blue">npm run dev</code>
                   </div>
                 </div>
               </div>
@@ -313,7 +216,7 @@ const Hero = ({ data }: HeroProps) => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero
