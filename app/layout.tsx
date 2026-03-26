@@ -1,3 +1,5 @@
+// app\layout.tsx
+
 import type React from "react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -8,11 +10,9 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Nabil - Full-Stack Developer",
-  description:
-    "Full-stack developer specializing in React, Next.js & Node.js. Portfolio showcasing modern web applications.",
-  generator: "v0.app",
-  keywords: "developer, react, next.js, node.js, full-stack, web development",
+  title: "Nabil - Frontend Developer",
+  description: "Frontend developer specializing in React and Next.js. Portfolio showcasing modern web applications.",
+  keywords: "Nabil, frontend developer, React, Next.js, TypeScript, portfolio, Morocco",
   authors: [{ name: "Nabil" }],
   icons: {
     icon: [

@@ -1,3 +1,5 @@
+// components\hero.tsx
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -135,7 +137,7 @@ const Hero = ({ data }: HeroProps) => {
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-neon-purple/10 border border-neon-purple/30 mb-6">
               <div className="w-2 h-2 rounded-full bg-neon-cyan animate-pulse"></div>
               <span className="text-sm font-mono text-neon-cyan">
-                Software Engineer
+                Frontend Developer
               </span>
             </div>
 

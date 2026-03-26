@@ -1,3 +1,5 @@
+// components\navbar.tsx
+
 "use client"
 
 import { useState, useEffect, useRef } from "react"
@@ -60,7 +62,7 @@ const Navbar = () => {
       canvas.width = canvas.offsetWidth
       canvas.height = canvas.offsetHeight
     }
-    
+
     setCanvasSize()
     window.addEventListener('resize', setCanvasSize)
 
@@ -79,26 +81,26 @@ const Navbar = () => {
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       ctx.font = `bold ${fontSize}px 'Monaco', 'Consolas', monospace`
-      
+
       // Draw binary characters
       if (frameCount % 3 === 0) {
         for (let i = 0; i < drops.length; i++) {
           const char = binary[Math.floor(Math.random() * binary.length)]
           const opacity = Math.random() * 0.15 + 0.05
-          
+
           // Purple/blue tint for binary code
           ctx.fillStyle = `rgba(120, 119, 198, ${opacity})`
           ctx.fillText(char, i * fontSize, drops[i])
-          
+
           drops[i] += fontSize
-          
+
           // Reset drop if it's past bottom
           if (drops[i] > canvas.height && Math.random() > 0.98) {
             drops[i] = -fontSize
           }
         }
       }
-      
+
       frameCount++
       animationFrameId = requestAnimationFrame(draw)
     }
@@ -136,19 +138,18 @@ const Navbar = () => {
         ref={canvasRef}
         className="fixed top-0 left-0 w-full h-16 -z-10"
         style={{
-          background: scrolled 
+          background: scrolled
             ? 'linear-gradient(180deg, rgba(10,10,20,0.95) 0%, rgba(10,10,20,0.9) 100%)'
             : 'linear-gradient(180deg, rgba(10,10,20,0.8) 0%, transparent 100%)'
         }}
       />
 
       {/* Navbar */}
-      <nav 
-        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-          scrolled 
-            ? 'bg-gray-900/90 backdrop-blur-xl border-b border-purple-500/20 shadow-xl shadow-purple-500/5' 
+      <nav
+        className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled
+            ? 'bg-gray-900/90 backdrop-blur-xl border-b border-purple-500/20 shadow-xl shadow-purple-500/5'
             : 'bg-transparent backdrop-blur-sm border-b border-purple-500/10'
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -172,8 +173,7 @@ const Navbar = () => {
                 <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                   Nabil
                 </span>
-                <span className="text-xs text-muted-foreground font-mono">Full-Stack Developer</span>
-              </div>
+                <span className="text-xs text-muted-foreground font-mono">Full-Stack Developer</span>              </div>
             </div>
 
             {/* Desktop Navigation */}
@@ -182,22 +182,21 @@ const Navbar = () => {
                 <button
                   key={link.id}
                   onClick={() => scrollToSection(link.id)}
-                  className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 group ${
-                    activeSection === link.label
+                  className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 group ${activeSection === link.label
                       ? 'text-white bg-purple-500/20'
                       : 'text-muted-foreground hover:text-white hover:bg-white/5'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-sm">{link.icon}</span>
                     <span>{link.label}</span>
                   </div>
-                  
+
                   {/* Active indicator */}
                   {activeSection === link.label && (
                     <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-6 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"></div>
                   )}
-                  
+
                   {/* Hover effect */}
                   <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </button>
@@ -261,11 +260,10 @@ const Navbar = () => {
                   <button
                     key={link.id}
                     onClick={() => scrollToSection(link.id)}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 ${
-                      activeSection === link.label
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 ${activeSection === link.label
                         ? 'bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30'
                         : 'hover:bg-white/5 border border-transparent'
-                    }`}
+                      }`}
                   >
                     <span className="text-lg">{link.icon}</span>
                     <span className="font-medium text-white">{link.label}</span>
@@ -274,7 +272,7 @@ const Navbar = () => {
                     )}
                   </button>
                 ))}
-                
+
                 {/* Mobile Actions */}
                 <div className="pt-4 border-t border-white/10 space-y-2">
                   <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">

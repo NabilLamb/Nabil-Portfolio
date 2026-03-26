@@ -1,3 +1,5 @@
+// components\footer.tsx
+
 "use client"
 
 import { useEffect, useRef, useState } from "react"
@@ -226,7 +228,7 @@ const Footer = ({ data }: FooterProps) => {
                       <h3 className="text-xl font-bold bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
                         Nabil
                       </h3>
-                      <p className="text-sm text-muted-foreground font-mono">Full-Stack Developer</p>
+                      <p className="text-sm text-muted-foreground font-mono">Frontend Developer</p>
                     </div>
                   </div>
                   <p className="text-muted-foreground mb-6">
