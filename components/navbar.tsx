@@ -3,7 +3,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { Menu, X, Search, Moon, Sun, User, LogIn } from "lucide-react"
+import { Menu, X, Moon, Sun, User } from "lucide-react"
 import Image from "next/image"
 
 const Navbar = () => {
@@ -11,7 +11,6 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState("Hero")
   const [darkMode, setDarkMode] = useState(true)
-  const [searchOpen, setSearchOpen] = useState(false)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   const links = [
@@ -147,8 +146,8 @@ const Navbar = () => {
       {/* Navbar */}
       <nav
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled
-            ? 'bg-gray-900/90 backdrop-blur-xl border-b border-purple-500/20 shadow-xl shadow-purple-500/5'
-            : 'bg-transparent backdrop-blur-sm border-b border-purple-500/10'
+          ? 'bg-gray-900/90 backdrop-blur-xl border-b border-purple-500/20 shadow-xl shadow-purple-500/5'
+          : 'bg-transparent backdrop-blur-sm border-b border-purple-500/10'
           }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -183,8 +182,8 @@ const Navbar = () => {
                   key={link.id}
                   onClick={() => scrollToSection(link.id)}
                   className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 group ${activeSection === link.label
-                      ? 'text-white bg-purple-500/20'
-                      : 'text-muted-foreground hover:text-white hover:bg-white/5'
+                    ? 'text-white bg-purple-500/20'
+                    : 'text-muted-foreground hover:text-white hover:bg-white/5'
                     }`}
                 >
                   <div className="flex items-center gap-2">
@@ -205,14 +204,6 @@ const Navbar = () => {
 
             {/* Right Actions */}
             <div className="flex items-center gap-2">
-              {/* Search Button */}
-              <button
-                onClick={() => setSearchOpen(!searchOpen)}
-                className="p-2 rounded-lg bg-white/5 border border-white/10 text-muted-foreground hover:text-white hover:border-purple-500/30 transition-all duration-300"
-              >
-                <Search size={18} />
-              </button>
-
               {/* Dark Mode Toggle */}
               <button
                 onClick={toggleDarkMode}
@@ -237,21 +228,6 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Search Bar */}
-          {searchOpen && (
-            <div className="pb-4 animate-in fade-in duration-300">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search portfolio..."
-                  className="w-full px-4 py-3 pl-10 rounded-lg bg-white/5 border border-purple-500/30 text-white placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-purple-500/50"
-                  autoFocus
-                />
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              </div>
-            </div>
-          )}
-
           {/* Mobile Menu */}
           {isOpen && (
             <div className="md:hidden pb-4 animate-in fade-in duration-300">
@@ -261,8 +237,8 @@ const Navbar = () => {
                     key={link.id}
                     onClick={() => scrollToSection(link.id)}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 ${activeSection === link.label
-                        ? 'bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30'
-                        : 'hover:bg-white/5 border border-transparent'
+                      ? 'bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30'
+                      : 'hover:bg-white/5 border border-transparent'
                       }`}
                   >
                     <span className="text-lg">{link.icon}</span>
@@ -274,15 +250,15 @@ const Navbar = () => {
                 ))}
 
                 {/* Mobile Actions */}
-                <div className="pt-4 border-t border-white/10 space-y-2">
-                  <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
-                    <LogIn size={18} />
-                    <span>Login</span>
-                  </button>
-                  <button className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium hover:shadow-lg hover:shadow-purple-500/30 transition-all">
+                <div className="pt-4 border-t border-white/10">
+                  <a
+                    href="/nabil_cv.pdf"
+                    download="Nabil_Lambattan_CV.pdf"
+                    className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300"
+                  >
                     <User size={18} />
                     Download CV
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
