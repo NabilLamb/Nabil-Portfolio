@@ -19,10 +19,9 @@ const About = ({ data }: AboutProps) => {
   const [counters, setCounters] = useState({
     experience: 0,
     projects: 0,
-    clients: 0,
     technologies: 0
   })
-  
+
   const ref = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -32,17 +31,16 @@ const About = ({ data }: AboutProps) => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true)
-          
+
           // Animate counters when visible
           setTimeout(() => {
             setCounters({
-              experience: 5,
-              projects: 40,
-              clients: 30,
-              technologies: 25
+              experience: 2,
+              projects: 6,
+              technologies: 10
             })
           }, 500)
-          
+
           observer.unobserve(entry.target)
         }
       },
@@ -66,7 +64,7 @@ const About = ({ data }: AboutProps) => {
       canvas.width = canvas.offsetWidth
       canvas.height = canvas.offsetHeight
     }
-    
+
     setCanvasSize()
     window.addEventListener('resize', setCanvasSize)
 
@@ -83,28 +81,28 @@ const About = ({ data }: AboutProps) => {
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       ctx.font = `${fontSize}px 'Monaco', 'Consolas', monospace`
-      
+
       // Draw binary characters
       for (let i = 0; i < drops.length; i++) {
         // Random character with varying opacity
         const char = binary[Math.floor(Math.random() * binary.length)]
         const opacity = Math.random() * 0.3 + 0.1
-        
+
         // Greenish tint for binary code
         ctx.fillStyle = `rgba(0, 255, 200, ${opacity})`
-        
+
         // Draw character
         ctx.fillText(char, i * fontSize, drops[i])
-        
+
         // Move drop down
         drops[i] += fontSize
-        
+
         // Reset drop if it's past bottom and random chance
         if (drops[i] > canvas.height && Math.random() > 0.95) {
           drops[i] = -fontSize
         }
       }
-      
+
       animationFrameId = requestAnimationFrame(draw)
     }
 
@@ -125,14 +123,6 @@ const About = ({ data }: AboutProps) => {
     { icon: <Terminal size={20} />, name: "TypeScript", color: "text-purple-400" },
     { icon: <Globe size={20} />, name: "AWS/Cloud", color: "text-orange-400" },
     { icon: <Cpu size={20} />, name: "CI/CD", color: "text-pink-400" }
-  ]
-
-  // Skills with percentages
-  const skills = [
-    { name: "Frontend Development", level: 95, color: "from-cyan-400 to-blue-500" },
-    { name: "Backend Development", level: 90, color: "from-purple-400 to-pink-500" },
-    { name: "UI/UX Design", level: 85, color: "from-green-400 to-emerald-500" },
-    { name: "DevOps & Cloud", level: 80, color: "from-orange-400 to-red-500" }
   ]
 
   return (
@@ -159,7 +149,7 @@ const About = ({ data }: AboutProps) => {
 
       {/* Grid pattern overlay */}
       <div className="absolute inset-0 -z-10 opacity-10">
-        <div 
+        <div
           className="absolute inset-0"
           style={{
             backgroundImage: `linear-gradient(to right, rgba(0, 255, 255, 0.1) 1px, transparent 1px),
@@ -178,13 +168,13 @@ const About = ({ data }: AboutProps) => {
             <Sparkles className="w-4 h-4 text-cyan-400" />
             <span className="text-sm font-mono text-cyan-300">About Me</span>
           </div>
-          
+
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
             <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
               {data.title}
             </span>
           </h2>
-          
+
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Get to know the developer behind the code
           </p>
@@ -198,11 +188,11 @@ const About = ({ data }: AboutProps) => {
             <div className="relative group">
               {/* Glowing border effect */}
               <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
+
               {/* Avatar container */}
               <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-br from-gray-900 to-black">
                 <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 via-transparent to-purple-500/10"></div>
-                
+
                 {/* Avatar image */}
                 <div className="relative aspect-square">
                   <Image
@@ -214,11 +204,11 @@ const About = ({ data }: AboutProps) => {
                     priority
                     quality={90}
                   />
-                  
+
                   {/* Gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                 </div>
-                
+
                 {/* Floating code badge */}
                 <div className="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-sm rounded-lg p-4 border border-cyan-500/30">
                   <div className="flex items-center justify-between">
@@ -236,10 +226,9 @@ const About = ({ data }: AboutProps) => {
               {/* Stats Grid */}
               <div className="grid grid-cols-2 gap-4 mt-8">
                 {[
-                  { label: "Years Experience", value: counters.experience, suffix: "+", color: "text-cyan-400" },
-                  { label: "Projects Delivered", value: counters.projects, suffix: "+", color: "text-purple-400" },
-                  { label: "Happy Clients", value: counters.clients, suffix: "+", color: "text-green-400" },
-                  { label: "Technologies", value: counters.technologies, suffix: "+", color: "text-orange-400" }
+                  { label: "Years Coding", value: counters.experience, suffix: "+", color: "text-cyan-400" },
+{ label: "Projects Built", value: counters.projects, suffix: "+", color: "text-purple-400" },
+{ label: "Technologies", value: counters.technologies, suffix: "+", color: "text-orange-400" }
                 ].map((stat, idx) => (
                   <div
                     key={idx}
@@ -268,43 +257,11 @@ const About = ({ data }: AboutProps) => {
                 <div className="w-12 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full"></div>
                 <h3 className="text-2xl font-bold text-white">My Journey</h3>
               </div>
-              
+
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
                 {data.description}
               </p>
               
-              <p className="text-muted-foreground/80 leading-relaxed">
-                With a passion for creating exceptional digital experiences, I specialize in building
-                modern, performant web applications using cutting-edge technologies. My approach combines
-                technical expertise with creative problem-solving to deliver solutions that exceed expectations.
-              </p>
-            </div>
-
-            {/* Skills Progress */}
-            <div className="mb-10">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full"></div>
-                <h3 className="text-2xl font-bold text-white">Expertise</h3>
-              </div>
-              
-              <div className="space-y-5">
-                {skills.map((skill, idx) => (
-                  <div key={idx} className="group">
-                    <div className="flex justify-between mb-2">
-                      <span className="text-sm font-medium text-white">{skill.name}</span>
-                      <span className="text-sm text-cyan-400">{skill.level}%</span>
-                    </div>
-                    <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                      <div
-                        className={`h-full rounded-full bg-gradient-to-r ${skill.color} transition-all duration-1000 ease-out ${
-                          isVisible ? "w-full" : "w-0"
-                        }`}
-                        style={{ width: isVisible ? `${skill.level}%` : '0%' }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
             </div>
 
             {/* Tech Stack */}
@@ -313,7 +270,7 @@ const About = ({ data }: AboutProps) => {
                 <div className="w-12 h-1 bg-gradient-to-r from-orange-500 to-red-500 rounded-full"></div>
                 <h3 className="text-2xl font-bold text-white">Tech Stack</h3>
               </div>
-              
+
               <div className="flex flex-wrap gap-3">
                 {techStack.map((tech, idx) => (
                   <div

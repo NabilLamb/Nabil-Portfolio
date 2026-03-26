@@ -498,25 +498,25 @@ const Experiences = ({ data }: ExperiencesProps) => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               {
-                label: "Years Experience",
+                label: "Years Coding",
                 value: "2+",
                 icon: <Clock size={20} />,
                 color: "text-purple-400",
               },
               {
-                label: "Projects",
-                value: "20+",
+                label: "Projects Build",
+                value: "6+",
                 icon: <Code2 size={20} />,
                 color: "text-cyan-400",
               },
               {
                 label: "Technologies",
-                value: "5+",
+                value: "10+",
                 icon: <Cpu size={20} />,
                 color: "text-blue-400",
               },
               {
-                label: "Satisfaction",
+                label: "Commitment",
                 value: "100%",
                 icon: <Sparkles size={20} />,
                 color: "text-green-400",

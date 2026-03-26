@@ -247,10 +247,10 @@ const Testimonials = ({ data }: TestimonialsProps) => {
           }`}
         >
           {[
-            { label: "Happy Clients", value: data.length * 3, icon: <Users size={20} />, color: "text-yellow-400" },
-            { label: "Average Rating", value: "4.9/5", icon: <Award size={20} />, color: "text-orange-400" },
-            { label: "Projects Delivered", value: "40+", icon: <TrendingUp size={20} />, color: "text-amber-400" },
-            { label: "Repeat Clients", value: "85%", icon: <Heart size={20} />, color: "text-red-400" },
+            { label: "Testimonials", value: data.length * 3, icon: <Users size={20} />, color: "text-yellow-400" },
+            { label: "Average Rating", value: "5/5", icon: <Award size={20} />, color: "text-orange-400" },
+            { label: "Projects Build", value: "40+", icon: <TrendingUp size={20} />, color: "text-amber-400" },
+            { label: "On-time Delivery", value: "100%", icon: <Heart size={20} />, color: "text-red-400" },
           ].map((stat, idx) => (
             <div
               key={idx}
