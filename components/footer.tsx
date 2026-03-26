@@ -1,5 +1,3 @@
-// components\footer.tsx
-
 "use client"
 
 import { useEffect, useRef, useState } from "react"
@@ -12,7 +10,6 @@ import {
   ExternalLink,
   Coffee,
   Sparkles,
-  Rocket,
   Zap,
   ChevronUp,
   FileText,
@@ -29,6 +26,9 @@ interface FooterProps {
   }
 }
 
+// The footer tech stack is intentionally a short curated list — kept here as UI config
+const FOOTER_TECH_STACK = ["React", "Next.js", "TypeScript", "Tailwind CSS", "MongoDB"]
+
 const Footer = ({ data }: FooterProps) => {
   const currentYear = new Date().getFullYear()
   const [isVisible, setIsVisible] = useState(false)
@@ -38,22 +38,20 @@ const Footer = ({ data }: FooterProps) => {
   const canvasRef = useBinaryCanvas({ color: "120, 119, 198", fontSize: 10, speed: 0.5, opacity: 0.08 })
 
   const socialLinks = [
-    { icon: Github, href: data.github, label: "GitHub", color: "text-gray-300", bg: "bg-gray-900/80", desc: "View my code" },
-    { icon: Linkedin, href: data.linkedin, label: "LinkedIn", color: "text-blue-400", bg: "bg-blue-900/80", desc: "Professional network" },
-    { icon: Mail, href: `mailto:${data.email}`, label: "Email", color: "text-red-400", bg: "bg-red-900/80", desc: "Contact me" },
+    { icon: Github,   href: data.github,              label: "GitHub",   color: "text-gray-300", bg: "bg-gray-900/80",  desc: "View my code"        },
+    { icon: Linkedin, href: data.linkedin,             label: "LinkedIn", color: "text-blue-400", bg: "bg-blue-900/80",  desc: "Professional network"},
+    { icon: Mail,     href: `mailto:${data.email}`,   label: "Email",    color: "text-red-400",  bg: "bg-red-900/80",   desc: "Contact me"          },
   ]
 
   const quickLinks = [
-    { label: "Home", href: "#hero", icon: "🏠" },
-    { label: "About", href: "#about", icon: "👨‍💻" },
-    { label: "Experience", href: "#experiences", icon: "💼" },
-    { label: "Projects", href: "#projects", icon: "🚀" },
-    { label: "Skills", href: "#technologies", icon: "⚡" },
-    { label: "Testimonials", href: "#feedbacks", icon: "⭐" },
-    { label: "Contact", href: "#contact", icon: "📧" },
+    { label: "Home",         href: "#hero",         icon: "🏠" },
+    { label: "About",        href: "#about",        icon: "👨‍💻" },
+    { label: "Experience",   href: "#experiences",  icon: "💼" },
+    { label: "Projects",     href: "#projects",     icon: "🚀" },
+    { label: "Skills",       href: "#technologies", icon: "⚡" },
+    { label: "Testimonials", href: "#feedbacks",    icon: "⭐" },
+    { label: "Contact",      href: "#contact",      icon: "📧" },
   ]
-
-  const techStack = ["React", "Next.js", "TypeScript", "Node.js", "Tailwind", "MongoDB"]
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -70,16 +68,12 @@ const Footer = ({ data }: FooterProps) => {
   }, [])
 
   useEffect(() => {
-    const handleScroll = () => {
-      setShowBackToTop(window.scrollY > 500)
-    }
+    const handleScroll = () => setShowBackToTop(window.scrollY > 500)
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" })
 
   const scrollToSection = (href: string) => {
     const element = document.getElementById(href.replace("#", ""))
@@ -88,7 +82,6 @@ const Footer = ({ data }: FooterProps) => {
 
   return (
     <>
-      {/* Back to Top Button */}
       {showBackToTop && (
         <button
           onClick={scrollToTop}
@@ -102,16 +95,14 @@ const Footer = ({ data }: FooterProps) => {
 
       <footer
         ref={footerRef}
-        className="relative border-t border-purple-500/20 bg-gradient-to-t from-gray-900 via-gray-900/95 to-gray-900 overflow-hidden"
+        className="relative border-t border-purple-500/20 overflow-hidden"
       >
-        {/* Binary Animation Background */}
         <canvas
           ref={canvasRef}
           className="absolute inset-0 -z-10"
           style={{ background: "linear-gradient(180deg, #0a0a14 0%, #11111f 100%)" }}
         />
 
-        {/* Animated gradient orbs */}
         <div className="absolute inset-0 -z-10 overflow-hidden">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/3 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/3 rounded-full blur-3xl"></div>
@@ -123,48 +114,46 @@ const Footer = ({ data }: FooterProps) => {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            {/* Main Footer Content */}
             <div className="grid lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
-              {/* Brand Column */}
+              {/* Brand */}
               <div className="lg:col-span-1">
-                <div className="mb-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 p-0.5">
-                      <div className="w-full h-full rounded-full bg-gray-900 flex items-center justify-center">
-                        <div className="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-                          N
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                        Nabil
-                      </h3>
-                      <p className="text-sm text-muted-foreground font-mono">Frontend Developer</p>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 p-0.5">
+                    <div className="w-full h-full rounded-full bg-gray-900 flex items-center justify-center">
+                      <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                        N
+                      </span>
                     </div>
                   </div>
-                  <p className="text-muted-foreground mb-6">
-                    Building modern web experiences with React and Next.js.
-                  </p>
-
-                  <a
-                    href="/nabil_cv.pdf"
-                    download="Nabil_Lambattan_CV.pdf"
-                    className="group relative w-full px-4 py-3 rounded-lg bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 flex items-center justify-center gap-2 text-purple-300 hover:text-white"
-                  >
-                    <FileText size={16} />
-                    Download Resume
-                  </a>
+                  <div>
+                    <h3 className="text-xl font-bold bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                      Nabil
+                    </h3>
+                    <p className="text-sm text-muted-foreground font-mono">Frontend Developer</p>
+                  </div>
                 </div>
+
+                <p className="text-muted-foreground mb-6 text-sm">
+                  Building modern web experiences with React and Next.js.
+                </p>
+
+                <a
+                  href="/nabil_cv.pdf"
+                  download="Nabil_Lambattan_CV.pdf"
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 hover:border-purple-500/40 text-purple-300 hover:text-white transition-all duration-300"
+                >
+                  <FileText size={16} />
+                  Download Resume
+                </a>
               </div>
 
-              {/* Quick Links Column */}
+              {/* Navigation */}
               <div className="lg:col-span-1">
                 <h4 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
                   <Zap className="w-4 h-4 text-purple-400" />
                   Navigation
                 </h4>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-3">
                   {quickLinks.map((link) => (
                     <button
                       key={link.label}
@@ -185,16 +174,16 @@ const Footer = ({ data }: FooterProps) => {
                 </div>
               </div>
 
-              {/* Tech Stack Column */}
+              {/* Tech Stack */}
               <div className="lg:col-span-1">
                 <h4 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
                   <Terminal className="w-4 h-4 text-cyan-400" />
                   Tech Stack
                 </h4>
                 <div className="flex flex-wrap gap-2">
-                  {techStack.map((tech, idx) => (
+                  {FOOTER_TECH_STACK.map((tech) => (
                     <span
-                      key={idx}
+                      key={tech}
                       className="px-3 py-1.5 text-xs rounded-full bg-white/5 border border-white/10 text-muted-foreground hover:text-cyan-300 hover:border-cyan-500/30 transition-all duration-300"
                     >
                       {tech}
@@ -205,13 +194,15 @@ const Footer = ({ data }: FooterProps) => {
                 <div className="mt-8 p-4 rounded-lg bg-gradient-to-r from-cyan-500/5 to-blue-500/5 border border-cyan-500/20">
                   <div className="flex items-center gap-2 mb-2">
                     <Sparkles className="w-4 h-4 text-cyan-400" />
-                    <span className="text-sm font-medium text-white">Currently Learning</span>
+                    <span className="text-sm font-medium text-white">Open to Work</span>
                   </div>
-                  <p className="text-xs text-muted-foreground">TypeScript advanced patterns & testing</p>
+                  <p className="text-xs text-muted-foreground">
+                    Available for frontend & full-stack opportunities
+                  </p>
                 </div>
               </div>
 
-              {/* Connect Column */}
+              {/* Connect */}
               <div className="lg:col-span-1">
                 <h4 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
                   <Globe className="w-4 h-4 text-blue-400" />
@@ -230,20 +221,16 @@ const Footer = ({ data }: FooterProps) => {
                     >
                       <div className="flex items-center gap-3">
                         <div className={`p-2 rounded-lg ${social.bg}`}>
-                          <div className={social.color}>
-                            <social.icon size={18} />
-                          </div>
+                          <social.icon size={18} className={social.color} />
                         </div>
                         <div className="flex-1">
                           <p className="text-sm font-medium text-white">{social.label}</p>
                           <p className="text-xs text-muted-foreground">{social.desc}</p>
                         </div>
                         <ExternalLink
-                          className={`w-4 h-4 transition-all duration-300 ${
-                            hoveredLink === social.label
-                              ? "opacity-100 translate-x-0"
-                              : "opacity-0 -translate-x-2"
-                          } text-purple-400`}
+                          className={`w-4 h-4 text-purple-400 transition-all duration-300 ${
+                            hoveredLink === social.label ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2"
+                          }`}
                         />
                       </div>
                     </a>
@@ -253,11 +240,7 @@ const Footer = ({ data }: FooterProps) => {
             </div>
 
             {/* Bottom Bar */}
-            <div
-              className={`pt-8 border-t border-white/10 transition-all duration-1000 delay-500 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              }`}
-            >
+            <div className="pt-8 border-t border-white/10">
               <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                 <div className="flex items-center gap-2">
                   <Heart className="w-4 h-4 text-red-500 fill-red-500 animate-pulse" />
@@ -266,21 +249,19 @@ const Footer = ({ data }: FooterProps) => {
                   </p>
                 </div>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3">
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Code2 className="w-4 h-4" />
                     <span>Built with</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    {["React", "Next.js", "TypeScript", "Tailwind"].map((tech) => (
-                      <div
-                        key={tech}
-                        className="px-3 py-1 text-xs rounded-full bg-white/5 border border-white/10 text-muted-foreground"
-                      >
-                        {tech}
-                      </div>
-                    ))}
-                  </div>
+                  {["React", "Next.js", "TypeScript", "Tailwind"].map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-3 py-1 text-xs rounded-full bg-white/5 border border-white/10 text-muted-foreground"
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
 
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">

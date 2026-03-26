@@ -1,18 +1,32 @@
 {
   "hero": {
     "name": "Nabil",
-    "title": "Full-Stack Developer specializing in React, Next.js & Node.js",
+    "title": "Frontend Developer specializing in React & Next.js",
     "subtitle": "I build high-quality, fast and scalable web applications.",
     "ctaHire": "Hire Me",
     "ctaCV": "Download CV",
-    "cvLink": "./nabil_cv.pdf",
-    "heroImageLink": "./hero.png",
-    "description": "Passionate about creating beautiful, performant digital experiences."
+    "cvLink": "/nabil_cv.pdf",
+    "heroImageLink": "/hero.png",
+    "description": "Passionate about creating beautiful, performant digital experiences.",
+    "techStack": ["React", "Next.js", "Node.js", "TypeScript", "Tailwind CSS", "MongoDB"]
   },
   "about": {
     "title": "Professional Profile",
-    "description": "Full-stack developer from Morocco specializing in modern web application development. I combine clean code practices with creative problem-solving to deliver solutions that users love. Passionate about performance optimization, accessibility, and building products that make an impact.",
-    "avatar": "./about.jpg"
+    "description": "Frontend developer from Morocco specializing in modern web application development with React and Next.js. I combine clean code practices with creative problem-solving to deliver fast, accessible, and maintainable products.",
+    "avatar": "/about.jpg",
+    "techStack": [
+      { "name": "React / Next.js", "category": "frontend" },
+      { "name": "Node.js / Express", "category": "backend" },
+      { "name": "MongoDB", "category": "database" },
+      { "name": "TypeScript", "category": "language" },
+      { "name": "Tailwind CSS", "category": "styling" },
+      { "name": "Git / GitHub", "category": "tools" }
+    ],
+    "stats": [
+      { "label": "Years Coding", "value": 2, "suffix": "+" },
+      { "label": "Projects Built", "value": 6, "suffix": "+" },
+      { "label": "Technologies", "value": 10, "suffix": "+" }
+    ]
   },
   "experiences": [
     {
@@ -29,11 +43,11 @@
       ]
     },
     {
-      "role": "Freelance Full-Stack Web Developer",
+      "role": "Freelance Frontend Developer",
       "company": "Self-employed",
       "location": "Remote",
       "date": "Dec 2024 – Present",
-      "description": "Designed, developed, and launched 8+ custom, performance-focused websites using Next.js and React. Implemented responsive, high-fidelity UIs with **Tailwind CSS**. Applied rigorous technical standards to deliver maintainable, scalable, and high-quality codebases while providing technical consulting to clients.",
+      "description": "Designed, developed, and launched 6+ custom, performance-focused websites using Next.js and React. Implemented responsive, high-fidelity UIs with Tailwind CSS. Applied rigorous technical standards to deliver maintainable, scalable, and high-quality codebases while providing technical consulting to clients.",
       "technologies": [
         "Next.js",
         "React",
@@ -44,11 +58,11 @@
       ]
     },
     {
-      "role": "End-of-studies Full-Stack Web Developer Intern",
+      "role": "End-of-studies Full-Stack Developer Intern",
       "company": "FCPO",
       "location": "Oujda, Morocco",
       "date": "Mar 2024 – Sep 2024",
-      "description": "Built a comprehensive e-commerce management dashboard using **React.js**. Streamlined the UI with Tailwind CSS & Bootstrap, cutting page load times by 40%. Secured crucial API communications via **Axios with JWT authentication** and designed data visualizations using **ECharts**.",
+      "description": "Built a comprehensive e-commerce management dashboard using React.js. Streamlined the UI with Tailwind CSS & Bootstrap, cutting page load times by 40%. Secured API communications via Axios with JWT authentication and designed data visualizations using ECharts.",
       "technologies": [
         "React.js",
         "Tailwind CSS",
@@ -60,11 +74,11 @@
       ]
     },
     {
-      "role": "Full-Stack Web Developer Intern",
+      "role": "Full-Stack Developer Intern",
       "company": "Oriental Regional Council (CRO)",
       "location": "Oujda, Morocco",
       "date": "Jun 2022 – Sep 2022",
-      "description": "Developed a critical web application to automate the management of association and cooperative files using a **React.js** frontend and **Node.js** backend. Digitized the entire file process, significantly improving administrative efficiency and implementing advanced features like data filtering and authorization.",
+      "description": "Developed a web application to automate the management of association and cooperative files using a React.js frontend and Node.js backend. Digitized the entire file process, improving administrative efficiency and implementing data filtering and authorization features.",
       "technologies": [
         "React.js",
         "Node.js",
@@ -86,74 +100,64 @@
     "Node.js",
     "Express",
     "MongoDB",
-    "PostgreSQL",
-    "Firebase",
     "Git",
-    "GitHub"
+    "GitHub",
+    "Vercel"
   ],
+  "currentlyLearning": "TypeScript advanced patterns & testing",
   "projects": [
     {
-      "title": "Full-featured eCommerce Platform",
-      "image": "/placeholder.svg?height=400&width=600",
-      "description": "Complete online shop with authentication, product catalog, shopping cart, payment integration, and admin panel for inventory management.",
-      "technologies": [
-        "React",
-        "Next.js",
-        "Node.js",
-        "MongoDB",
-        "Stripe"
-      ],
-      "github": "https://github.com",
-      "demo": "https://example.com"
+      "title": "Boucherie D'Or",
+      "image": "/Butcher-shop.png",
+      "description": "Full-featured e-commerce platform for a butcher shop. Includes product catalog, shopping cart, order management, and an admin dashboard for inventory control.",
+      "technologies": ["Next.js", "React", "Tailwind CSS", "MongoDB", "Node.js"],
+      "github": "https://github.com/NabilLamb/boucherie-D-or",
+      "demo": "https://boucherie-d-or.vercel.app/",
+      "featured": true
     },
     {
-      "title": "Sales Analytics Dashboard",
-      "image": "/placeholder.svg?height=400&width=600",
-      "description": "Real-time analytics dashboard for eCommerce sales tracking, business KPIs visualization, and performance metrics.",
-      "technologies": [
-        "React",
-        "Tailwind CSS",
-        "Recharts",
-        "Node.js"
-      ],
-      "github": "https://github.com",
-      "demo": "https://example.com"
+      "title": "FitHub – Gym E-Commerce",
+      "image": "/FitHub.png",
+      "description": "E-commerce store for gym equipment and supplements. Features product filtering, cart, checkout flow, and a clean responsive UI.",
+      "technologies": ["React", "Next.js", "Tailwind CSS", "MongoDB"],
+      "github": "https://github.com/NabilLamb/gym-e-commerce",
+      "demo": "https://gym-e-commerce-ten.vercel.app/",
+      "featured": true
     },
     {
-      "title": "Full-Stack Blog Platform",
-      "image": "/placeholder.svg?height=400&width=600",
-      "description": "Blog platform with post creation, comments, user authentication, search functionality, and admin moderation features.",
-      "technologies": [
-        "Next.js",
-        "MongoDB",
-        "Authentication",
-        "API Routes"
-      ],
-      "github": "https://github.com",
-      "demo": "https://example.com"
+      "title": "eCommerce Dashboard",
+      "image": "/Dashboard.png",
+      "description": "Real-time analytics dashboard for e-commerce. Tracks sales KPIs, order status, revenue trends, and inventory using interactive charts.",
+      "technologies": ["React", "Tailwind CSS", "ECharts", "Node.js", "JWT"],
+      "github": "https://github.com/NabilLamb/eCommerce-Dashboard",
+      "demo": "https://e-commerce-dashboard-azure-ten.vercel.app/",
+      "featured": true
     }
   ],
   "testimonials": [
     {
       "name": "Ahmed B.",
       "role": "Client",
-      "message": "Nabil delivered an excellent project with clean design, excellent performance, and professional communication throughout the process."
+      "message": "Nabil delivered an excellent project with clean design, great performance, and professional communication throughout.",
+      "rating": 5
     },
     {
       "name": "Karim L.",
       "role": "Project Manager",
-      "message": "Professional work, meets deadlines, and high-quality code. Highly recommended for any full-stack development project."
+      "message": "Professional work, meets deadlines, and high-quality code. Highly recommended for any frontend development project.",
+      "rating": 5
     },
     {
       "name": "Lisa M.",
       "role": "Founder",
-      "message": "Great communication, strong technical skills, and attention to detail. Will definitely work with Nabil again."
+      "message": "Great communication, strong technical skills, and attention to detail. Will definitely work with Nabil again.",
+      "rating": 5
     }
   ],
   "contact": {
     "email": "lambattannabil2000@gmail.com",
     "phone": "+212 639281869",
-    "location": "Oujda, Maroc"
+    "location": "Oujda, Morocco"
   },
   "social": {
     "github": "https://github.com/NabilLamb",

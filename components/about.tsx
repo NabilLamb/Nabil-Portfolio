@@ -1,5 +1,3 @@
-// components\about.tsx
-
 "use client"
 
 import { useEffect, useRef, useState } from "react"
@@ -12,12 +10,24 @@ interface AboutProps {
     title: string
     description: string
     avatar: string
+    techStack: { name: string; category: string }[]
+    stats: { label: string; value: number; suffix: string }[]
   }
+}
+
+// Map category → icon + color so data.json drives the UI
+const categoryIconMap: Record<string, { icon: React.ReactNode; color: string }> = {
+  frontend:  { icon: <Code2 size={20} />,     color: "text-cyan-400"   },
+  backend:   { icon: <Server size={20} />,    color: "text-green-400"  },
+  database:  { icon: <Database size={20} />,  color: "text-blue-400"   },
+  language:  { icon: <Terminal size={20} />,  color: "text-purple-400" },
+  styling:   { icon: <Globe size={20} />,     color: "text-cyan-300"   },
+  tools:     { icon: <Cpu size={20} />,       color: "text-orange-400" },
 }
 
 const About = ({ data }: AboutProps) => {
   const [isVisible, setIsVisible] = useState(false)
-  const [counters, setCounters] = useState({ experience: 0, projects: 0, technologies: 0 })
+  const [counters, setCounters] = useState<Record<string, number>>({})
   const ref = useRef<HTMLDivElement>(null)
   const canvasRef = useBinaryCanvas({ color: "0, 255, 200", fontSize: 12, speed: 1, opacity: 0.12 })
 
@@ -27,7 +37,9 @@ const About = ({ data }: AboutProps) => {
         if (entry.isIntersecting) {
           setIsVisible(true)
           setTimeout(() => {
-            setCounters({ experience: 2, projects: 6, technologies: 10 })
+            const final: Record<string, number> = {}
+            data.stats.forEach((s) => { final[s.label] = s.value })
+            setCounters(final)
           }, 500)
           observer.unobserve(entry.target)
         }
@@ -36,16 +48,7 @@ const About = ({ data }: AboutProps) => {
     )
     if (ref.current) observer.observe(ref.current)
     return () => observer.disconnect()
-  }, [])
-
-  const techStack = [
-    { icon: <Code2 size={20} />, name: "React / Next.js", color: "text-cyan-400" },
-    { icon: <Server size={20} />, name: "Node.js / Express", color: "text-green-400" },
-    { icon: <Database size={20} />, name: "MongoDB", color: "text-blue-400" },
-    { icon: <Terminal size={20} />, name: "TypeScript", color: "text-purple-400" },
-    { icon: <Globe size={20} />, name: "Tailwind CSS", color: "text-cyan-300" },
-    { icon: <Cpu size={20} />, name: "Git / GitHub", color: "text-orange-400" },
-  ]
+  }, [data.stats])
 
   return (
     <section
@@ -53,27 +56,24 @@ const About = ({ data }: AboutProps) => {
       className="relative py-24 md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden"
       ref={ref}
     >
-      {/* Binary Animation Background */}
       <canvas
         ref={canvasRef}
         className="absolute inset-0 -z-20"
         style={{ background: "linear-gradient(135deg, #0a0a14 0%, #11111f 100%)" }}
       />
 
-      {/* Animated gradient orbs */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl"></div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-cyan-500/5 to-purple-500/5 rounded-full blur-3xl"></div>
       </div>
 
-      {/* Grid pattern overlay */}
       <div className="absolute inset-0 -z-10 opacity-10">
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `linear-gradient(to right, rgba(0, 255, 255, 0.1) 1px, transparent 1px),
-                             linear-gradient(to bottom, rgba(0, 255, 255, 0.1) 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(to right, rgba(0,255,255,0.1) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(0,255,255,0.1) 1px, transparent 1px)`,
             backgroundSize: "50px 50px",
           }}
         />
@@ -103,7 +103,7 @@ const About = ({ data }: AboutProps) => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          {/* Left Column - Avatar & Stats */}
+          {/* Left — Avatar & Stats */}
           <div
             className={`transition-all duration-1000 delay-200 ${
               isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
@@ -139,20 +139,16 @@ const About = ({ data }: AboutProps) => {
                 </div>
               </div>
 
-              {/* Stats Grid */}
+              {/* Stats — driven by data.json */}
               <div className="grid grid-cols-3 gap-4 mt-8">
-                {[
-                  { label: "Years Coding", value: counters.experience, suffix: "+", color: "text-cyan-400" },
-                  { label: "Projects Built", value: counters.projects, suffix: "+", color: "text-purple-400" },
-                  { label: "Technologies", value: counters.technologies, suffix: "+", color: "text-orange-400" },
-                ].map((stat, idx) => (
+                {data.stats.map((stat, idx) => (
                   <div
                     key={idx}
                     className="p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-cyan-500/30 transition-all duration-300 hover:scale-105 group/stat"
                   >
                     <div className="flex items-end gap-1">
-                      <span className={`text-3xl font-bold ${stat.color} transition-all duration-300 group-hover/stat:scale-110`}>
-                        {stat.value}
+                      <span className="text-3xl font-bold text-cyan-400 transition-all duration-300 group-hover/stat:scale-110">
+                        {counters[stat.label] ?? 0}
                       </span>
                       <span className="text-lg text-muted-foreground">{stat.suffix}</span>
                     </div>
@@ -163,25 +159,21 @@ const About = ({ data }: AboutProps) => {
             </div>
           </div>
 
-          {/* Right Column - Description & Tech Stack */}
+          {/* Right — Description & Tech Stack */}
           <div
             className={`transition-all duration-1000 delay-400 ${
               isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
             }`}
           >
-            {/* Description */}
             <div className="mb-10">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full"></div>
                 <h3 className="text-2xl font-bold text-white">My Journey</h3>
               </div>
-
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                {data.description}
-              </p>
+              <p className="text-lg text-muted-foreground leading-relaxed">{data.description}</p>
             </div>
 
-            {/* Tech Stack */}
+            {/* Tech Stack — driven by data.json */}
             <div>
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-1 bg-gradient-to-r from-orange-500 to-red-500 rounded-full"></div>
@@ -189,21 +181,24 @@ const About = ({ data }: AboutProps) => {
               </div>
 
               <div className="flex flex-wrap gap-3">
-                {techStack.map((tech, idx) => (
-                  <div
-                    key={idx}
-                    className="flex items-center gap-2 px-4 py-3 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 hover:border-cyan-500/30 transition-all duration-300 hover:scale-105 group/tech"
-                  >
-                    <div className={`${tech.color} transition-transform duration-300 group-hover/tech:scale-110`}>
-                      {tech.icon}
+                {data.techStack.map((tech, idx) => {
+                  const iconData = categoryIconMap[tech.category] ?? { icon: <Code2 size={20} />, color: "text-gray-400" }
+                  return (
+                    <div
+                      key={idx}
+                      className="flex items-center gap-2 px-4 py-3 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 hover:border-cyan-500/30 transition-all duration-300 hover:scale-105 group/tech"
+                    >
+                      <div className={`${iconData.color} transition-transform duration-300 group-hover/tech:scale-110`}>
+                        {iconData.icon}
+                      </div>
+                      <span className="text-sm font-medium text-white">{tech.name}</span>
                     </div>
-                    <span className="text-sm font-medium text-white">{tech.name}</span>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             </div>
 
-            {/* Call to Action */}
+            {/* CTA */}
             <div className="mt-10 p-6 rounded-2xl bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 border border-cyan-500/20">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 flex items-center justify-center">

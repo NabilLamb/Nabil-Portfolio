@@ -1,5 +1,3 @@
-// app\page.tsx
-
 "use client"
 
 import { useEffect, useState } from "react"
@@ -14,14 +12,60 @@ import Contact from "@/components/contact"
 import Footer from "@/components/footer"
 
 type PortfolioData = {
-  hero: any
-  about: any
-  experiences: any
-  technologies: any
-  projects: any
-  testimonials: any
-  contact: any
-  social: any
+  hero: {
+    name: string
+    title: string
+    subtitle: string
+    ctaHire: string
+    ctaCV: string
+    heroImageLink: string
+    cvLink: string
+    description: string
+    techStack: string[]
+  }
+  about: {
+    title: string
+    description: string
+    avatar: string
+    techStack: { name: string; category: string }[]
+    stats: { label: string; value: number; suffix: string }[]
+  }
+  experiences: {
+    role: string
+    company: string
+    location: string
+    date: string
+    description: string
+    technologies: string[]
+  }[]
+  technologies: string[]
+  currentlyLearning: string
+  projects: {
+    title: string
+    image: string
+    description: string
+    technologies: string[]
+    github: string
+    demo: string
+    featured?: boolean
+  }[]
+  testimonials: {
+    name: string
+    role: string
+    message: string
+    rating: number
+    company?: string
+  }[]
+  contact: {
+    email: string
+    phone: string
+    location: string
+  }
+  social: {
+    github: string
+    linkedin: string
+    email: string
+  }
 }
 
 export default function Home() {
@@ -32,10 +76,10 @@ export default function Home() {
     const loadData = async () => {
       try {
         const response = await fetch("/data.json")
-        const jsonData = await response.json()
+        const jsonData: PortfolioData = await response.json()
         setData(jsonData)
       } catch (error) {
-        console.error("Error loading data:", error)
+        console.error("Error loading portfolio data:", error)
       } finally {
         setLoading(false)
       }
@@ -55,7 +99,7 @@ export default function Home() {
   if (!data) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-neon-purple text-lg">Error loading portfolio</div>
+        <div className="text-neon-purple text-lg">Error loading portfolio data.</div>
       </div>
     )
   }
@@ -66,7 +110,7 @@ export default function Home() {
       <Hero data={data.hero} />
       <About data={data.about} />
       <Experiences data={data.experiences} />
-      <Technologies data={data.technologies} />
+      <Technologies data={data.technologies} currentlyLearning={data.currentlyLearning} />
       <Projects data={data.projects} />
       <Testimonials data={data.testimonials} />
       <Contact data={data.contact} />

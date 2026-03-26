@@ -1,4 +1,4 @@
-// components\contact.tsx
+// components/contact.tsx
 
 "use client"
 
@@ -19,6 +19,7 @@ import {
   Paperclip,
   User,
   MailCheck,
+  AlertCircle,
 } from "lucide-react"
 import { useBinaryCanvas } from "@/hooks/useBinaryCanvas"
 
@@ -35,15 +36,34 @@ const Contact = ({ data }: ContactProps) => {
   const [formData, setFormData] = useState({ name: "", email: "", message: "", subject: "" })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [submitError, setSubmitError] = useState(false)
   const [activeField, setActiveField] = useState<string | null>(null)
   const ref = useRef<HTMLDivElement>(null)
   const formRef = useRef<HTMLFormElement>(null)
   const canvasRef = useBinaryCanvas({ color: "0, 255, 200", fontSize: 12, speed: 0.8, opacity: 0.1 })
 
   const socialLinks = [
-    { icon: <Github size={20} />, label: "GitHub", url: "https://github.com/NabilLamb", color: "text-gray-300", bg: "bg-gray-900/80" },
-    { icon: <Linkedin size={20} />, label: "LinkedIn", url: "https://linkedin.com/in/nabil-lambattan", color: "text-blue-400", bg: "bg-blue-900/80" },
-    { icon: <Mail size={20} />, label: "Email", url: `mailto:${data.email}`, color: "text-red-400", bg: "bg-red-900/80" },
+    {
+      icon: <Github size={20} />,
+      label: "GitHub",
+      url: "https://github.com/NabilLamb",
+      color: "text-gray-300",
+      bg: "bg-gray-900/80",
+    },
+    {
+      icon: <Linkedin size={20} />,
+      label: "LinkedIn",
+      url: "https://linkedin.com/in/nabil-lambattan",
+      color: "text-blue-400",
+      bg: "bg-blue-900/80",
+    },
+    {
+      icon: <Mail size={20} />,
+      label: "Email",
+      url: `mailto:${data.email}`,
+      color: "text-red-400",
+      bg: "bg-red-900/80",
+    },
   ]
 
   useEffect(() => {
@@ -78,29 +98,43 @@ const Contact = ({ data }: ContactProps) => {
 
       if (res.ok) {
         setIsSubmitted(true)
+        setSubmitError(false)
         setFormData({ name: "", email: "", message: "", subject: "" })
         setTimeout(() => setIsSubmitted(false), 5000)
+      } else {
+        setSubmitError(true)
+        setTimeout(() => setSubmitError(false), 5000)
       }
     } catch (error) {
-      console.error("Failed to send message:", error)
+      setSubmitError(true)
+      setTimeout(() => setSubmitError(false), 5000)
     } finally {
       setIsSubmitting(false)
     }
   }
 
   return (
-    <section id="contact" className="relative py-24 md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden" ref={ref}>
+    <section
+      id="contact"
+      className="relative py-24 md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      ref={ref}
+    >
       {/* Binary Animation Background */}
       <canvas
         ref={canvasRef}
         className="absolute inset-0 -z-20"
-        style={{ background: "linear-gradient(135deg, #0a0a14 0%, #11111f 100%)" }}
+        style={{
+          background: "linear-gradient(135deg, #0a0a14 0%, #11111f 100%)",
+        }}
       />
 
       {/* Animated gradient orbs */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-1/4 -left-40 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 -right-40 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }}></div>
+        <div
+          className="absolute bottom-1/4 -right-40 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-pulse"
+          style={{ animationDelay: "1s" }}
+        ></div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-r from-emerald-500/3 via-cyan-500/3 to-blue-500/3 rounded-full blur-3xl"></div>
       </div>
 
@@ -118,7 +152,11 @@ const Contact = ({ data }: ContactProps) => {
 
       <div className="max-w-7xl mx-auto relative">
         {/* Section Header */}
-        <div className={`transition-all duration-1000 mb-16 text-center ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+        <div
+          className={`transition-all duration-1000 mb-16 text-center ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 border border-emerald-500/20 mb-6">
             <MessageSquare className="w-4 h-4 text-emerald-400" />
             <span className="text-sm font-mono text-emerald-300">Let's Connect</span>
@@ -137,21 +175,55 @@ const Contact = ({ data }: ContactProps) => {
 
         <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
           {/* Contact Information */}
-          <div className={`transition-all duration-1000 lg:col-span-1 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"}`}>
+          <div
+            className={`transition-all duration-1000 lg:col-span-1 ${
+              isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
+            }`}
+          >
             <div className="space-y-6">
               {[
-                { icon: Mail, label: "Email", value: data.email, link: `mailto:${data.email}`, color: "text-red-400", bg: "bg-red-500/10" },
-                { icon: Phone, label: "Phone", value: data.phone, link: `tel:${data.phone}`, color: "text-green-400", bg: "bg-green-500/10" },
-                { icon: MapPin, label: "Location", value: data.location, link: "#", color: "text-blue-400", bg: "bg-blue-500/10" },
-                { icon: Clock, label: "Response Time", value: "Within 24 hours", link: "#", color: "text-purple-400", bg: "bg-purple-500/10" },
+                {
+                  icon: Mail,
+                  label: "Email",
+                  value: data.email,
+                  link: `mailto:${data.email}`,
+                  color: "text-red-400",
+                  bg: "bg-red-500/10",
+                },
+                {
+                  icon: Phone,
+                  label: "Phone",
+                  value: data.phone,
+                  link: `tel:${data.phone}`,
+                  color: "text-green-400",
+                  bg: "bg-green-500/10",
+                },
+                {
+                  icon: MapPin,
+                  label: "Location",
+                  value: data.location,
+                  link: "#",
+                  color: "text-blue-400",
+                  bg: "bg-blue-500/10",
+                },
+                {
+                  icon: Clock,
+                  label: "Response Time",
+                  value: "Within 24 hours",
+                  link: "#",
+                  color: "text-purple-400",
+                  bg: "bg-purple-500/10",
+                },
               ].map((item, idx) => {
                 const Icon = item.icon
                 return (
                   <a
                     key={idx}
                     href={item.link}
-                    onClick={(e) => (item.label === "Location" || item.label === "Response Time") && e.preventDefault()}
-                    className={`group block p-4 rounded-xl ${item.bg} backdrop-blur-sm border border-white/10 transition-all duration-300 hover:scale-105`}
+                    onClick={(e) =>
+                      (item.label === "Location" || item.label === "Response Time") && e.preventDefault()
+                    }
+                    className={`group block p-4 rounded-xl ${item.bg} backdrop-blur-sm border border-white/10 hover:border-${item.color.split("-")[1]}-500/30 transition-all duration-300 hover:scale-105 cursor-pointer`}
                   >
                     <div className="flex items-center gap-4">
                       <div className={`p-3 rounded-lg ${item.bg} border border-white/10`}>
@@ -161,7 +233,9 @@ const Contact = ({ data }: ContactProps) => {
                         <p className="text-sm text-muted-foreground">{item.label}</p>
                         <p className={`text-base font-medium truncate ${item.color}`}>{item.value}</p>
                       </div>
-                      <div className={`opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0 transition-all duration-300 ${item.color}`}>
+                      <div
+                        className={`opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0 transition-all duration-300 ${item.color}`}
+                      >
                         <Send className="w-4 h-4" />
                       </div>
                     </div>
@@ -182,7 +256,7 @@ const Contact = ({ data }: ContactProps) => {
                       href={social.url}
                       target={social.url.startsWith("mailto") ? undefined : "_blank"}
                       rel={social.url.startsWith("mailto") ? undefined : "noopener noreferrer"}
-                      className={`group flex-1 min-w-[100px] p-3 rounded-lg ${social.bg} backdrop-blur-sm border border-white/10 transition-all duration-300 hover:scale-105`}
+                      className={`group flex-1 min-w-[100px] p-3 rounded-lg ${social.bg} backdrop-blur-sm border border-white/10 transition-all duration-300 hover:scale-105 cursor-pointer`}
                     >
                       <div className="flex flex-col items-center gap-2">
                         <div className={`${social.color} transition-transform duration-300 group-hover:scale-110`}>
@@ -214,10 +288,15 @@ const Contact = ({ data }: ContactProps) => {
           </div>
 
           {/* Contact Form */}
-          <div className={`transition-all duration-1000 delay-300 lg:col-span-2 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"}`}>
+          <div
+            className={`transition-all duration-1000 delay-300 lg:col-span-2 ${
+              isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
+            }`}
+          >
             <div className="relative">
+              {/* Success Message */}
               {isSubmitted && (
-                <div className="mb-6 p-4 rounded-xl bg-gradient-to-r from-emerald-500/20 to-green-500/20 border border-emerald-500/30">
+                <div className="mb-6 p-4 rounded-xl bg-gradient-to-r from-emerald-500/20 to-green-500/20 border border-emerald-500/30 animate-in slide-in-from-top duration-500">
                   <div className="flex items-center gap-3">
                     <CheckCircle className="w-6 h-6 text-emerald-400" />
                     <div>
@@ -228,7 +307,29 @@ const Contact = ({ data }: ContactProps) => {
                 </div>
               )}
 
+              {/* Error Message */}
+              {submitError && (
+                <div className="mb-6 p-4 rounded-xl bg-red-500/20 border border-red-500/30 animate-in slide-in-from-top duration-500">
+                  <div className="flex items-center gap-3">
+                    <AlertCircle className="w-6 h-6 text-red-400" />
+                    <div>
+                      <p className="font-medium text-red-300">Something went wrong</p>
+                      <p className="text-sm text-red-200/80">
+                        Please try emailing me directly at{" "}
+                        <a
+                          href="mailto:lambattannabil2000@gmail.com"
+                          className="underline hover:text-red-300 transition-colors"
+                        >
+                          lambattannabil2000@gmail.com
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               <form ref={formRef} onSubmit={handleSubmit} className="relative group">
+                {/* Glow effect */}
                 <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-blue-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                 <div className="relative p-6 md:p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
@@ -238,6 +339,7 @@ const Contact = ({ data }: ContactProps) => {
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-6 mb-6">
+                    {/* Name Field */}
                     <div className="space-y-2">
                       <label className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
                         <User className="w-4 h-4" />
@@ -257,10 +359,13 @@ const Contact = ({ data }: ContactProps) => {
                             activeField === "name" ? "border-emerald-500/50" : "border-white/10"
                           } text-white placeholder-muted-foreground focus:outline-none transition-all duration-300`}
                         />
-                        {formData.name && <CheckCircle className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-emerald-400" />}
+                        {formData.name && (
+                          <CheckCircle className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-emerald-400" />
+                        )}
                       </div>
                     </div>
 
+                    {/* Email Field */}
                     <div className="space-y-2">
                       <label className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
                         <MailCheck className="w-4 h-4" />
@@ -280,11 +385,14 @@ const Contact = ({ data }: ContactProps) => {
                             activeField === "email" ? "border-emerald-500/50" : "border-white/10"
                           } text-white placeholder-muted-foreground focus:outline-none transition-all duration-300`}
                         />
-                        {formData.email && <CheckCircle className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-emerald-400" />}
+                        {formData.email && (
+                          <CheckCircle className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-emerald-400" />
+                        )}
                       </div>
                     </div>
                   </div>
 
+                  {/* Subject Field */}
                   <div className="space-y-2 mb-6">
                     <label className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
                       <Paperclip className="w-4 h-4" />
@@ -305,6 +413,7 @@ const Contact = ({ data }: ContactProps) => {
                     />
                   </div>
 
+                  {/* Message Field */}
                   <div className="space-y-2 mb-8">
                     <label className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
                       <MessageSquare className="w-4 h-4" />
@@ -319,7 +428,7 @@ const Contact = ({ data }: ContactProps) => {
                         onBlur={() => setActiveField(null)}
                         required
                         rows={6}
-                        placeholder="Tell me about your project..."
+                        placeholder="Tell me about your project, timeline, and budget..."
                         className={`w-full px-4 py-3 rounded-lg bg-white/5 border ${
                           activeField === "message" ? "border-emerald-500/50" : "border-white/10"
                         } text-white placeholder-muted-foreground focus:outline-none resize-none transition-all duration-300`}
@@ -330,12 +439,13 @@ const Contact = ({ data }: ContactProps) => {
                     </div>
                   </div>
 
+                  {/* Submit Button with fixed hover text visibility */}
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="group relative w-full px-8 py-4 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-emerald-500/30 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="group relative w-full px-8 py-4 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-emerald-500/30 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                   >
-                    <span className="relative flex items-center justify-center gap-2">
+                    <span className="relative z-10 flex items-center justify-center gap-2 text-white">
                       {isSubmitting ? (
                         <>
                           <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -348,7 +458,7 @@ const Contact = ({ data }: ContactProps) => {
                         </>
                       )}
                     </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
                   </button>
 
                   <div className="mt-6 flex items-center gap-2 text-sm text-muted-foreground">
@@ -373,7 +483,7 @@ const Contact = ({ data }: ContactProps) => {
                 </div>
                 <a
                   href={`tel:${data.phone}`}
-                  className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-emerald-400 hover:bg-emerald-500/10 hover:text-white transition-all duration-300"
+                  className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-emerald-400 hover:bg-emerald-500/10 hover:text-white transition-all duration-300 cursor-pointer"
                 >
                   {data.phone}
                 </a>
