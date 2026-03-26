@@ -136,20 +136,20 @@
   ],
   "testimonials": [
     {
-      "name": "Ahmed B.",
+      "name": "Ahmed Nadi",
       "role": "Client",
       "message": "Nabil delivered an excellent project with clean design, great performance, and professional communication throughout.",
       "rating": 5
     },
     {
-      "name": "Karim L.",
-      "role": "Project Manager",
+      "name": "Abdel El Ahmar",
+      "role": "Client",
       "message": "Professional work, meets deadlines, and high-quality code. Highly recommended for any frontend development project.",
       "rating": 5
     },
     {
-      "name": "Lisa M.",
-      "role": "Founder",
+      "name": "Lamiae Mossaoui",
+      "role": "Client",
       "message": "Great communication, strong technical skills, and attention to detail. Will definitely work with Nabil again.",
       "rating": 5
     }
