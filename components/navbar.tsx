@@ -4,13 +4,14 @@
 
 import { useState, useEffect, useRef } from "react"
 import { Menu, X, Moon, Sun, User } from "lucide-react"
+import { useTheme } from "next-themes"
 import Image from "next/image"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState("Hero")
-  const [darkMode, setDarkMode] = useState(true)
+  const { theme, setTheme } = useTheme()
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   const links = [
@@ -121,13 +122,7 @@ const Navbar = () => {
   }
 
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode)
-    // In a real app, you would update the theme here
-    if (!darkMode) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
+    setTheme(theme === "dark" ? "light" : "dark")
   }
 
   return (
@@ -209,7 +204,7 @@ const Navbar = () => {
                 onClick={toggleDarkMode}
                 className="p-2 rounded-lg bg-white/5 border border-white/10 text-muted-foreground hover:text-white hover:border-purple-500/30 transition-all duration-300"
               >
-                {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+                {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
               </button>
 
               {/* Download CV Button */}
