@@ -18,6 +18,7 @@ import {
   Terminal,
 } from "lucide-react"
 import { useBinaryCanvas } from "@/hooks/useBinaryCanvas"
+import { useTranslation } from "react-i18next"
 
 interface FooterProps {
   data: {
@@ -33,6 +34,7 @@ interface FooterProps {
 }
 
 const Footer = ({ data }: FooterProps) => {
+  const { t } = useTranslation()
   const currentYear = new Date().getFullYear()
   const [isVisible, setIsVisible] = useState(false)
   const [hoveredLink, setHoveredLink] = useState<string | null>(null)
@@ -83,7 +85,7 @@ const Footer = ({ data }: FooterProps) => {
       {showBackToTop && (
         <button
           onClick={scrollToTop}
-          aria-label="Back to top"
+          aria-label={t("ui.backToTop") || "Back to top"}
           className="fixed bottom-8 right-8 z-40 p-3 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-xl shadow-purple-500/30 hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 hover:scale-110 group"
         >
           <ChevronUp className="w-5 h-5" />
@@ -140,7 +142,7 @@ const Footer = ({ data }: FooterProps) => {
                     className="group relative w-full px-4 py-3 rounded-lg bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 flex items-center justify-center gap-2 text-purple-300 hover:text-foreground"
                   >
                     <FileText size={16} />
-                    Download Resume
+                    {t("hero.ctaCV") || "Download Resume"}
                   </a>
                 </div>
               </div>
@@ -149,7 +151,7 @@ const Footer = ({ data }: FooterProps) => {
               <div className="lg:col-span-1">
                 <h4 className="text-lg font-bold text-foreground mb-6 flex items-center gap-2">
                   <Zap className="w-4 h-4 text-purple-400" />
-                  Navigation
+                  {t("ui.navigation") || "Navigation"}
                 </h4>
                 <div className="grid grid-cols-2 gap-4">
                   {data.quickLinks.map((link) => (
@@ -176,7 +178,7 @@ const Footer = ({ data }: FooterProps) => {
               <div className="lg:col-span-1">
                 <h4 className="text-lg font-bold text-foreground mb-6 flex items-center gap-2">
                   <Terminal className="w-4 h-4 text-cyan-400" />
-                  Tech Stack
+                  {t("ui.techStack") || "Tech Stack"}
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {data.techStack.map((tech, idx) => (
@@ -192,7 +194,7 @@ const Footer = ({ data }: FooterProps) => {
                 <div className="mt-8 p-4 rounded-lg bg-gradient-to-r from-cyan-500/5 to-blue-500/5 border border-cyan-500/20">
                   <div className="flex items-center gap-2 mb-2">
                     <Sparkles className="w-4 h-4 text-cyan-400" />
-                    <span className="text-sm font-medium text-foreground">Currently Learning</span>
+                    <span className="text-sm font-medium text-foreground">{t("ui.currentlyLearning") || "Currently Learning"}</span>
                   </div>
                   <p className="text-xs text-muted-foreground">{data.learningText}</p>
                 </div>
@@ -202,13 +204,13 @@ const Footer = ({ data }: FooterProps) => {
               <div className="lg:col-span-1">
                 <h4 className="text-lg font-bold text-foreground mb-6 flex items-center gap-2">
                   <Globe className="w-4 h-4 text-blue-400" />
-                  Let's Connect
+                  {t("ui.connectOnline") || "Let's Connect"}
                 </h4>
                 <div className="space-y-4">
                   {[
-                    { label: "GitHub", url: "https://github.com/NabilLamb", color: "text-gray-300", bg: "bg-gray-900/80", icon: "github", desc: "View my code" },
-                    { label: "LinkedIn", url: "https://linkedin.com/in/nabil-lambattan", color: "text-blue-400", bg: "bg-blue-900/80", icon: "linkedin", desc: "Professional network" },
-                    { label: "Email", url: "mailto:lambattannabil2000@gmail.com", color: "text-red-400", bg: "bg-red-900/80", icon: "mail", desc: "Contact me" },
+                    { label: "GitHub", url: "https://github.com/NabilLamb", color: "text-gray-300", bg: "bg-gray-900/80", icon: "github", desc: t("ui.viewMyCode") || "View my code" },
+                    { label: "LinkedIn", url: "https://linkedin.com/in/nabil-lambattan", color: "text-blue-400", bg: "bg-blue-900/80", icon: "linkedin", desc: t("ui.professionalNetwork") || "Professional network" },
+                    { label: "Email", url: "mailto:lambattannabil2000@gmail.com", color: "text-red-400", bg: "bg-red-900/80", icon: "mail", desc: t("ui.contactMeDescription") || "Contact me" },
                   ].map((social, idx) => (
                     <a
                       key={idx}
@@ -249,14 +251,14 @@ const Footer = ({ data }: FooterProps) => {
                 <div className="flex items-center gap-2">
                   <Heart className="w-4 h-4 text-red-500 fill-red-500 animate-pulse" />
                   <p className="text-sm text-muted-foreground">
-                    © {currentYear} {data.copyrightName}. All rights reserved.
+                    © {currentYear} {data.copyrightName}. {t("ui.allRightsReserved") || "All rights reserved."}
                   </p>
                 </div>
 
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Code2 className="w-4 h-4" />
-                    <span>Built with</span>
+                    <span>{t("ui.builtWith") || "Built with"}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     {data.builtWithTechs.map((tech) => (
@@ -272,7 +274,7 @@ const Footer = ({ data }: FooterProps) => {
 
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Coffee className="w-4 h-4" />
-                  <span>Made with passion & lots of coffee</span>
+                  <span>{t("ui.madeWithCoffee") || "Made with passion & lots of coffee"}</span>
                 </div>
               </div>
             </div>

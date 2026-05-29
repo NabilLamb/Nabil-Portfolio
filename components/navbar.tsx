@@ -7,6 +7,8 @@ import { Menu, X, Moon, Sun, User } from "lucide-react"
 import Image from "next/image"
 import { useTheme } from "next-themes"
 import { useBinaryCanvas } from "@/hooks/useBinaryCanvas"
+import { useTranslation } from "react-i18next"
+import LanguageSwitcher from "./language-switcher"
 
 interface NavbarData {
   brandName?: string;
@@ -25,7 +27,9 @@ const Navbar = ({ data }: { data?: NavbarData }) => {
   const { theme, setTheme } = useTheme()
   const canvasRef = useBinaryCanvas({ color: "120, 119, 198", fontSize: 8, speed: 0.6, opacity: 0.1 })
 
-  const links = data?.links || [
+  const { t } = useTranslation()
+
+  const links = (t("navbar.links", { returnObjects: true }) as NavbarData["links"]) || [
     { id: "hero", label: "Home", icon: "🏠" },
     { id: "about", label: "About", icon: "👨‍💻" },
     { id: "experiences", label: "Experience", icon: "💼" },
@@ -111,9 +115,9 @@ const Navbar = ({ data }: { data?: NavbarData }) => {
               </div>
               <div className="hidden md:flex flex-col">
                 <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-                  {data?.brandName || "Nabil"}
+                  {t("navbar.brandName") || data?.brandName || "Nabil"}
                 </span>
-                <span className="text-xs text-muted-foreground font-mono">{data?.brandRole || "Frontend Developer"}</span>
+                <span className="text-xs text-muted-foreground font-mono">{t("navbar.brandRole") || data?.brandRole || "Frontend Developer"}</span>
               </div>
             </div>
 
@@ -147,6 +151,9 @@ const Navbar = ({ data }: { data?: NavbarData }) => {
 
             {/* Right Actions */}
             <div className="flex items-center gap-2">
+              {/* Language Switcher */}
+              <LanguageSwitcher />
+
               {/* Dark Mode Toggle */}
               <button
                 onClick={toggleDarkMode}
@@ -158,12 +165,12 @@ const Navbar = ({ data }: { data?: NavbarData }) => {
 
               {/* Download CV Button */}
               <a
-                href="/nabil_cv.pdf"
+                href={t("hero.cvLink") || "/nabil_cv.pdf"}
                 download="Nabil_Lambattan_CV.pdf"
                 className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30 text-purple-300 hover:text-foreground hover:border-purple-500/60 transition-all duration-300"
               >
                 <User size={16} />
-                <span className="text-sm font-medium">Download CV</span>
+                <span className="text-sm font-medium">{t("hero.ctaCV") || "Download CV"}</span>
               </a>
 
               {/* Mobile Menu Button */}
@@ -203,12 +210,12 @@ const Navbar = ({ data }: { data?: NavbarData }) => {
                 {/* Mobile Actions */}
                 <div className="pt-4 border-t border-white/10">
                   <a
-                    href="/nabil_cv.pdf"
+                    href={t("hero.cvLink") || "/nabil_cv.pdf"}
                     download="Nabil_Lambattan_CV.pdf"
                     className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300"
                   >
                     <User size={18} />
-                    Download CV
+                    {t("hero.ctaCV") || "Download CV"}
                   </a>
                 </div>
               </div>

@@ -1,0 +1,501 @@
+{
+  "hero": {
+    "name": "Nabil",
+    "title": "Développeur Frontend spécialisé en React, Next.js & TypeScript",
+    "subtitle": "Je conçois des applications web performantes, rapides et évolutives.",
+    "ctaHire": "Recrutez-moi",
+    "ctaCV": "Télécharger le CV",
+    "cvLink": "./nabil_cv.pdf",
+    "heroImageLink": "./hero.png",
+    "badgeText": "Développeur Frontend",
+    "techStack": [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Tailwind",
+      "Node.js",
+      "MongoDB",
+      "MySQL"
+    ],
+    "stats": [
+      {
+        "label": "Disponible pour travailler",
+        "icon": "status"
+      },
+      {
+        "label": "Rapide & Évolutif",
+        "icon": "bolt"
+      }
+    ]
+  },
+  "about": {
+    "title": "Profil Professionnel",
+    "description": "Développeur frontend basé au Maroc, spécialisé dans les applications web modernes. J'associe des pratiques de code propre à une résolution créative de problèmes pour proposer des solutions appréciées des utilisateurs. Passionné par l'optimisation des performances, l'accessibilité et la création de produits à fort impact.",
+    "avatar": "./about.jpg",
+    "sectionTitle": "À propos de moi",
+    "sectionSubtitle": "Découvrez le développeur derrière le code",
+    "journeyTitle": "Mon Parcours",
+    "techStackTitle": "Compétences Techniques",
+    "ctaTitle": "Construisons Quelque Chose d'Incroyable",
+    "ctaDescription": "Prêt à donner vie à vos idées grâce aux technologies modernes",
+    "techList": [
+      {
+        "name": "React / Next.js",
+        "icon": "code"
+      },
+      {
+        "name": "Node.js / Express",
+        "icon": "server"
+      },
+      {
+        "name": "MongoDB",
+        "icon": "database"
+      },
+      {
+        "name": "MySQL",
+        "icon": "database"
+      },
+      {
+        "name": "TypeScript",
+        "icon": "terminal"
+      },
+      {
+        "name": "Tailwind CSS",
+        "icon": "globe"
+      },
+      {
+        "name": "Git / GitHub",
+        "icon": "cpu"
+      }
+    ],
+    "stats": [
+      {
+        "label": "Années de Code",
+        "value": 2,
+        "suffix": "+"
+      },
+      {
+        "label": "Projets Réalisés",
+        "value": 6,
+        "suffix": "+"
+      },
+      {
+        "label": "Technologies",
+        "value": 10,
+        "suffix": "+"
+      }
+    ]
+  },
+  "experiences": {
+    "sectionTitle": "Expérience Professionnelle",
+    "sectionSubtitle": "Une chronologie de mon évolution professionnelle dans le secteur de la technologie",
+    "stats": [
+      {
+        "label": "Années de Code",
+        "value": "2+",
+        "icon": "clock"
+      },
+      {
+        "label": "Projets Réalisés",
+        "value": "6+",
+        "icon": "code2"
+      },
+      {
+        "label": "Technologies",
+        "value": "10+",
+        "icon": "cpu"
+      },
+      {
+        "label": "Engagement",
+        "value": "100%",
+        "icon": "sparkles"
+      }
+    ],
+    "ctaTitle": "Créons ensemble quelque chose d'exceptionnel",
+    "ctaDescription": "Je suis actuellement disponible pour des projets de développement frontend et de nouvelles opportunités.",
+    "ctaButtonPrimary": "Me recruter / Contact",
+    "ctaButtonSecondary": "Voir les Projets"
+  },
+  "technologies": {
+    "list": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "MySQL",
+      "Git",
+      "GitHub",
+      "Vercel"
+    ],
+    "sectionTitle": "Technologies & Outils",
+    "sectionSubtitle": "Les technologies que j'utilise pour concevoir des applications web modernes",
+    "stats": [
+      {
+        "label": "Frontend",
+        "value": 6,
+        "icon": "layout"
+      },
+      {
+        "label": "Backend & Base de données",
+        "value": 4,
+        "icon": "database"
+      },
+      {
+        "label": "DevOps & Outils",
+        "value": 3,
+        "icon": "shield"
+      },
+      {
+        "label": "Années d'Apprentissage",
+        "value": "2+",
+        "icon": "rocket"
+      }
+    ],
+    "learningText": "Actuellement : Patterns avancés TypeScript & tests"
+  },
+  "projects": {
+    "sectionTitle": "Projets Vedettes",
+    "sectionSubtitle": "Création de solutions avec des technologies modernes et les meilleures pratiques",
+    "stats": [
+      {
+        "label": "Total Projets",
+        "icon": "layers"
+      },
+      {
+        "label": "Open Source",
+        "icon": "github"
+      },
+      {
+        "label": "Démos en Direct",
+        "icon": "eye"
+      },
+      {
+        "label": "Vedettes",
+        "icon": "star"
+      }
+    ],
+    "viewAllButtonText": "Tout voir sur GitHub",
+    "emptyStateMessage": "Aucun projet ne correspond au filtre sélectionné.",
+    "resetFiltersButton": "Réinitialiser les filtres"
+  },
+  "projectsList": [
+    {
+      "title": "Butcher Shop",
+      "image": "/Butcher-shop.png",
+      "description": "Une plateforme e‑commerce moderne pour une boucherie avec catalogue de produits, panier et paiement.",
+      "technologies": [
+        "React",
+        "Next.js",
+        "Tailwind CSS",
+        "Node.js",
+        "MongoDB"
+      ],
+      "github": "https://github.com/NabilLamb/boucherie-D-or",
+      "demo": "https://boucherie-d-or.vercel.app/",
+      "featured": true
+    },
+    {
+      "title": "FitHub - Gym E‑commerce",
+      "image": "/FitHub.png",
+      "description": "E‑commerce d'équipements de sport avec filtrage de produits, panier d'achat et authentification des utilisateurs.",
+      "technologies": [
+        "React",
+        "Next.js",
+        "Tailwind CSS",
+        "MongoDB"
+      ],
+      "github": "https://github.com/NabilLamb/gym-e-commerce",
+      "demo": "https://gym-e-commerce-ten.vercel.app/",
+      "featured": true
+    },
+    {
+      "title": "Sales Dashboard",
+      "image": "/Dashboard.png",
+      "description": "Tableau de bord analytique pour e‑commerce avec graphiques en temps réel, suivi des ventes et gestion des utilisateurs.",
+      "technologies": [
+        "React",
+        "Next.js",
+        "Tailwind CSS",
+        "Recharts"
+      ],
+      "github": "https://github.com/NabilLamb/eCommerce-Dashboard",
+      "demo": "https://e-commerce-dashboard-azure-ten.vercel.app/",
+      "featured": false
+    }
+  ],
+  "testimonials": {
+    "sectionTitle": "Témoignages",
+    "sectionSubtitle": "Ce que les clients et collègues disent de leur collaboration avec moi",
+    "stats": [
+      {
+        "label": "Témoignages",
+        "value": 3,
+        "icon": "users"
+      },
+      {
+        "label": "Note Moyenne",
+        "value": "5/5",
+        "icon": "award"
+      },
+      {
+        "label": "Projets Réalisés",
+        "value": "6+",
+        "icon": "trending-up"
+      },
+      {
+        "label": "Livraison à Temps",
+        "value": "100%",
+        "icon": "heart"
+      }
+    ],
+    "ctaTitle": "Vous avez travaillé avec moi ?",
+    "ctaDescription": "J'aimerais beaucoup recevoir votre avis",
+    "ctaButtonText": "Partager Votre Avis",
+    "autoPlayText": "Lecture automatique",
+    "pausedText": "En pause"
+  },
+  "testimonialsList": [
+    {
+      "name": "Abdel El Ahmar",
+      "role": "Client",
+      "message": "Nabil a livré un excellent projet avec un design soigné, de superbes performances et une communication professionnelle tout au long du processus.",
+      "rating": 5
+    },
+    {
+      "name": "Karim Lemziani",
+      "role": "Client",
+      "message": "Travail professionnel, respect des délais et code de haute qualité. Hautement recommandé pour tout projet de développement full-stack.",
+      "rating": 5
+    },
+    {
+      "name": "Nawal Hinawi",
+      "role": "Client",
+      "message": "Excellente communication, solides compétences techniques et attention aux détails. Je retravaillerai sans hésiter avec Nabil.",
+      "rating": 5
+    }
+  ],
+  "contact": {
+    "email": "lambattannabil2000@gmail.com",
+    "phone": "+212 639281869",
+    "location": "Oujda, Maroc",
+    "sectionTitle": "Contactez-moi",
+    "sectionSubtitle": "Vous avez un projet en tête ? Parlons de la façon dont nous pouvons donner vie à vos idées",
+    "contactCards": [
+      {
+        "label": "Email",
+        "value": "lambattannabil2000@gmail.com",
+        "link": "mailto:lambattannabil2000@gmail.com",
+        "color": "text-red-400",
+        "bg": "bg-red-500/10"
+      },
+      {
+        "label": "Téléphone",
+        "value": "+212 639281869",
+        "link": "tel:+212639281869",
+        "color": "text-green-400",
+        "bg": "bg-green-500/10"
+      },
+      {
+        "label": "Localisation",
+        "value": "Oujda, Maroc",
+        "link": "#",
+        "color": "text-blue-400",
+        "bg": "bg-blue-500/10"
+      },
+      {
+        "label": "Temps de Réponse",
+        "value": "Sous 24 heures",
+        "link": "#",
+        "color": "text-purple-400",
+        "bg": "bg-purple-500/10"
+      }
+    ],
+    "socialLinks": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/NabilLamb",
+        "color": "text-gray-300",
+        "bg": "bg-gray-900/80",
+        "icon": "github"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://linkedin.com/in/nabil-lambattan",
+        "color": "text-blue-400",
+        "bg": "bg-blue-900/80",
+        "icon": "linkedin"
+      },
+      {
+        "label": "Email",
+        "url": "mailto:lambattannabil2000@gmail.com",
+        "color": "text-red-400",
+        "bg": "bg-red-900/80",
+        "icon": "mail"
+      }
+    ],
+    "availabilityText": "Actuellement Disponible",
+    "availabilitySubtext": "Pour de nouveaux projets & opportunités",
+    "formTitle": "Envoyez-moi un message",
+    "formNote": "Vos données sont sécurisées. Pas de spam, garanti.",
+    "quickContactTitle": "Vous préférez appeler ?",
+    "quickContactDescription": "Contactez-moi directement"
+  },
+  "navbar": {
+    "brandName": "Nabil",
+    "brandRole": "Développeur Frontend",
+    "links": [
+      {
+        "id": "hero",
+        "label": "Accueil",
+        "icon": "🏠"
+      },
+      {
+        "id": "about",
+        "label": "À propos",
+        "icon": "👨‍💻"
+      },
+      {
+        "id": "experiences",
+        "label": "Expérience",
+        "icon": "💼"
+      },
+      {
+        "id": "technologies",
+        "label": "Compétences",
+        "icon": "⚡"
+      },
+      {
+        "id": "projects",
+        "label": "Projets",
+        "icon": "🚀"
+      },
+      {
+        "id": "feedbacks",
+        "label": "Témoignages",
+        "icon": "⭐"
+      },
+      {
+        "id": "contact",
+        "label": "Contact",
+        "icon": "📧"
+      }
+    ]
+  },
+  "footer": {
+    "brandName": "Nabil",
+    "brandRole": "Développeur Frontend",
+    "description": "Création d'expériences web modernes avec React et Next.js.",
+    "quickLinks": [
+      {
+        "label": "Accueil",
+        "href": "#hero",
+        "icon": "🏠"
+      },
+      {
+        "label": "À propos",
+        "href": "#about",
+        "icon": "👨‍💻"
+      },
+      {
+        "label": "Expérience",
+        "href": "#experiences",
+        "icon": "💼"
+      },
+      {
+        "label": "Projets",
+        "href": "#projects",
+        "icon": "🚀"
+      },
+      {
+        "label": "Compétences",
+        "href": "#technologies",
+        "icon": "⚡"
+      },
+      {
+        "label": "Témoignages",
+        "href": "#feedbacks",
+        "icon": "⭐"
+      },
+      {
+        "label": "Contact",
+        "href": "#contact",
+        "icon": "📧"
+      }
+    ],
+    "techStack": [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Node.js",
+      "Tailwind"
+    ],
+    "learningText": "Actuellement en cours d'apprentissage : Patterns avancés TypeScript & tests",
+    "builtWithTechs": [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Tailwind"
+    ],
+    "copyrightName": "Nabil Lambattan"
+  },
+  "ui": {
+    "hello": "Salut, je suis",
+    "explore": "Explorer mon travail",
+    "techStack": "Tech Stack :",
+    "clientLove": "Avis Clients",
+    "all": "Tous",
+    "complexity": {
+      "basic": "Débutant",
+      "intermediate": "Intermédiaire",
+      "advanced": "Avancé"
+    },
+    "noProjects": "Aucun projet trouvé",
+    "viewCode": "Voir le Code",
+    "liveDemo": "Démo en Direct",
+    "featured": "Vedette",
+    "livePreview": "Aperçu en Direct",
+    "quickView": "Aperçu Rapide",
+    "code": "Code",
+    "showingProjects": "Affichage de {{count}} sur {{total}} projets",
+    "loading": "Chargement...",
+    "errorLoading": "Erreur lors du chargement du portfolio",
+    "preferCall": "Vous préférez appeler ?",
+    "reachDirectly": "Contactez-moi directement",
+    "form": {
+      "name": "Votre Nom",
+      "email": "Adresse Email",
+      "subject": "Sujet",
+      "message": "Votre Message",
+      "placeholderName": "John Doe",
+      "placeholderEmail": "john@exemple.com",
+      "placeholderSubject": "Demande de projet",
+      "placeholderMessage": "Parlez-moi de votre projet, de vos délais et de votre budget...",
+      "sending": "Envoi...",
+      "sendMessage": "Envoyer le Message",
+      "successTitle": "Message envoyé avec succès !",
+      "successDesc": "Je vous répondrai sous 24 heures.",
+      "errorTitle": "Une erreur est survenue",
+      "errorDesc": "Veuillez essayer de m'envoyer un e-mail directement à"
+    },
+    "alwaysLearning": "Toujours en Apprentissage",
+    "collaborate": "Prêt à collaborer ?",
+    "timeline": "Parcours professionnel",
+    "connectOnline": "Réseaux Sociaux",
+    "terminalPrompt": "nabil@portfolio:~$",
+    "backToTop": "Retour en haut",
+    "navigation": "Navigation",
+    "currentlyLearning": "En cours d'apprentissage",
+    "viewMyCode": "Voir mon code",
+    "professionalNetwork": "Réseau professionnel",
+    "contactMeDescription": "Me contacter",
+    "allRightsReserved": "Tous droits réservés.",
+    "builtWith": "Développé avec",
+    "madeWithCoffee": "Fait avec passion & beaucoup de café"
+  }
+}

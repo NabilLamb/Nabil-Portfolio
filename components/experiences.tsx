@@ -18,6 +18,7 @@ import {
   Mail,
 } from "lucide-react"
 import { useBinaryCanvas } from "@/hooks/useBinaryCanvas"
+import { useTranslation } from "react-i18next"
 
 interface Experience {
   role: string
@@ -42,6 +43,7 @@ interface ExperiencesProps {
 }
 
 const Experiences = ({ experiences, content }: ExperiencesProps) => {
+  const { t } = useTranslation()
   const [isVisible, setIsVisible] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
   const ref = useRef<HTMLDivElement>(null)
@@ -116,7 +118,7 @@ const Experiences = ({ experiences, content }: ExperiencesProps) => {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-cyan-500/10 border border-purple-500/20 mb-6">
             <TrendingUp className="w-4 h-4 text-purple-400" />
-            <span className="text-sm font-mono text-cyan-300">Career Journey</span>
+            <span className="text-sm font-mono text-cyan-300">{t("ui.timeline") || "Career Journey"}</span>
           </div>
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
             <span className="bg-gradient-to-r from-purple-400 via-violet-400 to-cyan-400 bg-clip-text text-transparent">
@@ -169,7 +171,7 @@ const Experiences = ({ experiences, content }: ExperiencesProps) => {
                 <div className="inline-flex items-center gap-2 mb-4">
                   <Briefcase size={20} className="text-cyan-400" />
                   <span className="text-sm font-semibold uppercase tracking-widest text-cyan-400">
-                    Ready to collaborate?
+                    {t("ui.collaborate") || "Ready to collaborate?"}
                   </span>
                 </div>
                 <h2 className="text-3xl md:text-4xl font-extrabold mb-4">

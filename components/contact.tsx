@@ -20,6 +20,7 @@ import {
   AlertCircle,
 } from "lucide-react"
 import { useBinaryCanvas } from "@/hooks/useBinaryCanvas"
+import { useTranslation } from "react-i18next"
 
 interface ContactProps {
   data: {
@@ -52,6 +53,7 @@ interface ContactProps {
 }
 
 const Contact = ({ data }: ContactProps) => {
+  const { t } = useTranslation()
   const [isVisible, setIsVisible] = useState(false)
   const [formData, setFormData] = useState({ name: "", email: "", message: "", subject: "" })
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -61,6 +63,19 @@ const Contact = ({ data }: ContactProps) => {
   const ref = useRef<HTMLDivElement>(null)
   const formRef = useRef<HTMLFormElement>(null)
   const canvasRef = useBinaryCanvas({ color: "0, 255, 200", fontSize: 12, speed: 0.8, opacity: 0.1 })
+
+  const getCardIcon = (label: string) => {
+    const l = label.toLowerCase()
+    if (l.includes("email") || l.includes("mail")) return Mail
+    if (l.includes("phone") || l.includes("téléphone") || l.includes("telephone")) return Phone
+    if (l.includes("location") || l.includes("localisation")) return MapPin
+    return Clock
+  }
+
+  const isCardInteractive = (label: string) => {
+    const l = label.toLowerCase()
+    return !(l.includes("location") || l.includes("localisation") || l.includes("time") || l.includes("temps"))
+  }
 
   const socialIcons: Record<string, any> = {
     github: <Github size={20} />,
@@ -152,7 +167,7 @@ const Contact = ({ data }: ContactProps) => {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 border border-emerald-500/20 mb-6">
             <MessageSquare className="w-4 h-4 text-emerald-400" />
-            <span className="text-sm font-mono text-emerald-300">Let's Connect</span>
+            <span className="text-sm font-mono text-emerald-300">{t("ui.connectOnline") || "Let's Connect"}</span>
           </div>
 
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
@@ -173,12 +188,12 @@ const Contact = ({ data }: ContactProps) => {
           >
             <div className="space-y-6">
               {data.contactCards.map((item, idx) => {
-                const Icon = item.label === "Email" ? Mail : item.label === "Phone" ? Phone : item.label === "Location" ? MapPin : Clock
+                const Icon = getCardIcon(item.label)
                 return (
                   <a
                     key={idx}
                     href={item.link}
-                    onClick={(e) => (item.label === "Location" || item.label === "Response Time") && e.preventDefault()}
+                    onClick={(e) => !isCardInteractive(item.label) && e.preventDefault()}
                     className={`group block p-4 rounded-xl ${item.bg} backdrop-blur-sm border border-white/10 hover:border-${item.color.split("-")[1]}-500/30 transition-all duration-300 hover:scale-105 cursor-pointer`}
                   >
                     <div className="flex items-center gap-4">
@@ -203,7 +218,7 @@ const Contact = ({ data }: ContactProps) => {
               <div className="p-5 rounded-xl backdrop-blur-sm" style={{ background: 'var(--glass-bg)', borderWidth: '1px', borderStyle: 'solid', borderColor: 'var(--glass-border)' }}>
                 <h3 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
                   <Globe className="w-5 h-5 text-cyan-400" />
-                  Connect Online
+                  {t("ui.connectOnline") || "Connect Online"}
                 </h3>
                 <div className="flex flex-wrap gap-3">
                   {data.socialLinks.map((social, idx) => (
@@ -256,8 +271,8 @@ const Contact = ({ data }: ContactProps) => {
                   <div className="flex items-center gap-3">
                     <CheckCircle className="w-6 h-6 text-emerald-400" />
                     <div>
-                      <p className="font-medium text-foreground">Message Sent Successfully!</p>
-                      <p className="text-sm text-muted-foreground">I'll get back to you within 24 hours.</p>
+                      <p className="font-medium text-foreground">{t("ui.form.successTitle") || "Message Sent Successfully!"}</p>
+                      <p className="text-sm text-muted-foreground">{t("ui.form.successDesc") || "I'll get back to you within 24 hours."}</p>
                     </div>
                   </div>
                 </div>
@@ -269,9 +284,9 @@ const Contact = ({ data }: ContactProps) => {
                   <div className="flex items-center gap-3">
                     <AlertCircle className="w-6 h-6 text-red-400" />
                     <div>
-                      <p className="font-medium text-red-300">Something went wrong</p>
+                      <p className="font-medium text-red-300">{t("ui.form.errorTitle") || "Something went wrong"}</p>
                       <p className="text-sm text-red-200/80">
-                        Please try emailing me directly at{" "}
+                        {t("ui.form.errorDesc") || "Please try emailing me directly at"}{" "}
                         <a href="mailto:lambattannabil2000@gmail.com" className="underline hover:text-red-300 transition-colors">
                           lambattannabil2000@gmail.com
                         </a>
@@ -295,7 +310,7 @@ const Contact = ({ data }: ContactProps) => {
                     <div className="space-y-2">
                       <label className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
                         <User className="w-4 h-4" />
-                        Your Name
+                        {t("ui.form.name") || "Your Name"}
                       </label>
                       <div className="relative">
                         <input
@@ -306,7 +321,7 @@ const Contact = ({ data }: ContactProps) => {
                           onFocus={() => setActiveField("name")}
                           onBlur={() => setActiveField(null)}
                           required
-                          placeholder="John Doe"
+                          placeholder={t("ui.form.placeholderName") || "John Doe"}
                           className={`w-full px-4 py-3 rounded-lg bg-white/50 dark:bg-white/5 border ${
                             activeField === "name" ? "border-emerald-500/50 ring-2 ring-emerald-500/20" : "border-black/10 dark:border-white/10"
                           } text-foreground placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none transition-all duration-300`}
@@ -321,7 +336,7 @@ const Contact = ({ data }: ContactProps) => {
                     <div className="space-y-2">
                       <label className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
                         <MailCheck className="w-4 h-4" />
-                        Email Address
+                        {t("ui.form.email") || "Email Address"}
                       </label>
                       <div className="relative">
                         <input
@@ -332,7 +347,7 @@ const Contact = ({ data }: ContactProps) => {
                           onFocus={() => setActiveField("email")}
                           onBlur={() => setActiveField(null)}
                           required
-                          placeholder="john@example.com"
+                          placeholder={t("ui.form.placeholderEmail") || "john@example.com"}
                           className={`w-full px-4 py-3 rounded-lg bg-white/50 dark:bg-white/5 border ${
                             activeField === "email" ? "border-emerald-500/50 ring-2 ring-emerald-500/20" : "border-black/10 dark:border-white/10"
                           } text-foreground placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none transition-all duration-300`}
@@ -348,7 +363,7 @@ const Contact = ({ data }: ContactProps) => {
                   <div className="space-y-2 mb-6">
                     <label className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
                       <Paperclip className="w-4 h-4" />
-                      Subject
+                      {t("ui.form.subject") || "Subject"}
                     </label>
                     <input
                       type="text"
@@ -358,7 +373,7 @@ const Contact = ({ data }: ContactProps) => {
                       onFocus={() => setActiveField("subject")}
                       onBlur={() => setActiveField(null)}
                       required
-                      placeholder="Project Inquiry"
+                      placeholder={t("ui.form.placeholderSubject") || "Project Inquiry"}
                       className={`w-full px-4 py-3 rounded-lg bg-white/50 dark:bg-white/5 border ${
                         activeField === "subject" ? "border-emerald-500/50 ring-2 ring-emerald-500/20" : "border-black/10 dark:border-white/10"
                       } text-foreground placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none transition-all duration-300`}
@@ -369,7 +384,7 @@ const Contact = ({ data }: ContactProps) => {
                   <div className="space-y-2 mb-8">
                     <label className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
                       <MessageSquare className="w-4 h-4" />
-                      Your Message
+                      {t("ui.form.message") || "Your Message"}
                     </label>
                     <div className="relative">
                       <textarea
@@ -380,7 +395,7 @@ const Contact = ({ data }: ContactProps) => {
                         onBlur={() => setActiveField(null)}
                         required
                         rows={6}
-                        placeholder="Tell me about your project, timeline, and budget..."
+                        placeholder={t("ui.form.placeholderMessage") || "Tell me about your project, timeline, and budget..."}
                         className={`w-full px-4 py-3 rounded-lg bg-white/50 dark:bg-white/5 border ${
                           activeField === "message" ? "border-emerald-500/50 ring-2 ring-emerald-500/20" : "border-black/10 dark:border-white/10"
                         } text-foreground placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none resize-none transition-all duration-300`}
@@ -401,12 +416,12 @@ const Contact = ({ data }: ContactProps) => {
                       {isSubmitting ? (
                         <>
                           <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                          Sending...
+                          {t("ui.form.sending") || "Sending..."}
                         </>
                       ) : (
                         <>
                           <Send className="w-5 h-5" />
-                          Send Message
+                          {t("ui.form.sendMessage") || "Send Message"}
                         </>
                       )}
                     </span>
@@ -429,8 +444,8 @@ const Contact = ({ data }: ContactProps) => {
                     <Phone className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-foreground">{data.quickContactTitle}</p>
-                    <p className="text-xs text-muted-foreground">{data.quickContactDescription}</p>
+                    <p className="text-sm font-medium text-foreground">{t("ui.preferCall") || data.quickContactTitle}</p>
+                    <p className="text-xs text-muted-foreground">{t("ui.reachDirectly") || data.quickContactDescription}</p>
                   </div>
                 </div>
                 <a

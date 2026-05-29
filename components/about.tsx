@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { Code2, Cpu, Zap, Sparkles, Globe, Server, Database, Terminal } from "lucide-react"
 import Image from "next/image"
 import { useBinaryCanvas } from "@/hooks/useBinaryCanvas"
+import { useTranslation } from "react-i18next"
 
 interface AboutProps {
   data: {
@@ -22,6 +23,7 @@ interface AboutProps {
 }
 
 const About = ({ data }: AboutProps) => {
+  const { t } = useTranslation()
   const [isVisible, setIsVisible] = useState(false)
   const [counters, setCounters] = useState({ experience: 0, projects: 0, technologies: 0 })
   const ref = useRef<HTMLDivElement>(null)
@@ -137,7 +139,7 @@ const About = ({ data }: AboutProps) => {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                      <code className="text-xs font-mono text-cyan-300">nabil@portfolio:~$</code>
+                      <code className="text-xs font-mono text-cyan-300">{t("ui.terminalPrompt") || "nabil@portfolio:~$"}</code>
                     </div>
                     <Zap className="w-4 h-4 text-yellow-500" />
                   </div>

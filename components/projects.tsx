@@ -15,6 +15,7 @@ import {
 } from "lucide-react"
 import Image from "next/image"
 import { useBinaryCanvas } from "@/hooks/useBinaryCanvas"
+import { useTranslation } from "react-i18next"
 
 interface Project {
   title: string
@@ -39,6 +40,7 @@ interface ProjectsProps {
 }
 
 const Projects = ({ data, content }: ProjectsProps) => {
+  const { t } = useTranslation()
   const [isVisible, setIsVisible] = useState(false)
   const [activeFilter, setActiveFilter] = useState("All")
   const [hoveredProject, setHoveredProject] = useState<string | null>(null)
@@ -73,9 +75,9 @@ const Projects = ({ data, content }: ProjectsProps) => {
   }, [])
 
   const getComplexityLevel = (techCount: number) => {
-    if (techCount > 8) return { level: "Advanced", color: "text-red-400", bg: "bg-red-500/10" }
-    if (techCount > 5) return { level: "Intermediate", color: "text-yellow-400", bg: "bg-yellow-500/10" }
-    return { level: "Basic", color: "text-green-400", bg: "bg-green-500/10" }
+    if (techCount > 8) return { level: t("ui.complexity.advanced") || "Advanced", color: "text-red-400", bg: "bg-red-500/10" }
+    if (techCount > 5) return { level: t("ui.complexity.intermediate") || "Intermediate", color: "text-yellow-400", bg: "bg-yellow-500/10" }
+    return { level: t("ui.complexity.basic") || "Basic", color: "text-green-400", bg: "bg-green-500/10" }
   }
 
   const iconMap: Record<string, any> = {
@@ -178,7 +180,7 @@ const Projects = ({ data, content }: ProjectsProps) => {
                 }`}
                 style={activeFilter !== tech ? { background: 'var(--glass-bg)', borderColor: 'var(--glass-border)' } : {}}
               >
-                {tech}
+                {tech === "All" ? (t("ui.all") || "All") : tech}
                 {activeFilter === tech && (
                   <span className="ml-2 inline-block w-2 h-2 bg-white rounded-full animate-pulse"></span>
                 )}
@@ -207,7 +209,7 @@ const Projects = ({ data, content }: ProjectsProps) => {
                     <div className="relative">
                       <div className="px-3 py-1 rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-xs font-bold flex items-center gap-1">
                         <Star size={10} />
-                        <span>Featured</span>
+                        <span>{t("ui.featured") || "Featured"}</span>
                       </div>
                       <div className="absolute inset-0 rounded-full bg-yellow-500 animate-ping opacity-20"></div>
                     </div>
@@ -229,8 +231,8 @@ const Projects = ({ data, content }: ProjectsProps) => {
                     <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                       <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                          <span className="text-xs text-white">Live Preview</span>
+                           <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                           <span className="text-xs text-white">{t("ui.livePreview") || "Live Preview"}</span>
                         </div>
                         <div className={`px-2 py-1 text-xs rounded-full ${complexity.bg} ${complexity.color}`}>
                           {complexity.level}
@@ -240,7 +242,7 @@ const Projects = ({ data, content }: ProjectsProps) => {
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                       <div className="px-4 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium text-sm backdrop-blur-sm flex items-center gap-2">
                         <Eye size={16} />
-                        <span>Quick View</span>
+                        <span>{t("ui.quickView") || "Quick View"}</span>
                       </div>
                     </div>
                   </div>
@@ -285,8 +287,8 @@ const Projects = ({ data, content }: ProjectsProps) => {
                         onClick={(e) => e.stopPropagation()}
                         className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-muted-foreground hover:text-foreground transition-all duration-300 group/link" style={{ background: 'var(--glass-bg)' }}
                       >
-                        <Github size={16} />
-                        <span className="text-sm">Code</span>
+                         <Github size={16} />
+                         <span className="text-sm">{t("ui.code") || "Code"}</span>
                         <ExternalLink className="w-3 h-3 opacity-0 group-hover/link:opacity-100 transition-opacity duration-300" />
                       </a>
                       <a
@@ -296,8 +298,8 @@ const Projects = ({ data, content }: ProjectsProps) => {
                         onClick={(e) => e.stopPropagation()}
                         className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-purple-500/20 to-pink-500/20 hover:from-purple-500/30 hover:to-pink-500/30 text-purple-300 hover:text-foreground transition-all duration-300 group/link"
                       >
-                        <Eye size={16} />
-                        <span className="text-sm">Live Demo</span>
+                         <Eye size={16} />
+                         <span className="text-sm">{t("ui.liveDemo") || "Live Demo"}</span>
                         <ExternalLink className="w-3 h-3 opacity-0 group-hover/link:opacity-100 transition-opacity duration-300" />
                       </a>
                     </div>
@@ -318,9 +320,9 @@ const Projects = ({ data, content }: ProjectsProps) => {
             <div className="inline-flex flex-col items-center gap-6">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <div className="w-12 h-0.5 bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
-                <span>
-                  Showing {filteredProjects.length} of {data.length} projects
-                </span>
+                 <span>
+                   {t("ui.showingProjects", { count: filteredProjects.length, total: data.length }) || `Showing ${filteredProjects.length} of ${data.length} projects`}
+                 </span>
                 <div className="w-12 h-0.5 bg-gradient-to-r from-transparent via-pink-500 to-transparent"></div>
               </div>
               <a
@@ -349,7 +351,7 @@ const Projects = ({ data, content }: ProjectsProps) => {
                 <Code2 className="w-10 h-10 text-purple-400" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-foreground mb-2">No Projects Found</h3>
+                 <h3 className="text-xl font-bold text-foreground mb-2">{t("ui.noProjects") || "No Projects Found"}</h3>
                 <p className="text-muted-foreground">{content.emptyStateMessage}</p>
               </div>
               <button
@@ -407,8 +409,8 @@ const Projects = ({ data, content }: ProjectsProps) => {
                   rel="noopener noreferrer"
                   className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-foreground hover:opacity-80 transition-all duration-300" style={{ background: 'var(--glass-bg)', borderWidth: '1px', borderStyle: 'solid', borderColor: 'var(--glass-border)' }}
                 >
-                  <Github size={18} />
-                  View Code
+                   <Github size={18} />
+                   {t("ui.viewCode") || "View Code"}
                 </a>
                 <a
                   href={selectedProject.demo}
@@ -416,8 +418,8 @@ const Projects = ({ data, content }: ProjectsProps) => {
                   rel="noopener noreferrer"
                   className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300"
                 >
-                  <Eye size={18} />
-                  Live Demo
+                   <Eye size={18} />
+                   {t("ui.liveDemo") || "Live Demo"}
                 </a>
               </div>
             </div>

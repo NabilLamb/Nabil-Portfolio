@@ -21,6 +21,7 @@ import {
   Triangle,
 } from "lucide-react"
 import { useBinaryCanvas } from "@/hooks/useBinaryCanvas"
+import { useTranslation } from "react-i18next"
 
 interface TechnologiesProps {
   data: string[]
@@ -52,6 +53,7 @@ const techIcons: Record<string, { icon: React.ReactNode; category: string; color
 }
 
 const Technologies = ({ data, content }: TechnologiesProps) => {
+  const { t } = useTranslation()
   const [isVisible, setIsVisible] = useState(false)
   const [hoveredTech, setHoveredTech] = useState<string | null>(null)
   const [activeCategory, setActiveCategory] = useState<string>("All")
@@ -116,7 +118,7 @@ const Technologies = ({ data, content }: TechnologiesProps) => {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 mb-6">
             <Cpu className="w-4 h-4 text-cyan-400" />
-            <span className="text-sm font-mono text-cyan-300">Tech Stack</span>
+            <span className="text-sm font-mono text-cyan-300">{t("ui.techStack") || "Tech Stack"}</span>
           </div>
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
             <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
@@ -144,7 +146,7 @@ const Technologies = ({ data, content }: TechnologiesProps) => {
                 }`}
                 style={activeCategory !== category ? { background: 'var(--glass-bg)', borderColor: 'var(--glass-border)' } : {}}
               >
-                {category}
+                {category === "All" ? (t("ui.all") || "All") : category}
                 {activeCategory === category && (
                   <span className="ml-2 inline-block w-2 h-2 bg-white rounded-full animate-pulse"></span>
                 )}
@@ -233,7 +235,7 @@ const Technologies = ({ data, content }: TechnologiesProps) => {
                   <Zap className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-foreground mb-1">Always Learning</h3>
+                  <h3 className="text-xl font-bold text-foreground mb-1">{t("ui.alwaysLearning") || "Always Learning"}</h3>
                   <p className="text-sm text-muted-foreground">{content.learningText}</p>
                 </div>
               </div>

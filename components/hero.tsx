@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { ArrowDown, Download, Mail } from "lucide-react"
 import Image from "next/image"
 import { useBinaryCanvas } from "@/hooks/useBinaryCanvas"
+import { useTranslation } from "react-i18next"
 
 interface HeroProps {
   data: {
@@ -23,6 +24,7 @@ interface HeroProps {
 import type { FC } from "react"
 
 const Hero: FC<HeroProps> = ({ data }) => {
+  const { t } = useTranslation()
   const [isVisible, setIsVisible] = useState(false)
   const canvasRef = useBinaryCanvas({ color: "0, 255, 255", fontSize: 14, speed: 1.5, opacity: 0.2 })
 
@@ -64,7 +66,7 @@ const Hero: FC<HeroProps> = ({ data }) => {
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 text-pretty leading-tight text-foreground">
-              Hi, I'm{" "}
+              {t("ui.hello") || "Hi, I'm"}{" "}
               <span className="bg-gradient-to-r from-neon-purple via-neon-blue to-neon-cyan bg-clip-text text-transparent animate-gradient bg-[length:200%_auto]">
                 {data.name}
               </span>
@@ -114,7 +116,7 @@ const Hero: FC<HeroProps> = ({ data }) => {
             </div>
 
             <div className="mb-12">
-              <p className="text-sm text-muted-foreground mb-3">Tech Stack:</p>
+              <p className="text-sm text-muted-foreground mb-3">{t("ui.techStack") || "Tech Stack:"}</p>
               <div className="flex flex-wrap gap-2">
                 {data.techStack.map((tech) => (
                   <span
@@ -132,7 +134,7 @@ const Hero: FC<HeroProps> = ({ data }) => {
               className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-all duration-300 group"
             >
               <span className="group-hover:text-neon-cyan group-hover:translate-x-1 transition-all duration-300">
-                Explore my work
+                {t("ui.explore") || "Explore my work"}
               </span>
               <ArrowDown
                 size={18}

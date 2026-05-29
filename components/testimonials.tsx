@@ -14,6 +14,7 @@ import {
   MessageCircle,
 } from "lucide-react"
 import { useBinaryCanvas } from "@/hooks/useBinaryCanvas"
+import { useTranslation } from "react-i18next"
 
 interface Testimonial {
   name: string
@@ -38,6 +39,7 @@ interface TestimonialsProps {
 }
 
 const Testimonials = ({ data, content }: TestimonialsProps) => {
+  const { t } = useTranslation()
   const [isVisible, setIsVisible] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
   const [autoPlay, setAutoPlay] = useState(true)
@@ -150,7 +152,7 @@ const Testimonials = ({ data, content }: TestimonialsProps) => {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 mb-6">
             <Heart className="w-4 h-4 text-yellow-400" />
-            <span className="text-sm font-mono text-yellow-300">Client Love</span>
+            <span className="text-sm font-mono text-yellow-300">{t("ui.clientLove") || "Client Love"}</span>
           </div>
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
             <span className="bg-gradient-to-r from-yellow-400 via-orange-400 to-amber-400 bg-clip-text text-transparent">
