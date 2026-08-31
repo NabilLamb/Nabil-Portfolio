@@ -34,7 +34,9 @@ interface FooterProps {
 }
 
 const Footer = ({ data }: FooterProps) => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const cvFile = i18n.language === "fr" ? "/nabil_cv_fr.pdf" : "/nabil_cv_en.pdf"
+  const cvFilename = i18n.language === "fr" ? "Nabil_Lambattan_CV_FR.pdf" : "Nabil_Lambattan_CV_EN.pdf"
   const currentYear = new Date().getFullYear()
   const [isVisible, setIsVisible] = useState(false)
   const [hoveredLink, setHoveredLink] = useState<string | null>(null)
@@ -137,8 +139,8 @@ const Footer = ({ data }: FooterProps) => {
                   <p className="text-muted-foreground mb-6">{data.description}</p>
 
                   <a
-                    href="/nabil_cv.pdf"
-                    download="Nabil_Lambattan_CV.pdf"
+                    href={cvFile}
+                    download={cvFilename}
                     className="group relative w-full px-4 py-3 rounded-lg bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 flex items-center justify-center gap-2 text-purple-300 hover:text-foreground"
                   >
                     <FileText size={16} />

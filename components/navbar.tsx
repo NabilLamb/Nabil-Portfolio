@@ -27,7 +27,9 @@ const Navbar = ({ data }: { data?: NavbarData }) => {
   const { theme, setTheme } = useTheme()
   const canvasRef = useBinaryCanvas({ color: "120, 119, 198", fontSize: 8, speed: 0.6, opacity: 0.1 })
 
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const cvFile = i18n.language === "fr" ? "/nabil_cv_fr.pdf" : "/nabil_cv_en.pdf"
+  const cvFilename = i18n.language === "fr" ? "Nabil_Lambattan_CV_FR.pdf" : "Nabil_Lambattan_CV_EN.pdf"
 
   const links = (t("navbar.links", { returnObjects: true }) as NavbarData["links"]) || [
     { id: "hero", label: "Home", icon: "🏠" },
@@ -129,7 +131,7 @@ const Navbar = ({ data }: { data?: NavbarData }) => {
                   onClick={() => scrollToSection(link.id)}
                   aria-label={`Navigate to ${link.label}`}
                   aria-current={activeSection === link.label ? "page" : undefined}
-                  className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 group ${
+                  className={`relative cursor-pointer px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 group ${
                     activeSection === link.label
                       ? "text-foreground bg-purple-500/20"
                       : "text-muted-foreground hover:text-foreground hover:bg-white/5"
@@ -158,16 +160,16 @@ const Navbar = ({ data }: { data?: NavbarData }) => {
               <button
                 onClick={toggleDarkMode}
                 aria-label="Toggle dark mode"
-                className="p-2 rounded-lg border text-muted-foreground hover:text-foreground hover:border-purple-500/30 transition-all duration-300" style={{ background: 'var(--glass-bg)', borderColor: 'var(--glass-border)' }}
+                className="cursor-pointer p-2 rounded-lg border text-muted-foreground hover:text-foreground hover:border-purple-500/30 transition-all duration-300" style={{ background: 'var(--glass-bg)', borderColor: 'var(--glass-border)' }}
               >
                 {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
               </button>
 
               {/* Download CV Button */}
               <a
-                href={t("hero.cvLink") || "/nabil_cv.pdf"}
-                download="Nabil_Lambattan_CV.pdf"
-                className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30 text-purple-300 hover:text-foreground hover:border-purple-500/60 transition-all duration-300"
+                href={cvFile}
+                download={cvFilename}
+                className="cursor-pointer hidden md:flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30 text-purple-300 hover:text-foreground hover:border-purple-500/60 transition-all duration-300"
               >
                 <User size={16} />
                 <span className="text-sm font-medium">{t("hero.ctaCV") || "Download CV"}</span>
@@ -178,7 +180,7 @@ const Navbar = ({ data }: { data?: NavbarData }) => {
                 onClick={() => setIsOpen(!isOpen)}
                 aria-label="Toggle mobile menu"
                 aria-expanded={isOpen}
-                className="md:hidden p-2 rounded-lg border text-purple-400 hover:text-foreground hover:border-purple-500/30 transition-all duration-300" style={{ background: 'var(--glass-bg)', borderColor: 'var(--glass-border)' }}
+                className="cursor-pointer md:hidden p-2 rounded-lg border text-purple-400 hover:text-foreground hover:border-purple-500/30 transition-all duration-300" style={{ background: 'var(--glass-bg)', borderColor: 'var(--glass-border)' }}
               >
                 {isOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
@@ -193,7 +195,7 @@ const Navbar = ({ data }: { data?: NavbarData }) => {
                   <button
                     key={link.id}
                     onClick={() => scrollToSection(link.id)}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 ${
+                    className={`cursor-pointer w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 ${
                       activeSection === link.label
                         ? "bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30"
                         : "hover:bg-white/5 border border-transparent"
@@ -210,9 +212,9 @@ const Navbar = ({ data }: { data?: NavbarData }) => {
                 {/* Mobile Actions */}
                 <div className="pt-4 border-t border-white/10">
                   <a
-                    href={t("hero.cvLink") || "/nabil_cv.pdf"}
-                    download="Nabil_Lambattan_CV.pdf"
-                    className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300"
+                    href={cvFile}
+                    download={cvFilename}
+                    className="cursor-pointer w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300"
                   >
                     <User size={18} />
                     {t("hero.ctaCV") || "Download CV"}

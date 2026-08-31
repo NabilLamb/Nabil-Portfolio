@@ -1,36 +1,48 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { ArrowDown, Download, Mail } from "lucide-react"
-import Image from "next/image"
-import { useBinaryCanvas } from "@/hooks/useBinaryCanvas"
-import { useTranslation } from "react-i18next"
+import { useEffect, useState } from "react";
+import { ArrowDown, Download, Mail } from "lucide-react";
+import Image from "next/image";
+import { useBinaryCanvas } from "@/hooks/useBinaryCanvas";
+import { useTranslation } from "react-i18next";
+import { isValidImageSrc } from "@/lib/utils";
 
 interface HeroProps {
   data: {
-    name: string
-    title: string
-    subtitle: string
-    ctaHire: string
-    ctaCV: string
-    heroImageLink: string
-    cvLink: string
-    badgeText: string
-    techStack: string[]
-    stats: Array<{ label: string; icon: string }>
-  }
+    name: string;
+    title: string;
+    subtitle: string;
+    ctaHire: string;
+    ctaCV: string;
+    heroImageLink: string;
+    cvLink: string;
+    badgeText: string;
+    techStack: string[];
+    stats: Array<{ label: string; icon: string }>;
+  };
 }
 
-import type { FC } from "react"
+import type { FC } from "react";
 
 const Hero: FC<HeroProps> = ({ data }) => {
-  const { t } = useTranslation()
-  const [isVisible, setIsVisible] = useState(false)
-  const canvasRef = useBinaryCanvas({ color: "0, 255, 255", fontSize: 14, speed: 1.5, opacity: 0.2 })
+  const { t, i18n } = useTranslation();
+  const cvFile =
+    i18n.language === "fr" ? "/nabil_cv_fr.pdf" : "/nabil_cv_en.pdf";
+  const cvFilename =
+    i18n.language === "fr"
+      ? "Nabil_Lambattan_CV_FR.pdf"
+      : "Nabil_Lambattan_CV_EN.pdf";
+  const [isVisible, setIsVisible] = useState(false);
+  const canvasRef = useBinaryCanvas({
+    color: "0, 255, 255",
+    fontSize: 14,
+    speed: 1.5,
+    opacity: 0.2,
+  });
 
   useEffect(() => {
-    setIsVisible(true)
-  }, [])
+    setIsVisible(true);
+  }, []);
 
   return (
     <section
@@ -40,7 +52,11 @@ const Hero: FC<HeroProps> = ({ data }) => {
       <canvas
         ref={canvasRef}
         className="absolute inset-0 -z-10"
-        style={{ background: "radial-gradient(ellipse at center, var(--section-bg) 0%, var(--section-bg-alt) 100%)", opacity: "var(--canvas-opacity)" }}
+        style={{
+          background:
+            "radial-gradient(ellipse at center, var(--section-bg) 0%, var(--section-bg-alt) 100%)",
+          opacity: "var(--canvas-opacity)",
+        }}
       />
 
       <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -57,12 +73,16 @@ const Hero: FC<HeroProps> = ({ data }) => {
           {/* Left Content */}
           <div
             className={`transition-all duration-700 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-8"
             }`}
           >
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-neon-purple/10 border border-neon-purple/30 mb-6">
               <div className="w-2 h-2 rounded-full bg-neon-cyan animate-pulse"></div>
-              <span className="text-sm font-mono text-neon-cyan">{data.badgeText}</span>
+              <span className="text-sm font-mono text-neon-cyan">
+                {data.badgeText}
+              </span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 text-pretty leading-tight text-foreground">
@@ -84,7 +104,9 @@ const Hero: FC<HeroProps> = ({ data }) => {
               {data.stats.map((stat, idx) => (
                 <div key={idx} className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
-                  <span className="font-mono text-sm text-neon-blue">{stat.label}</span>
+                  <span className="font-mono text-sm text-neon-blue">
+                    {stat.label}
+                  </span>
                 </div>
               ))}
             </div>
@@ -97,31 +119,43 @@ const Hero: FC<HeroProps> = ({ data }) => {
                shadow-lg shadow-neon-purple/30 transition-all duration-300
                hover:-translate-y-0.5 hover:scale-[1.04] hover:shadow-neon-blue/40"
               >
-                <Mail size={20} className="opacity-95 transition-transform duration-300 group-hover:-rotate-6" />
+                <Mail
+                  size={20}
+                  className="opacity-95 transition-transform duration-300 group-hover:-rotate-6"
+                />
                 <span className="tracking-wide">{data.ctaHire}</span>
               </a>
 
               <a
-                href={data.cvLink}
-                download="Nabil_Lambattan_CV.pdf"
+                href={cvFile}
+                download={cvFilename}
                 className="group inline-flex items-center gap-3 px-8 py-3.5 rounded-xl font-semibold
                border-2 border-neon-blue/60 text-neon-blue
                transition-all duration-300
                hover:bg-neon-blue/10 hover:border-neon-blue hover:scale-[1.04]
                hover:shadow-lg hover:shadow-neon-blue/30"
               >
-                <Download size={20} className="transition-transform duration-300 group-hover:translate-x-[2px]" />
+                <Download
+                  size={20}
+                  className="transition-transform duration-300 group-hover:translate-x-[2px]"
+                />
                 <span className="tracking-wide">{data.ctaCV}</span>
               </a>
             </div>
 
             <div className="mb-12">
-              <p className="text-sm text-muted-foreground mb-3">{t("ui.techStack") || "Tech Stack:"}</p>
+              <p className="text-sm text-muted-foreground mb-3">
+                {t("ui.techStack") || "Tech Stack:"}
+              </p>
               <div className="flex flex-wrap gap-2">
                 {data.techStack.map((tech) => (
                   <span
                     key={tech}
-                    className="px-3 py-1.5 text-xs font-mono rounded-full border hover:border-neon-cyan/30 hover:text-neon-cyan transition-colors duration-300 text-foreground" style={{ background: 'var(--glass-bg)', borderColor: 'var(--glass-border)' }}
+                    className="px-3 py-1.5 text-xs font-mono rounded-full border hover:border-neon-cyan/30 hover:text-neon-cyan transition-colors duration-300 text-foreground"
+                    style={{
+                      background: "var(--glass-bg)",
+                      borderColor: "var(--glass-border)",
+                    }}
                   >
                     {tech}
                   </span>
@@ -146,20 +180,29 @@ const Hero: FC<HeroProps> = ({ data }) => {
           {/* Right Visual - Profile Image */}
           <div
             className={`transition-all duration-700 delay-300 ${
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
+              isVisible
+                ? "opacity-100 translate-x-0"
+                : "opacity-0 translate-x-8"
             }`}
           >
             <div className="relative w-full max-w-2xl mx-auto aspect-square">
               <div className="absolute inset-0 bg-gradient-to-br from-neon-purple/20 via-neon-blue/20 to-neon-cyan/20 rounded-[2.5rem] blur-xl"></div>
-              <div className="relative h-full rounded-[2rem] overflow-hidden border-2" style={{ borderColor: 'var(--glass-border)' }}>
+              <div
+                className="relative h-full rounded-[2rem] overflow-hidden border-2"
+                style={{ borderColor: "var(--glass-border)" }}
+              >
                 <div className="absolute inset-0 opacity-10">
                   <div className="absolute top-0 left-0 w-32 h-32 border-t-2 border-l-2 border-neon-purple/50"></div>
                   <div className="absolute bottom-0 right-0 w-32 h-32 border-b-2 border-r-2 border-neon-cyan/50"></div>
                 </div>
                 <div className="relative w-full h-full">
                   <Image
-                    src={data.heroImageLink || "/hero.png"}
-                    alt={data.name}
+                    src={
+                      isValidImageSrc(data.heroImageLink)
+                        ? data.heroImageLink
+                        : "/hero.png"
+                    }
+                    alt={`${data.name} — Full-Stack Developer specializing in React, Next.js and C# / ASP.NET Core`}
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
                     priority
@@ -173,7 +216,9 @@ const Hero: FC<HeroProps> = ({ data }) => {
                 <div className="absolute -bottom-4 -right-4 bg-background/80 backdrop-blur-sm border border-neon-blue/30 rounded-lg p-3 shadow-xl dark:shadow-xl shadow-md">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                    <code className="text-xs font-mono text-neon-blue">npm run dev</code>
+                    <code className="text-xs font-mono text-neon-blue">
+                      npm run dev
+                    </code>
                   </div>
                 </div>
               </div>
@@ -189,7 +234,7 @@ const Hero: FC<HeroProps> = ({ data }) => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;

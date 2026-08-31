@@ -1,21 +1,20 @@
 {
   "hero": {
-    "name": "Nabil",
-    "title": "Frontend Developer specializing in React, Next.js & TypeScript",
-    "subtitle": "I build high‑quality, fast and scalable web applications.",
+    "name": "Nabil Lambattan",
+    "title": "Full-Stack Developer specializing in React & C# / .NET",
+    "subtitle": "I design and build modern, scalable, and high-performance web applications from frontend to backend.",
     "ctaHire": "Hire Me",
-    "ctaCV": "Download CV",
-    "cvLink": "./nabil_cv.pdf",
+    "ctaCV": "Download Resume",
+    "cvLink": "./nabil_cv_en.pdf",
     "heroImageLink": "./hero.png",
-    "badgeText": "Frontend Developer",
+    "badgeText": "Full-Stack Developer",
     "techStack": [
       "React",
       "Next.js",
       "TypeScript",
-      "Tailwind",
-      "Node.js",
-      "MongoDB",
-      "MySQL"
+      "C#",
+      "ASP.NET Core",
+      "Node.js"
     ],
     "stats": [
       {
@@ -30,7 +29,7 @@
   },
   "about": {
     "title": "Professional Profile",
-    "description": "Frontend developer from Morocco specializing in modern web applications. I combine clean code practices with creative problem‑solving to deliver solutions that users love. Passionate about performance optimization, accessibility, and building products that make an impact.",
+    "description": "Full-Stack Developer specializing in React and C# / ASP.NET Core, with a solid track record in designing modern and scalable web applications. My expertise spans both frontend and backend development, including REST API creation, Entity Framework Core, and SQL/NoSQL database management. Passionate about delivering high-performance, maintainable solutions that align with business goals. Bilingual in French and English, open to opportunities, and highly committed to code quality, documentation, and data privacy.",
     "avatar": "./about.jpg",
     "sectionTitle": "About Me",
     "sectionSubtitle": "Get to know the developer behind the code",
@@ -44,16 +43,20 @@
         "icon": "code"
       },
       {
-        "name": "Node.js / Express",
+        "name": "C# / ASP.NET Core",
+        "icon": "terminal"
+      },
+      {
+        "name": "Entity Framework",
+        "icon": "database"
+      },
+      {
+        "name": "PostgreSQL / MySQL",
+        "icon": "database"
+      },
+      {
+        "name": "Node.js / Express.js",
         "icon": "server"
-      },
-      {
-        "name": "MongoDB",
-        "icon": "database"
-      },
-      {
-        "name": "MySQL",
-        "icon": "database"
       },
       {
         "name": "TypeScript",
@@ -62,10 +65,6 @@
       {
         "name": "Tailwind CSS",
         "icon": "globe"
-      },
-      {
-        "name": "Git / GitHub",
-        "icon": "cpu"
       }
     ],
     "stats": [
@@ -81,7 +80,7 @@
       },
       {
         "label": "Technologies",
-        "value": 10,
+        "value": 30,
         "suffix": "+"
       }
     ]
@@ -102,7 +101,7 @@
       },
       {
         "label": "Technologies",
-        "value": "10+",
+        "value": "30+",
         "icon": "cpu"
       },
       {
@@ -112,43 +111,59 @@
       }
     ],
     "ctaTitle": "Let's Build Something Exceptional Together",
-    "ctaDescription": "I'm currently available for frontend development projects and new opportunities.",
+    "ctaDescription": "I'm currently available for full-stack development projects and new opportunities.",
     "ctaButtonPrimary": "Hire Me / Contact",
     "ctaButtonSecondary": "View Projects"
   },
   "technologies": {
     "list": [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "TypeScript",
       "React",
       "Next.js",
-      "Tailwind CSS",
+      "TypeScript",
+      "JavaScript (ES6+)",
+      "HTML5",
+      "CSS3",
+      "C# / ASP.NET Core",
       "Node.js",
-      "Express",
-      "MongoDB",
+      "Express.js",
+      "REST API",
+      "GraphQL (basics)",
+      "API Integration",
+      "Tailwind CSS",
+      "Responsive Web Design",
+      "Component-Oriented Architecture",
+      "Chart.js",
+      "Recharts",
+      "D3.js (basics)",
+      "Interactive Dashboards",
+      "PostgreSQL",
       "MySQL",
+      "MongoDB",
+      "Firebase",
+      "Entity Framework Core",
       "Git",
       "GitHub",
-      "Vercel"
+      "Docker (basics)",
+      "Vercel",
+      "Netlify",
+      "CI/CD (GitHub Actions)"
     ],
     "sectionTitle": "Technologies & Tools",
     "sectionSubtitle": "Technologies I use to build modern web applications",
     "stats": [
       {
-        "label": "Frontend",
-        "value": 6,
+        "label": "Frontend & Styling",
+        "value": 10,
         "icon": "layout"
       },
       {
         "label": "Backend & Database",
-        "value": 4,
+        "value": 8,
         "icon": "database"
       },
       {
         "label": "DevOps & Tools",
-        "value": 3,
+        "value": 6,
         "icon": "shield"
       },
       {
@@ -157,7 +172,7 @@
         "icon": "rocket"
       }
     ],
-    "learningText": "Currently: TypeScript advanced patterns & testing"
+    "learningText": "Currently: ASP.NET Core & cloud deployment optimization"
   },
   "projects": {
     "sectionTitle": "Featured Projects",
@@ -348,7 +363,7 @@
   },
   "navbar": {
     "brandName": "Nabil",
-    "brandRole": "Frontend Developer",
+    "brandRole": "Full-Stack Developer",
     "links": [
       {
         "id": "hero",
@@ -389,8 +404,8 @@
   },
   "footer": {
     "brandName": "Nabil",
-    "brandRole": "Frontend Developer",
-    "description": "Building modern web experiences with React and Next.js.",
+    "brandRole": "Full-Stack Developer",
+    "description": "Building modern web experiences with React, C#, and ASP.NET Core.",
     "quickLinks": [
       {
         "label": "Home",
@@ -432,11 +447,11 @@
       "React",
       "Next.js",
       "TypeScript",
-      "Node.js",
-      "Tailwind",
-      "MongoDB"
+      "C#",
+      "ASP.NET Core",
+      "Node.js"
     ],
-    "learningText": "Currently learning: TypeScript advanced patterns & testing",
+    "learningText": "Currently learning: ASP.NET Core & cloud deployment optimization",
     "builtWithTechs": [
       "React",
       "Next.js",

@@ -36,20 +36,53 @@ interface TechnologiesProps {
 // Icons remain the same
 
 const techIcons: Record<string, { icon: React.ReactNode; category: string; color: string }> = {
-  "HTML": { icon: <FileCode size={24} />, category: "Frontend", color: "text-orange-500" },
-  "CSS": { icon: <Palette size={24} />, category: "Frontend", color: "text-blue-500" },
-  "JavaScript": { icon: <Code2 size={24} />, category: "Frontend", color: "text-yellow-500" },
-  "TypeScript": { icon: <Terminal size={24} />, category: "Frontend", color: "text-blue-400" },
+  // Frontend
   "React": { icon: <Atom size={24} />, category: "Frontend", color: "text-cyan-400" },
   "Next.js": { icon: <Globe size={24} />, category: "Frontend", color: "text-foreground" },
-  "Tailwind CSS": { icon: <Wind size={24} />, category: "Frontend", color: "text-cyan-300" },
-  "Node.js": { icon: <Server size={24} />, category: "Backend", color: "text-green-500" },
-  "Express": { icon: <Zap size={24} />, category: "Backend", color: "text-gray-400" },
-  "MongoDB": { icon: <Database size={24} />, category: "Database", color: "text-green-400" },
-  "MySQL": { icon: <Database size={24} />, category: "Database", color: "text-blue-300" },
-  "Git": { icon: <GitBranch size={24} />, category: "Tools", color: "text-orange-600" },
-  "GitHub": { icon: <Github size={24} />, category: "Tools", color: "text-gray-300" },
-  "Vercel": { icon: <Triangle size={24} />, category: "DevOps", color: "text-foreground" },
+  "TypeScript": { icon: <Terminal size={24} />, category: "Frontend", color: "text-blue-400" },
+  "JavaScript (ES6+)": { icon: <Code2 size={24} />, category: "Frontend", color: "text-yellow-500" },
+  "HTML5": { icon: <FileCode size={24} />, category: "Frontend", color: "text-orange-500" },
+  "CSS3": { icon: <Palette size={24} />, category: "Frontend", color: "text-blue-500" },
+
+  // Backend & API
+  "C# / ASP.NET Core": { icon: <Terminal size={24} />, category: "Backend & API", color: "text-purple-500" },
+  "Node.js": { icon: <Server size={24} />, category: "Backend & API", color: "text-green-500" },
+  "Express.js": { icon: <Zap size={24} />, category: "Backend & API", color: "text-gray-400" },
+  "REST API": { icon: <Globe size={24} />, category: "Backend & API", color: "text-blue-300" },
+  "GraphQL (notions)": { icon: <Globe size={24} />, category: "Backend & API", color: "text-pink-400" },
+  "GraphQL (basics)": { icon: <Globe size={24} />, category: "Backend & API", color: "text-pink-400" },
+  "Intégration d'API": { icon: <Zap size={24} />, category: "Backend & API", color: "text-amber-400" },
+  "API Integration": { icon: <Zap size={24} />, category: "Backend & API", color: "text-amber-400" },
+
+  // Styles & UI
+  "Tailwind CSS": { icon: <Wind size={24} />, category: "Styles & UI", color: "text-cyan-300" },
+  "Responsive Web Design": { icon: <Layout size={24} />, category: "Styles & UI", color: "text-indigo-400" },
+  "Architecture orientée composants": { icon: <Layout size={24} />, category: "Styles & UI", color: "text-teal-400" },
+  "Component-Oriented Architecture": { icon: <Layout size={24} />, category: "Styles & UI", color: "text-teal-400" },
+
+  // Data Viz
+  "Chart.js": { icon: <Layout size={24} />, category: "Data Viz", color: "text-red-400" },
+  "Recharts": { icon: <Layout size={24} />, category: "Data Viz", color: "text-cyan-400" },
+  "D3.js (notions)": { icon: <Layout size={24} />, category: "Data Viz", color: "text-orange-400" },
+  "D3.js (basics)": { icon: <Layout size={24} />, category: "Data Viz", color: "text-orange-400" },
+  "Tableaux de bord interactifs": { icon: <Layout size={24} />, category: "Data Viz", color: "text-emerald-400" },
+  "Interactive Dashboards": { icon: <Layout size={24} />, category: "Data Viz", color: "text-emerald-400" },
+
+  // Database & ORM
+  "PostgreSQL": { icon: <Database size={24} />, category: "Database & ORM", color: "text-blue-400" },
+  "MySQL": { icon: <Database size={24} />, category: "Database & ORM", color: "text-blue-300" },
+  "MongoDB": { icon: <Database size={24} />, category: "Database & ORM", color: "text-green-400" },
+  "Firebase": { icon: <Database size={24} />, category: "Database & ORM", color: "text-yellow-500" },
+  "Entity Framework Core": { icon: <Database size={24} />, category: "Database & ORM", color: "text-purple-400" },
+
+  // Tools & DevOps
+  "Git": { icon: <GitBranch size={24} />, category: "Tools & DevOps", color: "text-orange-600" },
+  "GitHub": { icon: <Github size={24} />, category: "Tools & DevOps", color: "text-gray-300" },
+  "Docker (notions)": { icon: <Cpu size={24} />, category: "Tools & DevOps", color: "text-sky-500" },
+  "Docker (basics)": { icon: <Cpu size={24} />, category: "Tools & DevOps", color: "text-sky-500" },
+  "Vercel": { icon: <Triangle size={24} />, category: "Tools & DevOps", color: "text-foreground" },
+  "Netlify": { icon: <Triangle size={24} />, category: "Tools & DevOps", color: "text-cyan-400" },
+  "CI/CD (GitHub Actions)": { icon: <GitBranch size={24} />, category: "Tools & DevOps", color: "text-emerald-500" },
 }
 
 const Technologies = ({ data, content }: TechnologiesProps) => {

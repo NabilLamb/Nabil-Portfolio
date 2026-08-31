@@ -1,21 +1,20 @@
 {
   "hero": {
-    "name": "Nabil",
-    "title": "Développeur Frontend spécialisé en React, Next.js & TypeScript",
-    "subtitle": "Je conçois des applications web performantes, rapides et évolutives.",
+    "name": "Nabil Lambattan",
+    "title": "Développeur Full-Stack spécialisé en React & C# / .NET",
+    "subtitle": "Je conçois et développe des applications web modernes, performantes et évolutives, du frontend au backend.",
     "ctaHire": "Recrutez-moi",
     "ctaCV": "Télécharger le CV",
-    "cvLink": "./nabil_cv.pdf",
+    "cvLink": "./nabil_cv_fr.pdf",
     "heroImageLink": "./hero.png",
-    "badgeText": "Développeur Frontend",
+    "badgeText": "Développeur Full-Stack",
     "techStack": [
       "React",
       "Next.js",
       "TypeScript",
-      "Tailwind",
-      "Node.js",
-      "MongoDB",
-      "MySQL"
+      "C#",
+      "ASP.NET Core",
+      "Node.js"
     ],
     "stats": [
       {
@@ -30,7 +29,7 @@
   },
   "about": {
     "title": "Profil Professionnel",
-    "description": "Développeur frontend basé au Maroc, spécialisé dans les applications web modernes. J'associe des pratiques de code propre à une résolution créative de problèmes pour proposer des solutions appréciées des utilisateurs. Passionné par l'optimisation des performances, l'accessibilité et la création de produits à fort impact.",
+    "description": "Développeur Full-Stack spécialisé dans React et C# / ASP.NET Core, avec une solide expérience dans la conception d’applications web modernes et évolutives. Mon parcours couvre à la fois le développement frontend et backend, incluant la création d’API REST, l’utilisation d’Entity Framework Core et la gestion de bases de données SQL et NoSQL. Je suis passionné par la livraison de solutions performantes, maintenables et alignées sur les besoins métier. Bilingue (français et anglais), je suis disponible sur Casablanca ou Oujda et attaché à la qualité du code, à la documentation et à la confidentialité des données.",
     "avatar": "./about.jpg",
     "sectionTitle": "À propos de moi",
     "sectionSubtitle": "Découvrez le développeur derrière le code",
@@ -44,16 +43,20 @@
         "icon": "code"
       },
       {
-        "name": "Node.js / Express",
+        "name": "C# / ASP.NET Core",
+        "icon": "terminal"
+      },
+      {
+        "name": "Entity Framework",
+        "icon": "database"
+      },
+      {
+        "name": "PostgreSQL / MySQL",
+        "icon": "database"
+      },
+      {
+        "name": "Node.js / Express.js",
         "icon": "server"
-      },
-      {
-        "name": "MongoDB",
-        "icon": "database"
-      },
-      {
-        "name": "MySQL",
-        "icon": "database"
       },
       {
         "name": "TypeScript",
@@ -62,10 +65,6 @@
       {
         "name": "Tailwind CSS",
         "icon": "globe"
-      },
-      {
-        "name": "Git / GitHub",
-        "icon": "cpu"
       }
     ],
     "stats": [
@@ -81,7 +80,7 @@
       },
       {
         "label": "Technologies",
-        "value": 10,
+        "value": 30,
         "suffix": "+"
       }
     ]
@@ -102,7 +101,7 @@
       },
       {
         "label": "Technologies",
-        "value": "10+",
+        "value": "30+",
         "icon": "cpu"
       },
       {
@@ -112,43 +111,59 @@
       }
     ],
     "ctaTitle": "Créons ensemble quelque chose d'exceptionnel",
-    "ctaDescription": "Je suis actuellement disponible pour des projets de développement frontend et de nouvelles opportunités.",
+    "ctaDescription": "Je suis actuellement disponible pour des projets de développement full-stack et de nouvelles opportunités.",
     "ctaButtonPrimary": "Me recruter / Contact",
     "ctaButtonSecondary": "Voir les Projets"
   },
   "technologies": {
     "list": [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "TypeScript",
       "React",
       "Next.js",
-      "Tailwind CSS",
+      "TypeScript",
+      "JavaScript (ES6+)",
+      "HTML5",
+      "CSS3",
+      "C# / ASP.NET Core",
       "Node.js",
-      "Express",
-      "MongoDB",
+      "Express.js",
+      "REST API",
+      "GraphQL (notions)",
+      "Intégration d'API",
+      "Tailwind CSS",
+      "Responsive Web Design",
+      "Architecture orientée composants",
+      "Chart.js",
+      "Recharts",
+      "D3.js (notions)",
+      "Tableaux de bord interactifs",
+      "PostgreSQL",
       "MySQL",
+      "MongoDB",
+      "Firebase",
+      "Entity Framework Core",
       "Git",
       "GitHub",
-      "Vercel"
+      "Docker (notions)",
+      "Vercel",
+      "Netlify",
+      "CI/CD (GitHub Actions)"
     ],
     "sectionTitle": "Technologies & Outils",
     "sectionSubtitle": "Les technologies que j'utilise pour concevoir des applications web modernes",
     "stats": [
       {
-        "label": "Frontend",
-        "value": 6,
+        "label": "Frontend & Design",
+        "value": 10,
         "icon": "layout"
       },
       {
         "label": "Backend & Base de données",
-        "value": 4,
+        "value": 8,
         "icon": "database"
       },
       {
         "label": "DevOps & Outils",
-        "value": 3,
+        "value": 6,
         "icon": "shield"
       },
       {
@@ -157,7 +172,7 @@
         "icon": "rocket"
       }
     ],
-    "learningText": "Actuellement : Patterns avancés TypeScript & tests"
+    "learningText": "Actuellement : ASP.NET Core & optimisation des déploiements cloud"
   },
   "projects": {
     "sectionTitle": "Projets Vedettes",
@@ -348,7 +363,7 @@
   },
   "navbar": {
     "brandName": "Nabil",
-    "brandRole": "Développeur Frontend",
+    "brandRole": "Développeur Full-Stack",
     "links": [
       {
         "id": "hero",
@@ -389,8 +404,8 @@
   },
   "footer": {
     "brandName": "Nabil",
-    "brandRole": "Développeur Frontend",
-    "description": "Création d'expériences web modernes avec React et Next.js.",
+    "brandRole": "Développeur Full-Stack",
+    "description": "Création d'expériences web modernes avec React, C# et ASP.NET Core.",
     "quickLinks": [
       {
         "label": "Accueil",
@@ -432,10 +447,11 @@
       "React",
       "Next.js",
       "TypeScript",
-      "Node.js",
-      "Tailwind"
+      "C#",
+      "ASP.NET Core",
+      "Node.js"
     ],
-    "learningText": "Actuellement en cours d'apprentissage : Patterns avancés TypeScript & tests",
+    "learningText": "Actuellement en cours d'apprentissage : ASP.NET Core & optimisation des déploiements cloud",
     "builtWithTechs": [
       "React",
       "Next.js",

@@ -173,7 +173,7 @@ const Projects = ({ data, content }: ProjectsProps) => {
               <button
                 key={tech}
                 onClick={() => setActiveFilter(tech)}
-                className={`group relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 overflow-hidden ${
+                className={`group relative cursor-pointer px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 overflow-hidden ${
                   activeFilter === tech
                     ? "text-white bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg shadow-purple-500/30"
                     : "text-muted-foreground hover:text-foreground border"
@@ -285,7 +285,7 @@ const Projects = ({ data, content }: ProjectsProps) => {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-muted-foreground hover:text-foreground transition-all duration-300 group/link" style={{ background: 'var(--glass-bg)' }}
+                        className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-muted-foreground hover:text-foreground transition-all duration-300 group/link cursor-pointer" style={{ background: 'var(--glass-bg)' }}
                       >
                          <Github size={16} />
                          <span className="text-sm">{t("ui.code") || "Code"}</span>
@@ -296,7 +296,7 @@ const Projects = ({ data, content }: ProjectsProps) => {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-purple-500/20 to-pink-500/20 hover:from-purple-500/30 hover:to-pink-500/30 text-purple-300 hover:text-foreground transition-all duration-300 group/link"
+                        className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-purple-500/20 to-pink-500/20 hover:from-purple-500/30 hover:to-pink-500/30 text-purple-300 hover:text-foreground transition-all duration-300 group/link cursor-pointer"
                       >
                          <Eye size={16} />
                          <span className="text-sm">{t("ui.liveDemo") || "Live Demo"}</span>
@@ -329,11 +329,13 @@ const Projects = ({ data, content }: ProjectsProps) => {
                 href="https://github.com/NabilLamb"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/30 flex items-center gap-2"
+                className="group relative cursor-pointer px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/30 flex items-center gap-2"
               >
-                <Rocket size={18} />
-                {content.viewAllButtonText}
                 <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-rose-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative z-10 flex items-center gap-2">
+                  <Rocket size={18} />
+                  {content.viewAllButtonText}
+                </span>
               </a>
             </div>
           </div>
@@ -356,7 +358,7 @@ const Projects = ({ data, content }: ProjectsProps) => {
               </div>
               <button
                 onClick={() => setActiveFilter("All")}
-                className="px-6 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300"
+                className="cursor-pointer px-6 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300"
               >
                 {content.resetFiltersButton}
               </button>
@@ -381,7 +383,7 @@ const Projects = ({ data, content }: ProjectsProps) => {
               <button
                 onClick={() => setSelectedProject(null)}
                 aria-label="Close modal"
-                className="absolute top-4 right-4 p-2 rounded-full bg-black/50 text-white hover:bg-black/80 transition-colors"
+                className="cursor-pointer absolute top-4 right-4 p-2 rounded-full bg-black/50 text-white hover:bg-black/80 transition-colors"
               >
                 <X size={20} />
               </button>
@@ -407,7 +409,7 @@ const Projects = ({ data, content }: ProjectsProps) => {
                   href={selectedProject.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-foreground hover:opacity-80 transition-all duration-300" style={{ background: 'var(--glass-bg)', borderWidth: '1px', borderStyle: 'solid', borderColor: 'var(--glass-border)' }}
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-foreground hover:opacity-80 transition-all duration-300 cursor-pointer" style={{ background: 'var(--glass-bg)', borderWidth: '1px', borderStyle: 'solid', borderColor: 'var(--glass-border)' }}
                 >
                    <Github size={18} />
                    {t("ui.viewCode") || "View Code"}
@@ -416,7 +418,7 @@ const Projects = ({ data, content }: ProjectsProps) => {
                   href={selectedProject.demo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300"
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300 cursor-pointer"
                 >
                    <Eye size={18} />
                    {t("ui.liveDemo") || "Live Demo"}
