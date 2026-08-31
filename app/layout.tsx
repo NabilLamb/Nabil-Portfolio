@@ -9,7 +9,7 @@ import JsonLd from "@/components/JsonLd"
 // @ts-ignore: Importing global CSS as a side-effect.
 import "./globals.css"
 
-const BASE_URL = "https://nabil-lambattan.vercel.app"
+const BASE_URL = "https://nabil-portfolio-gold.vercel.app"
 
 // ─── Font loading with display:swap (prevents render-blocking) ───────────────
 const geist = Geist({
