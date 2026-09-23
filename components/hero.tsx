@@ -2,10 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { ArrowDown, Download, Mail } from "lucide-react";
-import Image from "next/image";
 import { useBinaryCanvas } from "@/hooks/useBinaryCanvas";
 import { useTranslation } from "react-i18next";
-import { isValidImageSrc } from "@/lib/utils";
 
 interface HeroProps {
   data: {
@@ -196,18 +194,16 @@ const Hero: FC<HeroProps> = ({ data }) => {
                   <div className="absolute bottom-0 right-0 w-32 h-32 border-b-2 border-r-2 border-neon-cyan/50"></div>
                 </div>
                 <div className="relative w-full h-full">
-                  <Image
-                    src={
-                      isValidImageSrc(data.heroImageLink)
-                        ? data.heroImageLink
-                        : "/hero.png"
-                    }
-                    alt={`${data.name} — Full-Stack Developer specializing in React, Next.js and C# / ASP.NET Core`}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    priority
-                    className="object-cover object-center"
-                    quality={85}
+                  <video
+                    src="/v-hero.mp4"
+                    autoPlay
+                    muted
+                    playsInline
+                    loop
+                    disablePictureInPicture
+                    controlsList="nodownload noplaybackrate"
+                    className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
+                    aria-label={`${data.name} — Full-Stack Developer specializing in React, Next.js and C# / ASP.NET Core`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/20 via-transparent to-background/10"></div>
                   <div className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-neon-cyan rounded-tr-lg"></div>

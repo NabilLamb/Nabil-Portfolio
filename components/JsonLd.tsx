@@ -23,7 +23,7 @@ const personSchema = {
   },
   image: {
     "@type": "ImageObject",
-    url: `${BASE_URL}/hero.png`,
+    url: `${BASE_URL}/v-hero.mp4`,
     width: 1200,
     height: 1200,
   },

@@ -6,7 +6,7 @@
     "ctaHire": "Recrutez-moi",
     "ctaCV": "Télécharger le CV",
     "cvLink": "./nabil_cv_fr.pdf",
-    "heroImageLink": "./hero.png",
+    "heroImageLink": "./v-hero.mp4",
     "badgeText": "Développeur Full-Stack",
     "techStack": [
       "React",
